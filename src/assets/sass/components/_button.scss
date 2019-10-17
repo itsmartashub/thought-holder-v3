@@ -1,0 +1,48 @@
+.btn {
+	&,
+	&:link,
+	&:visited {
+		// text-decoration: none;
+		display: inline-block;
+		border-radius: .8rem;
+		cursor: pointer;
+		padding: 1rem 3rem;
+		background: $grey;
+		color: grey;
+		font-family: inherit;
+		
+		@extend .transition-1;
+	}
+
+	&:active,
+	&:focus {
+		outline: none;
+		box-shadow: $box-shadow-note;
+	}
+
+	&:active {
+		transform: scale(.96);
+	}
+
+	&:hover {
+		background: $blue;
+		color: $white;
+		box-shadow: $box-shadow-btn;
+	}
+
+	// &:hover {
+	// 	background: orangered;
+	// 	box-shadow: 0px 0px 3px 1px orangered;
+	// 	color: inherit;
+	// }
+	&--blue {
+		font-size: inherit;
+		background: $blue;
+		color: $white;
+		box-shadow: 0 3px 5px rgba($blue, .7);
+
+		&:hover {
+			background: darken($blue, 10%);
+		}
+	}
+}

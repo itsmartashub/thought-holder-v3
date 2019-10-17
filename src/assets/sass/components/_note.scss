@@ -1,0 +1,201 @@
+//! OVO JE VELIKA NOTE
+.note {
+	// width: 55%;
+	background: $white;
+	// margin: auto;
+	box-shadow: $box_shadow_note;
+	border-radius: .8rem;
+	color: lighten($black, 18%);
+	padding: 1.5rem 2.5rem;
+	// max-height: 70%;
+	
+	// form { margin: 5rem 0; }
+
+	i {
+		font-size: 1.6rem;
+		cursor: pointer;
+		@extend .transition-1;
+		&:hover { color: $blue; opacity: 1; }
+	}
+
+	&__title-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__title {
+		// padding: 1rem 0rem 1rem 2rem;
+		padding: 1rem 0;
+		width: 96%;
+		font-size: 1.6rem;
+		font-weight: bold;
+		// background: lightseagreen;
+	}
+
+
+	&__body {
+		// background: lightcoral;
+		// padding: 2rem 0;
+		// min-height: 8rem;
+		// height: auto;
+		font-weight: 400;
+		font-size: 1.5rem;
+		overflow-y: auto;
+		max-height: 50rem;
+
+	}
+
+	&__title:empty:before,
+	&__body:empty:before {
+		content: attr(data-placeholder);
+		color: $dgrey;
+	}
+
+	&__title:focus,
+	&__body:focus {
+		outline: none;
+	}
+
+	&__pinned {
+		opacity: .5;
+	}
+
+	&__tag {
+		display: inline-block;
+		border-radius: 10rem;
+		padding: .5rem 1.5rem;
+		background: rgba($blue, .1);
+		color: $blue;
+		font-size: 1.2rem;
+		font-weight: 400;
+		margin-bottom: 1rem;
+	}
+
+	&__add-tags {
+		@extend .note__pallete;
+		// background: red;
+	}
+
+	&__add-tags-container {
+		background: blue;
+		// width: auto;
+		// display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 100;
+		height: auto;
+		box-shadow: $box_shadow_note;
+		border-radius: .2rem;
+		background: $white;
+		border: 1px solid $grey;
+		padding: 1rem;
+		// width: 10vw;
+
+		input[type=text] {
+			padding: 1.5rem .4rem;
+			// width: 100%;
+		}
+
+		ul {
+			display: grid;
+			grid-gap: .5rem;
+
+			label {
+				display: flex;
+				align-items: center;
+
+				input { 
+					margin-right: 1rem;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					appearance: none;
+					// display: inline-block;
+					width: 1.3rem;
+					height: 1.3rem;
+					border: 2px solid $dgrey;
+					opacity: .4;
+					outline: none;
+					vertical-align: middle;
+
+					&:checked {
+						background: $blue;
+						border: 2px solid $blue;
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		button {
+			width: 100%;
+		}
+	}
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+	}
+
+	&__options {
+		width: 100%;
+		// grid-gap: 2.5vw;
+		justify-items: space-between !important;
+		// align-items: center;
+		// flex-wrap: wrap;
+		// padding: 1rem; 
+		// display: flex;
+		// justify-items: center;
+	}
+
+	&__btn-container {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 1.5rem;
+
+		button:nth-of-type(1) {
+			margin-right: 1.5rem;
+		}
+	}
+
+	&__pallete {
+		position: relative;
+
+		&:hover .note__colors-container  {
+			display: grid;
+		}
+	}
+
+	&__colors-container  {
+		display: none;
+		position: absolute;
+		bottom: 100%;
+		left: 0;
+		box-shadow: $box_shadow_note;
+		background: $white;
+
+		padding: .8rem;
+		// display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: .8rem;
+
+		& > div {
+			width: 2.3rem;
+			height: 2.3rem;
+			border: 1px solid $black;
+			border-radius: 50%;
+			cursor: pointer;
+			opacity: .8;
+
+			&:hover {
+				// border: 1px solid rgba($black, .3);
+				opacity: 1;
+			}
+			// margin: 1rem;
+		}
+	}
+}

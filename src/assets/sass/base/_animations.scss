@@ -1,0 +1,24 @@
+@-webkit-keyframes hide {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		transform: translateY(-20%);		
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+	}
+@keyframes hide {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		transform: translateY(-20%);		
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(100%);    
+	}
+}

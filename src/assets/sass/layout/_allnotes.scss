@@ -1,0 +1,98 @@
+.notes {
+	grid-area: main;
+	padding: 5rem 20rem;
+}
+
+.grid-notes {
+	height: auto;
+	// padding: 1rem;
+	-webkit-column-width: 21rem;
+	-webkit-column-gap: 2rem;
+	-moz-column-width: 21rem;
+	-moz-column-gap: 2rem;
+	column-width: 21.5rem;
+	column-gap: 2rem;
+	
+	i {
+		font-size: 1.3rem;
+	}
+
+	.note {
+		padding: .8rem 1.8rem;
+		// height: auto;
+		// width: auto;
+		// min-width: 22rem;
+		// display: inline-block; //! BITNOOO, ILI IPAK NE
+		-webkit-column-break-inside: avoid; //! BITNOO
+          page-break-inside: avoid; //! BITNOOO
+               break-inside: avoid; //! BITNOOO
+		font-size: 1.3rem;
+		box-shadow: $box-shadow-note;
+
+		&:hover {
+			.note__pin,
+			.note__options {
+				opacity: 1;
+				visibility: visible;
+
+			}
+		}
+
+		// &__pin {
+		// 	pointer-events: none;
+		// }
+
+		&__pin,
+		&__options  {
+			opacity: 0;
+			visibility: hidden;
+			@extend .transition-2;
+		}
+
+		&__click-open-note {
+			z-index: 2;
+		}
+		&__pin {
+			z-index: 5;
+		}
+
+		&__body {
+			max-height: 30rem;
+			min-height: 4rem;
+			overflow: hidden;
+			box-sizing: inherit;
+			font-size: 1.4rem;
+		}
+
+		&__tag {
+			padding: .4rem 1.3rem;
+			font-size: 1rem;
+		}
+
+		&__options {
+			display: flex;
+			flex-wrap: wrap;
+			// grid-column: 1/-1 !important;
+			justify-content: space-evenly;
+			// pointer-events: none;
+
+			// i {
+			// 	font-size: 1.3rem;
+			// }
+
+			// button {
+			// 	display: none;
+			// }
+		}
+	}
+}
+
+
+
+
+
+
+// @media screen and (max-width: 750px) { 
+// 	.grid-allnotes  { column-gap: 0px; }
+// 	.grid-allnotes  .note { width: 100%; }
+// }

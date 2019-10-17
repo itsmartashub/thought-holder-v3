@@ -1,0 +1,16 @@
+.login,
+.signup {
+	width: 100vw;
+	height: 100vh;
+	 background: linear-gradient(to right top, #4e54c8, #8f94fb);
+	// background: linear-gradient(to right bottom, #396afc,#2948ff); 	
+	// background: linear-gradient(to right bottom, rgba(#396afc, .7),rgba(#2948ff, .7)); 
+	//  background: linear-gradient(to right, #4776e6, #8e54e9);
+	//   background: linear-gradient(to right, #6190e8, #a7bfe8);
+	//   background: linear-gradient(to right bottom, rgba($dgrey, .5), rgba($grey, 1)); 
+	  
+	display: flex;
+	// flex-direction: column;
+	align-items: center;
+	justify-content: center;	
+}
