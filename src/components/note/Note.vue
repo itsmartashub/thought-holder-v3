@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- <h1>{{ note.title }}</h1> -->
-		<article class="note mb-2" :class="[{'open-note': openNote}, note.color]" ref="refNote" @click.prevent="onOpenNote($event, note.id)">
+		<article class="note mb-2" :class="[{'open-note': openNote}, note.color]" ref="refNote" @click.prevent="onOpenNote(note.id)">
 
 			<div class="note__title-container mb-1">
 				<div
@@ -29,43 +29,7 @@
 			<div class="note__footer">
 				<div class="note__options mt-1" :class="{ 'open-note-opacity': openNote }">
 
-					<!-- <div class="note__add-tags" >
-						<i class="fas fa-tags" title="Add tag" @click.stop="tagsOpen = !tagsOpen"></i>
-
-						<form class="note__add-tags-container" @submit.prevent v-if="tagsOpen">
-							<h4>Tag note</h4>
-							<input type="text" placeholder="Enter tag name">
-							<ul>
-								<li>
-									<label for="KEY1"><input type="checkbox" id="KEY1"></label>
-								</li>
-
-								<li>
-									<label for="KEY2"><input type="checkbox" id="KEY2">IME TAGA </label>
-								</li>
-
-								<li>
-									<label for="KEY3"><input type="checkbox" id="KEY3">IME TAGA </label>
-								</li>
-							</ul>
-
-							<button class="btn mt-2" @click.prevent>add tag</button>
-						</form>
-					</div> -->
-					<NoteTags :note="note" :tagsOpen="tagsOpen" />
-
-					<!-- <div class="note__pallete">
-						<i class="fas fa-palette" title="Change color"></i>
-
-						<div class="note__colors-container">
-							<div class="color-1 red"></div>
-							<div class="color-2 blue"></div>
-							<div class="color-3 green"></div>
-							<div class="color-4 purple"></div>
-							<div class="color-5 orange"></div>
-							<div class="color-6 grey"></div>
-						</div>
-					</div> -->
+					<NoteTags :note="note" />
 
 					<NoteColors :note="note" />
 					
@@ -73,16 +37,16 @@
 					<i class="fas fa-trash" title="Delete" @click.stop="deleteNote(note.id)"></i>
 				</div>
 
-
 				<div class="note__btn-container" v-if="openNote">
-					<button class="btn btn--blue" @click.prevent="editNote(note.id)">edit note</button>
-					<button class="btn" @click.prevent="closeNote">close</button>
+					
+					<button class="btn btn--blue" @click.stop.prevent ="editNote(note.id)">edit note</button>
+					<p class="btn" @click.stop="OPEN_NOTE = false">close</p>
 				</div>
 			</div>
 
 		</article>
 
-		<div class="open-note-background" v-if="openNote" @click="closeNote"></div>
+		<div class="open-note-background" v-if="openNote" @click="OPEN_NOTE = false"></div>
 
 		<!-- <router-view name="open-note" :key="$route.fullPath" :note="note"></router-view> -->
 	</div>
@@ -100,12 +64,14 @@ export default {
 
 	props: {
 		note: Object,
-		index: Number // ovo je za koju notu otvaramo kada kliknemo valjda
+		index: Number, // ovo je za koju notu otvaramo kada kliknemo valjda
+		// tagsOpen: Boolean
 	},
 
 	data() {
 		return {
 			openNote: false,
+			// tagsOpen: false,
 			// openNoteBG: true,
 			// currNote: false,
 
@@ -116,42 +82,30 @@ export default {
 			archived: this.note.archived,
 			// arrTags: [],
 
-			tagsOpen: false,
 		}
 	},
 
 	computed: {
 		GET_TAGS_IN_NOTES () {
 			return this.$store.getters.GET_TAGS_IN_NOTES(this.note.id)
+		},
+
+		OPEN_NOTE: {
+			get() {
+				return this.openNote
+			},
+			set(value) {
+				this.openNote = value
+			}
 		}
 	},
 
-	// mounted() {
-	// 	this.$store.commit('SET_TAG_NOTE_IDS')
-	// },
-
-	// computed: {
-	// 	...mapGetters({
-	// 		GET_OPEN_NOTE: 'GET_OPEN_NOTE'
-	// 	}),
-
-	// 	open: {
-	// 		get() {
-	// 			return this.openNote
-	// 		},
-	// 		set(value) {
-	// 			// this.$store.commit('SET_OPEN_NOTE', value)
-	// 			this.openNote = value
-	// 		}
-	// 	}
-	// },
-
-	// watch: {
+	// watch: { // TODO ovo ako se odlucim da otvara note u poseban NotesModal, a ne ovako koji ce imati i params IDnote
 	// 	openNote: function (value) {
 	// 		if (value === false) {
 	// 			this.$route.push({
 	// 				name: 'notes',
-	// 				params: { IDnote: this.note.id}
+	// 				params: { IDnote: this.note.id }
 	// 			})
 	// 		}
 	// 	}
@@ -166,38 +120,14 @@ export default {
 			this.content = e.target.innerText
 		},
 
-		onOpenNote(e, idNote) {
-			// this.$refs.refNote.classList.add('open-note') //! OVAKO NE RADI
-			// this.currNote = e.target.closest('.note') //! OVAKO RADI
-			// this.currNote.classList.add('open-note')
+		// onOpenNote(idNote) {
+		// 	this.openNote = true
+		// 	// console.log(idNote);
+		// },
 
-			// this.$route.params.IDnote = idNote
-			// this.$router.push({
-			// 	name: 'open-note',
-			// 	params: { IDnote: idNote }
-			// })
-			console.log(e.target.closest('.note').classList);
-			e.target.closest('.note').classList.add('open-note')
-			this.openNote = true
-			console.log(idNote);
-		},
-
-		closeNote() {
-			// console.log(this.$refs.refNote.classList);
-			
-			// if(this.$refs.refNote.classList.contains('open-note')) {
-			// 	this.$refs.refNote.classList.remove('open-note')
-			// }
-
-			// console.log(this.$refs.refNote.classList);
-			this.openNote = false
-
-			// this.$router.push({
-			// 	name: 'home'
-			// 	// params: { IDnote: idNote }
-			// })
-			
-		},
+		// closeNote() {
+		// 	this.openNote = false
+		// },
 
 		resetNote() {
 			this.title = ''
@@ -217,23 +147,6 @@ export default {
 				idNote: idNote,
 				isPinned: this.pinned
 			})
-
-
-
-			// if(this.pinned) {
-			// 	this.$store.dispatch('ui/ACT_NOTIFICATION', {
-			// 		display: true,
-			// 		text: 'Note pinned!',
-			// 		alertClass: 'success'
-			// 	})
-			// } else {
-			// 	this.$store.dispatch('ui/ACT_NOTIFICATION', {
-			// 		display: true,
-			// 		text: 'Note unpinned!',
-			// 		alertClass: 'info'
-			// 	})
-			// 	console.log(object);
-			// }
 		},
 
 		onArchived(idNote) {
@@ -244,20 +157,6 @@ export default {
 				isArchived: this.archived,
 				isPinned: this.pinned
 			})
-
-			// if(this.archived) {
-			// 	this.$store.dispatch('ui/ACT_NOTIFICATION', {
-			// 		display: true,
-			// 		text: 'Note archived!',
-			// 		alertClass: 'success'
-			// 	})
-			// } else {
-			// 	this.$store.dispatch('ui/ACT_NOTIFICATION', {
-			// 		display: true,
-			// 		text: 'Note unarchived!',
-			// 		alertClass: 'info'
-			// 	})
-			// }
 		},
 
 		editNote(idNote) {
@@ -274,6 +173,9 @@ export default {
 
 				console.log(note)
 				this.$store.dispatch('POST_NOTE', note)
+
+				// TODO ovde treba kao za note samo za tags!
+				// this.$store.dispatch('POST_TAGS', tags)
 				
 				this.resetNote()
 			} else {

@@ -16,18 +16,9 @@ export default {
 	components: { Note },
 
 	computed: {
-		// GET_NOTES_WITH_SPECIAL_TAG_NAME() {
-		// 	return this.$store.getters.GET_NOTES_WITH_SPECIAL_TAG // TODO ovde se javi error kada rifresujemo stranicu na /tags/:tagName jer on dobije tag name tek kad se klikne u sidebaru na ovaj link jer odatle prosledjujemo ovde tagName iz onog niza tagova
-		// },
-
 		GET_NOTES_WITH_SPECIAL_TAG_NAME () {
-			return this.$store.getters.GET_NOTES_WITH_SPECIAL_TAG(this.$route.params.tagName) // TODO ovde se javi error kada rifresujemo stranicu na /tags/:tagName jer on dobije tag name tek kad se klikne u sidebaru na ovaj link jer odatle prosledjujemo ovde tagName iz onog niza tagova
+			return this.$store.getters.GET_NOTES_WITH_SPECIAL_TAG(this.$route.params.tagName) // TODO ovde se javi error kada rifresujemo stranicu na /tags/:tagName jer on dobije tag name tek kad se klikne u sidebaru na ovaj link jer odatle prosledjujemo ovde tagName iz onog niza tagova. EDIT: poppravili smo error taj tako stosmo fetchovali tagove u Home.vue PRE (BITNO) nego sto smo fetchovali notes
 		}
 	},
-
-	// created() {
-	// 	// this.$store.commit('SET_NOTES_WITH_SPECIAL_TAG', this.$route.params.tagName)
-	// 	this.$store.dispatch('FETCH_TAGS')
-	// }
 }
 </script>

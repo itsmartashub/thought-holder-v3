@@ -57,7 +57,7 @@ export default {
 	},
 
 	created() {
-		this.$store.dispatch('FETCH_TAGS')
+		// this.$store.dispatch('FETCH_TAGS') // FETCHUJEM U Home.vue
 
 		if(this.TAGS !== []) {
 			this.isActive = !this.isActive

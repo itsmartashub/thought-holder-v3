@@ -32,6 +32,7 @@ export default {
 	// }
 
 	created() {
+		this.$store.dispatch('FETCH_TAGS') //! mora prvo tagove da fetchujemo pa onda notes inace se  javlja error notes_ids undefined kada rifresujemo page akda smo na ruti recimo /tags/muzika i sl
 		this.$store.dispatch('FETCH_NOTES')
 	}
 }
