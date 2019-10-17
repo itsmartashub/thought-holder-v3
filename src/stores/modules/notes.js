@@ -5,21 +5,18 @@ export default {
 	state: {
 		arrNotes: [],
 		arrArchived: [],
-		// arrPinned: [],
+		arrPinned: [],
 		arrTags: [],
 		arrTagsInNotes: [],
+		arrIDsNotesWithSpecialTag: []
 
-		arrIDsNotesWithSpecialTag: [],
-		arrNotesIDs: [],
-
-		arrTagNoteIds: [],
 	},
 
 	getters: {
 		// GET_NOTES: state => state.arrNotes = state.arrNotes.filter(note => note.archived === false),
 		GET_NOTES: state => state.arrNotes,
 
-		GET_ARCHIVED_NOTES: state => state.arrArchived = state.arrNotes.filter(note => note.archived === true),
+		GET_ARCHIVED: state => state.arrArchived = state.arrNotes.filter(note => note.archived === true),
 
 		GET_PINNED: state => state.arrPinned = state.arrNotes.filter(note => note.pinned === true),
 
@@ -30,70 +27,13 @@ export default {
 				state.arrTags.filter(tag => tag.note_ids.find(id => id == idNote))
 		},
 
-		// GET_NOTES_WITH_SPECIAL_TAG: state => idNote => {
-		// 	return state.arrNotes.filter(note => note.id === idNote)
-		// },
-
-		// GET_NOTES_WITH_SPECIAL_TAG: state => tagName => {
-		// 	return state.arrIDsNotesWithSpecialTag = state.arrNotes.filter(note => state.arrTags.find(tag => tag.name == tagName).note_ids.find(note_id => note_id == note.id))
-		// },
-
 		GET_NOTES_WITH_SPECIAL_TAG: state => tagName => {
-			state.arrNotesIDs = state.arrTags.find(tag => tag.name == tagName).note_ids
-
-			state.arrNotesIDs.forEach(note_id => {
-				// state.arrIDsNotesWithSpecialTag = state.arrNotes.filter(note => note.id == note_id)
-				state.arrNotes.forEach(note => {
-					if (note.id === note_id) {
-						state.arrIDsNotesWithSpecialTag.push(note)
-					}
-				})
-			})
-			return state.arrIDsNotesWithSpecialTag
-			
-			// return state.arrIDsNotesWithSpecialTag = state.arrTags.find(tag => tag.name == tagName).note_ids
-			// .forEach(note_id => state.arrNotes.filter(note => note_id == note))
-
-			// return state.arrNotes.filter(note => {
-			// 	return state.arrIDsNotesWithSpecialTag = state.arrTags.find(tag => tag.name === tagName).note_ids
-			// 	.forEach(note_id => {
-			// 		return note_id == note
-			// 	})
-			// })
+			return state.arrIDsNotesWithSpecialTag = state.arrNotes.filter(note => state.arrTags.find(tag => tag.name == tagName).note_ids.find(note_id => note_id == note.id))
 		},
 
-
-		// GET_NOTES_WITH_SPECIAL_TAG_NAME: state => tagName => {
-		// 	return state.arrIDsNotesWithSpecialTag = state.arrTags.filter(tag => tag.name == tagName).note_ids
-		// 		// .forEach(note_id => {
-		// 		// 	state.arrNotes.filter(note => note.id == note_id)
-		// 		// })
+		// GET_NOTES_WITH_SPECIAL_TAG: state => {
+		// 	return state.arrIDsNotesWithSpecialTag
 		// }
-
-		// GET_TN: state => (tagName, IDnote) => {
-		// 	return state.arrTagsNotes = state.arrTags.find(tag => tag.name == tagName).note_ids
-		// 		.filter(noteID => noteID == IDnote)
-		// },
-
-		// GET_TAG_NOTE_IDS: state => idNote => {
-		// 	return state.arrTagNoteIds = state.arrTags.filter(tag => {
-		// 		tag.note_ids.find(tagIdNote => tagIdNote == idNote )
-		// 	})
-		// },
-
-
-		// GET_TAG_NOTE_IDS: state => {
-		// 	return state.arrTagNoteIds
-		// },
-
-
-		// GET_TAG_NOTE_IDS: state => (idTag, idNote) => {
-		// 	// return state.arrTags
-		// 	// 	.find(tag => tag.id === idTag) // find the tag
-		// 	// 	.note_ids.find(id => id === idNote)
-
-		// 	return state.arrTagNoteIds = state.arrTags.filter(tag => tag.note_ids !== null)
-		// },
 	},
 
 	mutations: {
@@ -105,28 +45,17 @@ export default {
 			state.arrTags = tags
 		},
 
-		SET_PINNED (state, idNote) {
-			state.arrPinned.unshift(idNote)
+		SET_PINNED (state, note) {
+			state.arrPinned.unshift(note)
 		},
 
-		// SET_TAGS_NOTES (state, idNote) {
-		// 	state.arrTagNotes = arrTags.filter(tag => tag.note_id == idNote) 
-		// }
+		SET_ARCHIVED (state, note) {
+			state.arrPinned.unshift(note)
+		},
 
-		// SET_TAG_NOTE_IDS (state) {
-		// 	state.arrTags.forEach((tag) => {
-		// 		// console.log(tag.note_ids);
-		// 		tag.note_ids.forEach((id) => {
-		// 			console.log(id);
-		// 			state.arrTagNoteIds.push(id)
-		// 		})
-		// 	})
-		// },
-
-		// SET_TN (state, {idTag, idNote}) {
-		// 	state.arrTagsNotes = state.arrTags.find(tag => tag.id == idTag).note_ids
-		// 		.filter(noteID => noteID == idNote)
-		// }
+		SET_NOTES_WITH_SPECIAL_TAG (state, tagName) {
+			state.arrIDsNotesWithSpecialTag = state.arrNotes.filter(note => state.arrTags.find(tag => tag.name == tagName).note_ids.find(note_id => note_id == note.id))
+		}
 	},
 
 
@@ -166,7 +95,6 @@ export default {
 				console.log('FETCH_TAGS', tags);
 
 				commit('SET_TAGS', tags)
-				// commit('SET_TAG_NOTE_IDS')
 
 			} catch (error) {
 				console.log(error);
@@ -201,7 +129,7 @@ export default {
 				})
 				console.log(docRef.id);
 
-				dispatch('FETCH_DB_CHANGES')
+				dispatch('FETCH_DB_NOTES_CHANGES')
 
 				// if(note.archived === true) {
 				// 	commit('SET_ARCHIVED_NOTES')
@@ -230,7 +158,7 @@ export default {
 			}
 		},
 
-		FETCH_DB_CHANGES({commit, dispatch}) {
+		FETCH_DB_NOTES_CHANGES({commit, dispatch}) {
 			db.collection('notes').where('user_id', '==', firebase.auth().currentUser.uid).orderBy('timestamp')
 			.onSnapshot(snapshot => {
 				let notes = []
@@ -256,8 +184,6 @@ export default {
 		},
 
 
-		
-
 		UPDATE_PINNED({commit, dispatch}, {idNote, isPinned}) {
 			let refNote = db.collection('notes').doc(idNote)
 
@@ -267,7 +193,7 @@ export default {
 					archived: false
 				})
 				.then(() => {
-					dispatch('FETCH_DB_CHANGES')
+					dispatch('FETCH_DB_NOTES_CHANGES')
 
 					if(isPinned) {
 						dispatch('ui/ACT_NOTIFICATION', {
@@ -296,7 +222,7 @@ export default {
 					pinned: false,
 				})
 				.then(() => {
-					dispatch('FETCH_DB_CHANGES')
+					dispatch('FETCH_DB_NOTES_CHANGES')
 
 					if(isPinned) {
 						dispatch('ui/ACT_NOTIFICATION', {
@@ -334,7 +260,7 @@ export default {
 					pinned: false
 				})
 				.then(() => {
-					dispatch('FETCH_DB_CHANGES')
+					dispatch('FETCH_DB_NOTES_CHANGES')
 
 					if(isArchived) {
 						dispatch('ui/ACT_NOTIFICATION', {
@@ -363,7 +289,7 @@ export default {
 					archived: false
 				})
 				.then(() => {
-					dispatch('FETCH_DB_CHANGES')
+					dispatch('FETCH_DB_NOTES_CHANGES')
 
 					if(isArchived) {
 						dispatch('ui/ACT_NOTIFICATION', {
@@ -398,7 +324,7 @@ export default {
 				color: colorName
 			})
 			.then(() => {
-				dispatch('FETCH_DB_CHANGES')
+				dispatch('FETCH_DB_NOTES_CHANGES')
 
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
@@ -421,7 +347,7 @@ export default {
 			db.collection('notes').doc(idNote)
 				.delete()
 				.then(() => {
-					dispatch('FETCH_DB_CHANGES')
+					dispatch('FETCH_DB_NOTES_CHANGES')
 
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,

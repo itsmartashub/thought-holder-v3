@@ -3,13 +3,13 @@
 		<div class="grid-notes m-auto">
 
 			<!-- <h1>ARCHIVED</h1> -->
-			<!-- <template v-for="(note, key) in GET_ARCHIVED_NOTES">
+			<template v-for="(note, key) in GET_ARCHIVED">
 				<Note :key="key" :note="note" :index="key" />
-			</template> -->
-
-			<template v-for="(note, key) in GET_NOTES">
-				<Note :key="key" :note="note" :index="key"  v-if="note.archived"/>
 			</template>
+
+			<!-- <template v-for="(note, key) in GET_NOTES">
+				<Note :key="key" :note="note" :index="key"  v-if="note.archived"/>
+			</template> -->
 		</div>
 	</section>
 </template>
@@ -23,8 +23,8 @@ export default {
 	components: { Note },
 
 	computed: {
-		GET_ARCHIVED_NOTES() {
-			return this.$store.getters.GET_ARCHIVED_NOTES
+		GET_ARCHIVED () {
+			return this.$store.getters.GET_ARCHIVED
 		},
 
 		GET_NOTES() {

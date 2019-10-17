@@ -13,9 +13,11 @@
 						<p class="mb-1"><i class="fas fa-tags"></i> {{ tag.name }}</p>
 					</router-link> -->
 
-					<router-link :to="{ name: 'tags', params: { tagName: tag.name }}" v-for="(tag, key) in TAGS" :key="key" :arrNoteIds="tag.note_ids" >
-						<p class="mb-1"><i class="fas fa-tags"></i> {{ tag.name }}</p>
-					</router-link>
+					<template v-for="(tag, key) in TAGS">
+						<router-link :to="{ name: 'tags', params: { tagName: tag.name } }" :key="key">
+							<p class="mb-1"><i class="fas fa-tags"></i> {{ tag.name }}</p>
+						</router-link>
+					</template>
 				</div><br>
 			
 			<router-link tag="li" :to="{ name: 'archived' }"><i class="fas fa-archive"></i> Archive</router-link>

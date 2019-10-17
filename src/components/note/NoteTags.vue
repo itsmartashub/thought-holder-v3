@@ -9,14 +9,6 @@
 				<li v-for="(tag, key) in GET_TAGS" :key="key">
 					<label :for="key"><input type="checkbox" :id="key">{{ tag.name }}</label>
 				</li>
-
-				<!-- <li>
-					<label for="KEY2"><input type="checkbox" id="KEY2">IME TAGA </label>
-				</li>
-
-				<li>
-					<label for="KEY3"><input type="checkbox" id="KEY3">IME TAGA </label>
-				</li> -->
 			</ul>
 
 			<button class="btn mt-2" @click.prevent>add tag</button>

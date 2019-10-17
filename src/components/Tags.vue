@@ -1,15 +1,11 @@
 <template>
-	<div class="grid-notes m-auto">
-			<!-- <h1>TAGS {{ $route.params.tagName }}</h1>
-			<h1>TAGS {{ $route.params.idNote }}</h1> -->
-			<!-- <h1>{{ findNoteID }}</h1> -->
-			<!-- <h1>Tag name: {{ tagName }}</h1>
-			<h1>note id: {{ GET_NOTES_WITH_SPECIAL_TAG_NAME }}</h1> -->
+	<div class="grid-notes m-auto notes">
+		<!-- <h1>TAGS {{ $route.params.tagName }}</h1>  -->
 
-			<template v-for="(note, key) in GET_NOTES_WITH_SPECIAL_TAG_NAME">
-				<Note :note="note" :key="key" />
-			</template>
-		</div>
+		<template v-for="(note, key) in GET_NOTES_WITH_SPECIAL_TAG_NAME">
+			<Note :note="note" :key="key" />
+		</template>
+	</div>
 </template>
 
 <script>
@@ -19,24 +15,19 @@ export default {
 	name: 'tags',
 	components: { Note },
 
-	props: {
-		tagName: String,
-		arrNoteIds: Array
-	},
-
 	computed: {
-		GET_NOTES_WITH_SPECIAL_TAG_NAME() {
-			return this.$store.getters.GET_NOTES_WITH_SPECIAL_TAG(this.$route.params.tagName)
-		},
-
-		// findNoteID() {
-		// 	// this.arrNoteIds = this.arrNoteIds.find(idNote => idNote )
-		// 	this.arrNoteIds.forEach((idNote, i) => console.log(i, idNote));
+		// GET_NOTES_WITH_SPECIAL_TAG_NAME() {
+		// 	return this.$store.getters.GET_NOTES_WITH_SPECIAL_TAG // TODO ovde se javi error kada rifresujemo stranicu na /tags/:tagName jer on dobije tag name tek kad se klikne u sidebaru na ovaj link jer odatle prosledjujemo ovde tagName iz onog niza tagova
 		// },
 
-		// GET_NOTES_WITH_SPECIAL_TAG () {
-		// 	this.$store.getters.GET_NOTES_WITH_SPECIAL_TAG(this.idNote)
-		// }
-	}
+		GET_NOTES_WITH_SPECIAL_TAG_NAME () {
+			return this.$store.getters.GET_NOTES_WITH_SPECIAL_TAG(this.$route.params.tagName) // TODO ovde se javi error kada rifresujemo stranicu na /tags/:tagName jer on dobije tag name tek kad se klikne u sidebaru na ovaj link jer odatle prosledjujemo ovde tagName iz onog niza tagova
+		}
+	},
+
+	// created() {
+	// 	// this.$store.commit('SET_NOTES_WITH_SPECIAL_TAG', this.$route.params.tagName)
+	// 	this.$store.dispatch('FETCH_TAGS')
+	// }
 }
 </script>

@@ -47,7 +47,7 @@ const router = new Router({
 					path: 'tags/:tagName',
 					name: 'tags',
 					component: Tags,
-					props: true
+					// props: true
 				},
 				{
 					path: 'archived',
