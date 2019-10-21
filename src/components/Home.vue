@@ -6,6 +6,10 @@
 		<!-- <router-view name="notes"/> -->
 		<router-view :key="$route.fullPath" />
 		<!-- <router-view :key="$route.fullPath" name="open-modal"/> -->
+
+		<EditTags v-if="OPEN_EDIT_TAGS"/>
+		
+		<ModalBackground />
 	</div>
 </template>
 
@@ -15,21 +19,22 @@
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import Notes from '@/components/note/Notes'
+import ModalBackground from '@/components/ModalBackground'
+import EditTags from '@/components/EditTags'
 
 export default {
-	components: {
-		// AddNote,
-		// Notes
-		Header, Sidebar, Notes
-	},
+	components: { Header, Sidebar, Notes, ModalBackground, EditTags },
 
-	// computed: {
-	// 	allnotes() {
-	// 		if (this.$route.path == '/') {
-	// 			return true
-	// 		}
-	// 	}
-	// }
+	computed: {
+		OPEN_EDIT_TAGS: {
+			get() {
+				return this.$store.getters['ui/GET_OPEN_EDIT_TAGS']
+			},
+			set(newVal) {
+				this.$store.commit('ui/SET_OPEN_EDIT_TAGS', newVal)
+			}
+		}
+	},
 
 	created() {
 		this.$store.dispatch('FETCH_TAGS') //! mora prvo tagove da fetchujemo pa onda notes inace se  javlja error notes_ids undefined kada rifresujemo page akda smo na ruti recimo /tags/muzika i sl

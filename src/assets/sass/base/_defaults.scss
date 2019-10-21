@@ -41,6 +41,10 @@ hr {
 	// opacity: 1 !important;
 }
 
+.scroll-shadow {
+	box-shadow: $box-shadow-header;
+}
+
 
 
 //! NOTE CLASSES
@@ -51,7 +55,7 @@ hr {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	@extend .transition-2;
-	width: 70rem;
+	width: 70rem !important;
 	font-size: 1.5rem;
 }
 
@@ -65,17 +69,33 @@ hr {
 	width: auto !important;
 }
 
-.open-note-background {
+// .open-note-background {
+// 	position: fixed;
+// 	z-index: 90;
+// 	// width: 100%;
+// 	// height: 100%;
+// 	top: 0;
+// 	left: 0;
+// 	right: 0;
+// 	bottom: 0;
+// 	background: rgba($grey, .8);
+// 	backdrop-filter: blur(2px);
+// }
+.modal-background {
+	// TODO dodati onaj shadow kao sto je traversy stavljao za kopiju netflixa
 	position: fixed;
-	z-index: 90;
-	// width: 100%;
-	// height: 100%;
+	z-index: 70;
+	width: 100vw;
+	height: 100%;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	background: rgba($grey, .8);
 	backdrop-filter: blur(2px);
+	box-shadow:
+		inset 3rem 10rem 25rem rgba($dgrey, .2),
+		inset -3rem -10rem 25rem rgba($dgrey, .2);
 }
 
 .open-note-footer {
@@ -91,24 +111,30 @@ hr {
 }
 
 
+
+//? COLOR PALLETE CLASSES
 .white {
 	background: $white !important; // ok
 }
 
 .red {
 	background: $red !important; // promeni
+
 }
 
 .blue {
 	background: $cblue !important; // promeni
+
 }
 
 .green {
 	background: $cgreen !important; // ok
+
 }
 
 .purple {
 	background: $cpurple !important; // promeni
+
 }
 
 .orange {
@@ -117,4 +143,29 @@ hr {
 
 .grey {
 	background: $cgrey !important; // menjaj
+}
+
+i {
+	padding: .5rem .5rem;
+	font-size: 1.6rem;
+	cursor: pointer;
+	@extend .transition-1;
+
+	&:hover {
+		// border-radius: 50%;
+		// background: rgba($grey, .3);
+		color: $blue;
+	}
+}
+
+i.icon-delete {
+	&:hover {
+		color: darken($red, 5%);
+	}
+	// color: $red;
+}
+i.icon-check {
+	&:hover {
+		color: darken($green, 5%);
+	}
 }

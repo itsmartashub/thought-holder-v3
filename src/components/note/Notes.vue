@@ -1,37 +1,38 @@
 <template>
-	<section class="notes">
+	<section class="notes" >
 		<NewNote />
 
-		<!-- <router-view name="open-note"/> -->
+		<div v-if="!GET_NOTES.length" class="no-notes">
+			<div class="logo">
+				<i class="fab fa-think-peaks"></i> Though<strong>Holder</strong>
+			</div>
+			<h2 class="mt-2">Notes you add appear here</h2>
+		</div>
 
-		<div class="notes__pinned">
+		<div v-if="GET_NOTES.length">
+			<div class="mb-4">
 			<h4>PINNED: </h4><br>
 			<div class="grid-notes m-auto">
 				<template v-for="(note, key) in GET_NOTES">
-					<Note :key="key" :note="note" :index="key" v-if="note.pinned && !note.archived"/>
+					<Note :key="key" :note="note" :index="key" v-show="note.pinned && !note.archived" />
 				</template>
-				
-				<!-- <template v-for="(note, key) in GET_NOTES">
-					<Note :key="key" :note="note" :index="key"/>
-				</template> -->
+			</div>
+
+			<!-- <hr class="mt-5 mb-5"> -->
+			</div>
+
+			<div class="notes__unpinned">
+				<div class="grid-notes m-auto">
+					<template v-for="(note, key) in GET_NOTES">
+						<Note :key="key" :note="note" :index="key" v-show="!note.pinned && !note.archived"/>
+					</template>
+
+						<!-- <template v-for="(note, key) in GET_PINNED">
+							<Note :key="key" :note="note" :index="key"/>
+						</template> -->
+				</div>
 			</div>
 		</div>
-
-		<hr class="mt-5 mb-5">
-
-		<div class="notes__unpinned">
-			<div class="grid-notes m-auto">
-				<template v-for="(note, key) in GET_NOTES">
-					<Note :key="key" :note="note" :index="key" v-if="!note.pinned && !note.archived"/>
-				</template>
-
-				<!-- <template v-for="(note, key) in GET_PINNED">
-					<Note :key="key" :note="note" :index="key"/>
-				</template> -->
-			</div>
-		</div>
-
-		<!-- <router-view name="open-modal" :key="$route.fullPath"></router-view> -->
 
 	</section>
 </template>
@@ -52,7 +53,7 @@ export default {
 
 	data() {
 		return {
-
+			isPinned: false
 		}
 	},
 
@@ -60,7 +61,16 @@ export default {
 		...mapGetters({
 			GET_NOTES: 'GET_NOTES'
 			// GET_PINNED: 'GET_PINNED'
-		})
+		}),
+
+		is_pinned: {
+			get() {
+				return isPinned
+			},
+			set(newValue) {
+				this.isPinned = newValue
+			}
+ 		}
 	}
 }
 </script>

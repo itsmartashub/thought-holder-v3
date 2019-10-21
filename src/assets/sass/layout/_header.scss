@@ -1,7 +1,9 @@
 .header {
 	grid-area: header;
 
-	width: 100%;
+	position: fixed;
+	top: 0;
+	width: 100vw;
 	background: $white;
 	padding: 3rem 6rem;
 	display: flex;

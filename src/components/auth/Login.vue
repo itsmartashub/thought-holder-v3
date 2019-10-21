@@ -8,7 +8,7 @@
 			<h1 class="mb-4">Fill up and login! </h1>
 
 			<div class="input-group">
-				<i class="fas fa-envelope input-icon"></i>
+				<i class="mdi mdi-email input-icon"></i>
 				<input type="email" v-model="email" name="email" required placeholder="Enter your e-mail" class="input">
 				<label for="email" class="label">Email</label>
 
@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="input-group">
-				<i class="fas fa-lock input-icon"></i>
+				<i class="mdi mdi-lock input-icon"></i>
 				<input type="password" v-model="password" name="password" required placeholder="Enter your password" class="input">
 				<label for="password" class="label">Password</label>
 				<!-- <i class="fas fa-eye input-icon-append"></i> -->

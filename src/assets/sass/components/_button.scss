@@ -45,4 +45,19 @@
 			background: darken($blue, 10%);
 		}
 	}
+
+	&--icon {
+		display: flex;
+		align-items: center;
+		padding: 1rem 2rem;
+
+		i {
+			padding: 0;
+			margin: 0;
+
+			&:hover {
+				color: currentColor;
+			}
+		}
+	}
 }

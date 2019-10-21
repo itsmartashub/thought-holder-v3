@@ -51,7 +51,8 @@ export default {
 			// isOpen: true,
 			isList: false,
 			isDark: false,
-			show: false
+			show: false,
+			isScrolled: false
 		}
 	},
 
@@ -68,6 +69,7 @@ export default {
 		sidebarToggle() {
 			document.querySelector('.sidebar').classList.toggle('translateX'); // TODO ovo ce ici u modules/ui.js
 			document.querySelector('.grid-container').classList.toggle('grid-sidebar-hidden'); // TODO ovo ce ici u modules/ui.js
+			// document.querySelector('.notes').classList.toggle('translateX'); // TODO ovo ce ici u modules/ui.js
 		},
 
 		listviewToggle() {

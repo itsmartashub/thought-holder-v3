@@ -1,17 +1,59 @@
 .notes {
 	grid-area: main;
 	padding: 5rem 20rem;
+	@extend .transition-2;
+	background: $lgrey;
+
+
+	// position: relative;
+
+}
+
+.no-notes-wrapper {
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.no-notes {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	opacity: 1;
+
+	.logo {
+		position: relative;
+		font-size: 4rem;
+		i {
+			font-size: 5rem;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: -25%;
+			left: 45%;
+			width: 20%;
+			height: .8rem;
+			background: $blue;
+			border-radius: .8rem;
+
+		}
+	}
 }
 
 .grid-notes {
 	height: auto;
 	// padding: 1rem;
-	-webkit-column-width: 21rem;
-	-webkit-column-gap: 2rem;
-	-moz-column-width: 21rem;
-	-moz-column-gap: 2rem;
-	column-width: 21.5rem;
-	column-gap: 2rem;
+	// -webkit-column-width: 21rem;
+	// -webkit-column-gap: 2rem;
+	// -moz-column-width: 21rem;
+	// -moz-column-gap: 2rem;
+	column-width: 18rem;
+	column-gap: 5rem;
 	
 	i {
 		font-size: 1.3rem;
@@ -21,8 +63,8 @@
 		padding: .8rem 1.8rem;
 		// height: auto;
 		// width: auto;
-		// min-width: 22rem;
-		// display: inline-block; //! BITNOOO, ILI IPAK NE
+		width: 21.5rem;
+		display: inline-block; //! BITNOOO, ILI IPAK NE
 		-webkit-column-break-inside: avoid; //! BITNOO
           page-break-inside: avoid; //! BITNOOO
                break-inside: avoid; //! BITNOOO

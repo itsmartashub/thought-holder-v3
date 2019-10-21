@@ -1,0 +1,66 @@
+.edit-tags {
+	box-shadow: $box-shadow-note;
+	background: $white;
+	position: absolute !important;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+	padding: 2rem;
+	width: 20vw;
+
+	&:focus{
+		border: none;
+		outline: none;
+	}
+
+	.label-add-tag {
+		display: flex;
+		align-items: center;
+	}
+	.input-add-tag {
+		padding: 1rem;
+		// border-bottom: 1px solid $dgrey;
+	}
+	
+	ul {
+		overflow-y: scroll;
+		height: 40vh;
+	}
+
+	li {
+		border: none;
+		border-radius: 0;
+		// background: lawngreen;
+		padding: .5rem;
+		font-size: 1.3rem;
+		@extend .transition-2;
+
+		&:hover {
+			background:rgba($grey, .5);
+			input {
+				color: darken($blue, 5%);
+			}
+		}
+	}
+	label {
+		display: flex;
+		align-items: center;
+	}
+
+	input {
+		padding: .7rem 0;
+		margin: 0 3rem;
+		background: none;
+		width: 100%;
+		
+		&:focus {
+			border-bottom: 1px solid $dgrey;
+
+		}
+	}
+
+	button {
+		width: 100%;
+	}
+}

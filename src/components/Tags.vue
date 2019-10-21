@@ -1,11 +1,18 @@
 <template>
-	<div class="grid-notes m-auto notes">
-		<!-- <h1>TAGS {{ $route.params.tagName }}</h1>  -->
+	<section class="notes" :class="{ 'no-notes-wrapper': !GET_NOTES_WITH_SPECIAL_TAG_NAME.length }">
 
-		<template v-for="(note, key) in GET_NOTES_WITH_SPECIAL_TAG_NAME">
-			<Note :note="note" :key="key" />
-		</template>
-	</div>
+		<div v-if="!GET_NOTES_WITH_SPECIAL_TAG_NAME.length" class="no-notes">
+			<i class="mdi mdi-tag-multiple"></i>
+			<h2 class="mt-2">No notes with this tag yet</h2>
+		</div>
+
+		<div class="grid-notes m-auto" v-else>
+			<template v-for="(note, key) in GET_NOTES_WITH_SPECIAL_TAG_NAME">
+				<Note :note="note" :key="key" />
+			</template>
+		</div>
+
+	</section>
 </template>
 
 <script>

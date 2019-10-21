@@ -8,7 +8,14 @@ export default {
 		arrPinned: [],
 		arrTags: [],
 		arrTagsInNotes: [],
-		arrIDsNotesWithSpecialTag: []
+		arrIDsNotesWithSpecialTag: [],
+
+		arrCuratedSearchTags: [], //* search
+		searchTags: '', //* search
+
+		arrCheckedTags: [],
+		NEKINIZ: [],
+		defaultChecked: []
 
 	},
 
@@ -31,9 +38,32 @@ export default {
 			return state.arrIDsNotesWithSpecialTag = state.arrNotes.filter(note => state.arrTags.find(tag => tag.name == tagName).note_ids.find(note_id => note_id == note.id))
 		},
 
-		// GET_NOTES_WITH_SPECIAL_TAG: state => {
-		// 	return state.arrIDsNotesWithSpecialTag
-		// }
+		GET_CURATED_TAGS: state => { //* search
+			if(!state.arrCuratedSearchTags.length && state.searchTags === '') {
+				return state.arrTags
+
+			} else if (state.arrCuratedSearchTags.length && state.searchTags !== '') {
+				return state.arrCuratedSearchTags
+
+			} else if (state.searchTags === '') {
+				return state.arrCuratedSearchTags
+			}
+		},
+
+		ARR_ONLY_CURATED_SEARCH: state => state.arrCuratedSearchTags,
+
+		// GET_DEFAULT_CHECKED: state => state.defaultChecked,
+
+		GET_DEFAULT_CHECKED: (state, getters) => idNote => {
+			const arr = getters.GET_CURATED_TAGS.filter(tag => tag.note_ids.find(id => id == idNote))
+
+			arr.forEach(checkedTag => {
+				state.defaultChecked.push(checkedTag.name) // on stalno pushuje ovo, na svaki klik na tagove
+			})
+
+			console.log('GET_DEFAULT_CHECKED', state.defaultChecked);
+			return state.defaultChecked
+		}
 	},
 
 	mutations: {
@@ -55,14 +85,38 @@ export default {
 
 		SET_NOTES_WITH_SPECIAL_TAG (state, tagName) {
 			state.arrIDsNotesWithSpecialTag = state.arrNotes.filter(note => state.arrTags.find(tag => tag.name == tagName).note_ids.find(note_id => note_id == note.id))
-		}
+		},
+
+		SET_SEARCH_TAGS (state, inputValue) { //* search
+			state.searchTags = inputValue
+		},
+	
+		SET_CURATED_SEARCH_TAGS (state, matchedSearch) { //* search
+			state.arrCuratedSearchTags = matchedSearch
+		},
+
+		// SET_DEFAULT_CHECKED (state, getters, { inputChecks }) {
+		// 	state.defaultChecked = inputChecks
+		// },
+
+		// SET_DEFAULT_CHECKED: (state, getters) => idNote => {
+		// 	const arr = getters.GET_CURATED_TAGS.filter(tag => tag.note_ids.find(id => id == idNote))
+
+		// 	arr.forEach(checkedTag => {
+		// 		state.defaultChecked.push(checkedTag.name)
+		// 	})
+
+		// 	console.log('GET_DEFAULT_CHECKED', state.defaultChecked);
+		// 	return state.defaultChecked
+		// }
 	},
 
 
 	actions: {
 		async FETCH_NOTES({commit, dispatch}) {
 			try {
-				let querySnapshot = await db.collection('notes').where('user_id', '==', firebase.auth().currentUser.uid).orderBy('timestamp').get()
+				// let querySnapshot = await db.collection('notes').where('user_id', '==', firebase.auth().currentUser.uid).orderBy('editedTime').get()
+				let querySnapshot = await db.collection('notes').where('user_id', '==', firebase.auth().currentUser.uid).orderBy('editedTime').get()
 				let notes = []
 
 				querySnapshot.forEach(doc => {
@@ -115,39 +169,35 @@ export default {
 				// 		name: note.tags.name
 				// 	})
 				// }
-				let docRef = db.collection('notes').doc()
-				await docRef.set({
-					id: docRef.id,
+				let docNote = db.collection('notes').doc()
+
+				const date = new Date().toLocaleDateString() 
+				const time = new Date().toLocaleTimeString()
+				// const timeDate = `${time} ${date}`
+				const timeDate = time + '\n' + date
+
+				await docNote.set({
+					id: docNote.id,
 					user_id: firebase.auth().currentUser.uid,
 					title: note.title,
 					content: note.content,
 					color: note.color,
 					pinned: note.pinned,
 					archived: note.archived,
-					timestamp: Date.now()
+					createdTime: timeDate,
+					editedTime: timeDate
 					// tags: note.arrTags
 				})
-				console.log(docRef.id);
+				console.log(docNote.id);
 
 				dispatch('FETCH_DB_NOTES_CHANGES')
-
-				// if(note.archived === true) {
-				// 	commit('SET_ARCHIVED_NOTES')
-				// }
 				
-
-				//! NOTE TAGS
-				// if(note.arrTags) {
-				// 	docRef.collection('tags').set({
-				// 		name: note.tag.name
-				// 	})
-				// }
-
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: 'Note added!',
 					alertClass: 'success'
 				})
+
 			} catch (error) {
 				console.log(error);
 				dispatch('ui/ACT_NOTIFICATION', {
@@ -159,8 +209,10 @@ export default {
 		},
 
 		FETCH_DB_NOTES_CHANGES({commit, dispatch}) {
-			db.collection('notes').where('user_id', '==', firebase.auth().currentUser.uid).orderBy('timestamp')
-			.onSnapshot(snapshot => {
+			// db.collection('notes').where('user_id', '==', firebase.auth().currentUser.uid).orderBy('createdTime')
+			let query = db.collection('notes').where('user_id', '==', firebase.auth().currentUser.uid)
+
+			query.onSnapshot(snapshot => {
 				let notes = []
 
             snapshot.docChanges().forEach(change => {
@@ -247,8 +299,6 @@ export default {
 					})
 				})
 			}
-
-			
 		},
 
 		UPDATE_ARCHIVED({commit, dispatch}, {idNote, isArchived}) {
@@ -342,6 +392,42 @@ export default {
 			})
 		},
 
+		UPDATE_NOTE({commit, dispatch}, { idNote, noteData }) {
+			let refNote = db.collection('notes').doc(idNote)
+
+			const date = new Date().toLocaleDateString() 
+			const time = new Date().toLocaleTimeString()
+			const timeDate = `${time}
+			${date}`
+
+			return refNote.update({
+				id: refNote.id,
+				user_id: firebase.auth().currentUser.uid,
+				title: noteData.title,
+				content: noteData.content,
+				// color: noteData.color,
+				// pinned: noteData.pinned,
+				// archived: noteData.archived,
+				editedTime: timeDate
+			}).then(() => {
+				dispatch('FETCH_DB_NOTES_CHANGES')
+
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: 'Note has been updated!',
+					alertClass: 'success'
+				})
+			})
+			.catch(error => {
+				console.error("Error updating NOTE: ", error);
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: error.message,
+					alertClass: 'warning'
+				})
+			})
+		},
+
 
 		DELETE_NOTE({commit, dispatch}, idNote) {
 			db.collection('notes').doc(idNote)
@@ -363,6 +449,165 @@ export default {
 						alertClass: 'warning'
 					})
 				});
+		},
+
+		//* search
+		UPD_CURATED_SEARCH_TAGS({commit, state}, inputValue) {
+			let matchedSearch = state.arrTags.filter(tag => tag.name.toLowerCase().includes(inputValue))
+
+			commit('SET_CURATED_SEARCH_TAGS', matchedSearch)
+		},
+
+
+		async POST_TAG({commit, dispatch}, {inputValue, idNote}) {
+			let docRef = db.collection('tags').doc()
+			console.log('ID NOTE', idNote);
+			try {
+				await docRef.set({
+					id: docRef.id,
+					name: inputValue,
+					user_id: firebase.auth().currentUser.uid,
+					note_ids: [idNote]
+				})
+
+				dispatch('FETCH_TAGS')
+				dispatch('UPD_CURATED_SEARCH_TAGS', inputValue)
+				commit('SET_SEARCH_TAGS', inputValue) // TODO ne znam treba li ovo
+
+				console.log('ID TAG-a', docRef.id);			
+
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		ADD_TAG_TO_NOTE({commit, dispatch}, { idNote, idTag }) {
+			let docRef = db.collection('tags').doc(idTag)
+
+			return docRef.update('note_ids', firebase.firestore.FieldValue.arrayUnion(idNote))
+			.then(() => {
+
+				console.log('UPDATE_TAGS_IN_NOTE');
+				dispatch('FETCH_TAGS')
+
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: 'Tag added to this note!',
+					alertClass: 'success'
+				})
+			})
+			.catch(error => {
+				console.error("Error updating COLOR: ", error);
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: error.message,
+					alertClass: 'warning'
+				})
+			})
+		},
+
+		REMOVE_TAG_FROM_NOTE({commit, dispatch}, { idNote, idTag }) {
+			let docRef = db.collection('tags').doc(idTag)
+
+			return docRef.update('note_ids', firebase.firestore.FieldValue.arrayRemove(idNote))
+			.then(() => {
+
+				console.log('REMOVE_TAGS_FROM_NOTE');
+				dispatch('FETCH_TAGS')
+
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: 'Tag removed from this note!',
+					alertClass: 'info'
+				})
+			})
+			.catch(error => {
+				console.error("Error updating COLOR: ", error);
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: error.message,
+					alertClass: 'warning'
+				})
+			})
+		},
+
+		DELETE_TAG({commit, dispatch}, idTag) {
+			let docTags = db.collection('tags').doc(idTag)
+
+			docTags.delete()
+				.then(() => {
+					dispatch('FETCH_TAGS')
+
+					dispatch('ui/ACT_NOTIFICATION', {
+						display: true,
+						text: 'Tag deleted!',
+						alertClass: 'info'
+					})
+				})
+				.catch((error) => {
+					console.error("Error removing document: ", error);
+					dispatch('ui/ACT_NOTIFICATION', {
+						display: true,
+						text: error.message,
+						alertClass: 'warning'
+					})
+				});
+		},
+
+		UPDATE_TAG({commit, dispatch}, { idTag, newTagName }) {
+			let docTags = db.collection('tags').doc(idTag)
+
+			return docTags.update({
+				name: newTagName
+			})
+			.then(() => {
+
+				console.log('UPDATE_TAGS');
+				dispatch('FETCH_TAGS')
+
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: 'Tag has been updated!',
+					alertClass: 'success'
+				})
+			})
+			.catch(error => {
+				console.error("Error updating TAG: ", error);
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: error.message,
+					alertClass: 'warning'
+				})
+			})
+		},
+
+		async ADD_TAG({commit, dispatch}, tagName) {
+			const docTags = db.collection('tags').doc()
+
+			try {
+				await docTags.set({
+					id: docTags.id,
+					name: tagName,
+					user_id: firebase.auth().currentUser.uid,
+					note_ids: []
+				})
+
+				dispatch('FETCH_TAGS')
+
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: 'Tag has been added!',
+					alertClass: 'success'
+				})
+			} catch (error) {
+				console.log(error);
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: 'Tag can not be added!',
+					alertClass: 'warning'
+				})
+			}
 		}
-	}
+
+ 	}
 }

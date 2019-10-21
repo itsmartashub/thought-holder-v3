@@ -1,5 +1,5 @@
 <template>
-	<section class="note newNote mb-5 m-auto">
+	<section class="note newNote mb-5 m-auto" :class="setColor">
 
 			<div class="note__title-container mb-3">
 				<div
@@ -9,7 +9,10 @@
 					v-text="title"
 					@blur="editTitle"
 				></div>
-				<i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i>
+				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
+				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
+				<i class="mdi mdi-pin" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i>
+				
 			</div>
 
 
@@ -27,46 +30,19 @@
 			<div class="note__footer">
 				<div class="note__options mt-1">
 
-					<!-- <div class="note__add-tags" >
-						<i class="fas fa-tags" title="Add tag" @click="tagsOpen = !tagsOpen"></i>
+					<NoteTags />
 
-						<form class="note__add-tags-container" @submit.prevent v-if="tagsOpen">
-							<h4>Tag note</h4>
-							<input type="text" placeholder="Enter tag name">
-							<ul>
-								<li>
-									<label for="KEY1"><input type="checkbox" id="KEY1">IME TAGA </label>
-								</li>
+					<div class="note__pallete">
+						<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
+						<i class="mdi mdi-palette" title="Change color"></i>
 
-								<li>
-									<label for="KEY2"><input type="checkbox" id="KEY2">IME TAGA </label>
-								</li>
-
-								<li>
-									<label for="KEY3"><input type="checkbox" id="KEY3">IME TAGA </label>
-								</li>
-							</ul>
-
-							<button class="btn mt-2" @click.prevent>add tag</button>
-						</form>
-					</div> -->
-					<NoteTags :tagsOpen="tagsOpen" />
-
-					<!-- <div class="note__pallete">
-						<i class="fas fa-palette" title="Change color"></i>
-
-						<div class="note__colors-container">
-							<div class="color-1 red"></div>
-							<div class="color-2 blue"></div>
-							<div class="color-3 green"></div>
-							<div class="color-4 purple"></div>
-							<div class="color-5 orange"></div>
-							<div class="color-6 grey"></div>
+						<div class="note__colors-container" >
+							<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
 						</div>
-					</div> -->
-					<NoteColors />
-					<i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
-					<!-- <i class="fas fa-trash" title="Delete"></i> -->
+					</div>
+
+					<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i> -->
+					<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
 				</div>
 
 
@@ -91,20 +67,22 @@ export default {
 	name: 'newNote',
 	components: { NoteColors, NoteTags },
 
-	props: {
-		tagsOpen: Boolean
-	},
-
 	data() {
 		return {
 			title: '',
 			content: '',
-			color: 'white',
+			setColor: 'white',
 			pinned: false,
 			archived: false,
-			// arrTags: [],
-
-			// tagsOpen: false
+			// setColor: '',
+			colors: [
+				{ id: 1, name: 'white' },
+				{ id: 2, name: 'red' },
+				{ id: 3, name: 'blue' },
+				{ id: 4, name: 'green' },
+				{ id: 5, name: 'purple' },
+				{ id: 6, name: 'orange' }
+			]
 		}
 	},
 
@@ -127,7 +105,7 @@ export default {
 			this.tagsOpen = false
 		},
 
-		onPinned() {
+		onPinned() { // TODO srediti
 			this.pinned = !this.pinned
 
 			if(this.pinned) {
@@ -145,7 +123,7 @@ export default {
 			}
 		},
 
-		onArchived() {
+		onArchived() { // TODO srediti
 			this.archived = !this.archived
 
 			if(this.archived) {
@@ -163,13 +141,17 @@ export default {
 			}
 		},
 
-		addNote() {
+		addColor(colorName) {
+			this.setColor = colorName
+		},
+
+		addNote() { // TODO srediti
 			if(this.title != '' || this.content != '') {
 
 				const note = {
 					title: this.title,
 					content: this.content,
-					color: this.color,
+					color: this.setColor,
 					pinned: this.pinned,
 					archived: this.archived
 					// arrTags: this.arrTags
@@ -177,6 +159,8 @@ export default {
 
 				console.log(note)
 				this.$store.dispatch('POST_NOTE', note)
+
+				// TODO if tagss, add tags
 				
 				this.resetNote()
 			} else {

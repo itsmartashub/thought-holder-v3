@@ -7,6 +7,9 @@
 	border-radius: .8rem;
 	color: lighten($black, 18%);
 	padding: 1.5rem 2.5rem;
+	&:focus {
+		outline: none;
+	}
 	// max-height: 70%;
 	
 	// form { margin: 5rem 0; }
@@ -74,6 +77,9 @@
 
 	&__add-tags {
 		@extend .note__pallete;
+		&:focus {
+			outline: none;
+		}
 		// background: red;
 	}
 

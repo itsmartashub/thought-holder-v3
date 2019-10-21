@@ -3,6 +3,8 @@ export default {
 
 	state: {
 		noteOpen: false,
+		tagsOpen: false,
+		editTagsOpen: false,
 
 		notification: {
 			display: false,
@@ -10,15 +12,19 @@ export default {
 			className: 'success'
 		},
 
-		displayNoteBG: false
+		modalBackground: false
 	},
 
 	getters: {
 		GET_NOTIFICATION: state => state.notification,
 
-		GET_NOTE_OPEN: state => state.noteOpen,
+		GET_OPEN_NOTE: state => state.noteOpen,
 
-		GET_NOTE_BG: state => state.displayNoteBG
+		GET_OPEN_BG: state => state.modalBackground,
+
+		GET_OPEN_TAGS: state => state.tagsOpen,
+
+		GET_OPEN_EDIT_TAGS: state => state.editTagsOpen
 	},
 	mutations: {
 		SET_NOTIFICATION (state, {display, text, alertClass}) {
@@ -27,14 +33,24 @@ export default {
 			state.notification.className = alertClass
 		},
 
-		SET_NOTE_OPEN (state, payload) {
+		SET_OPEN_NOTE (state, payload) {
 			state.noteOpen = payload
-			state.displayNoteBG = payload
+			state.modalBackground = payload
 		},
 
-		// SET_DISPLAY_NOTE_BG (state, payload) {
-		// 	state.displayNoteBg = payload
-		// }
+		SET_OPEN_BG (state, payload) {
+			state.modalBackground = payload
+		},
+
+		SET_OPEN_TAGS (state, payload) {
+			state.tagsOpen = payload
+			state.modalBackground = payload
+		},
+
+		SET_OPEN_EDIT_TAGS (state, payload) {
+			state.editTagsOpen = payload
+			state.modalBackground = payload
+		}
 	},
 	actions: {
 		ACT_NOTIFICATION ({commit, state}, {display, text, alertClass}) {

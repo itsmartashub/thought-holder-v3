@@ -1,6 +1,13 @@
 <template>
-	<section class="notes">
-		<div class="grid-notes m-auto">
+	<section class="notes" :class="{ 'no-notes-wrapper': !GET_ARCHIVED.length }">
+
+		<div v-if="!GET_ARCHIVED.length" class="no-notes">
+			<i class="mdi mdi-arrow-down-bold-box-outline"></i>
+			<h2 class="mt-2">Your archived notes appear here</h2>
+		</div>
+
+		<!-- <div class="grid-notes m-auto" v-if="GET_ARCHIVED.length"> -->
+		<div class="grid-notes m-auto" v-else>
 
 			<!-- <h1>ARCHIVED</h1> -->
 			<template v-for="(note, key) in GET_ARCHIVED">

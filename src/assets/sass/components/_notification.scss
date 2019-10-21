@@ -1,7 +1,7 @@
 .notification {
 	position: fixed;
 	bottom: 5%;
-	right: 2%;
+	left: 5%;
 	// background: $red;
 	// background: $green;
 	// background: #00e676;
@@ -9,7 +9,7 @@
 	z-index: 10000;
 	padding: 2rem;
 	color: $black;
-	width: 20%;
+	width: 25%;
 	height: auto;
 	box-shadow: $box-shadow-note;
 	// display: none;

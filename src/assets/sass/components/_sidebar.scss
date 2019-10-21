@@ -2,19 +2,13 @@
 	grid-area: side;
 
 	background: $white;
-	// border: 1px solid #000;
-	// position: absolute;
-	// top: 8%;
-	// padding-top: 5%;
-	// top: 0;
-	// left: 0;
-	height: 100%;
-	// width: 15vw;
-	// transform: translateX(-100%);
+	position: fixed;
+	top: 8%;
+	width: 18vw;
+	// height: 100vh;
 	transform: translateX(0);
 	transition: transform .3s $cub-1 !important;
-	// z-index: 1;
-	// padding: 2rem; 
+	z-index: 70;
 
 	li {
 		padding: 2rem 4rem;
@@ -71,6 +65,11 @@
 				font-size: 1.4rem;
 				margin-right: 1rem;
 			}
+	}
+
+	&__footer {
+		padding: 0 4.5rem;
+		// background: red;
 	}
 }
 

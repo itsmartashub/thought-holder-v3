@@ -8,7 +8,7 @@
 			<h1 class="mb-4">Fill up and signup! </h1>
 
 			<div class="input-group">
-				<i class="fas fa-envelope input-icon"></i>
+				<i class="mdi mdi-email input-icon"></i>
 				<input
 					type="email"
 					name="email" 
@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="input-group">
-				<i class="fas fa-unlock input-icon"></i>
+				<i class="mdi mdi-lock-open input-icon"></i>
 				<input
 					type="password"
 					name="password"
@@ -43,7 +43,7 @@
 			</div>
 
 			<div class="input-group">
-				<i class="fas fa-lock input-icon"></i>
+				<i class="mdi mdi-lock input-icon"></i>
 				<input
 					type="password"
 					name="confirm_password"

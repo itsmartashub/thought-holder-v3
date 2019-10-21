@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<!-- <div> -->
 		<!-- <h1>{{ note.title }}</h1> -->
-		<article class="note mb-2" :class="[{'open-note': openNote}, note.color]" ref="refNote" @click.prevent="onOpenNote(note.id)">
+		<article class="note mb-2" :class="[{'open-note': OPEN_NOTE}, note.color]" ref="refNote" @click="onOpenNote()" tabindex="0" @keydown.esc="closeNote()">
 
 			<div class="note__title-container mb-1">
 				<div
@@ -12,7 +12,8 @@
 					@blur="editTitle"
 				>
 				</div>
-				<i class="fas fa-thumbtack note__pinned" title="Pin note" @click.stop="onPinned(note.id)" :class="{'txt-blue': note.pinned}"></i>
+				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click.stop="onPinned(note.id)" :class="{'txt-blue': note.pinned}"></i> -->
+				<i class="mdi mdi-pin" title="Pin note" @click.stop="onPinned(note.id)" :class="{'txt-blue': note.pinned}"></i>
 			</div>
 
 			<div
@@ -24,32 +25,46 @@
 				@blur="editContent"
 			></div>
 
-			<h4 class="note__tag mt-3" v-for="(tag, key) in GET_TAGS_IN_NOTES" :key="key">{{ tag.name }}</h4>
-
-			<div class="note__footer">
-				<div class="note__options mt-1" :class="{ 'open-note-opacity': openNote }">
-
-					<NoteTags :note="note" />
-
-					<NoteColors :note="note" />
-					
-					<i class="fas fa-archive" title="Archive" @click.stop="onArchived(note.id)" :class="{'txt-blue': archived}"></i>
-					<i class="fas fa-trash" title="Delete" @click.stop="deleteNote(note.id)"></i>
+			<div class="note__tag-date-wrapper">
+				<div>
+					<h4 class="note__tag mt-3" v-for="(tag, key) in GET_TAGS_IN_NOTES" :key="key">{{ tag.name }}</h4>
 				</div>
 
-				<div class="note__btn-container" v-if="openNote">
+				<div class="note__date" :title="titleTime">
+					<!-- Created at: {{ note.createdTime }} <br/><br/> -->
+					Edited at: <br>{{ note.editedTime }}
+				</div>
+				
+
+			</div>
+
+			<div class="note__footer">
+				<div class="note__options mt-1" :class="{ 'open-note-opacity': OPEN_NOTE }">
+
+					<NoteTags :note="note" :key="index" :unique="index" />
+
+					<NoteColors :note="note" :unique="index" />
+					
+					<!-- <i class="fas fa-archive" title="Archive" @click.stop="onArchived(note.id)" :class="{'txt-blue': archived}"></i> -->
+					<i class="mdi mdi-package-down" title="Archive" @click.stop="onArchived(note.id)" :class="{'txt-blue': archived}"></i>
+
+					<!-- <i class="fas fa-trash" title="Delete" @click.stop="deleteNote(note.id)"></i> -->
+					<i class="mdi mdi-delete" title="Delete" @click.stop="deleteNote(note.id)"></i>
+				</div>
+
+				<div class="note__btn-container" v-if="OPEN_NOTE">
 					
 					<button class="btn btn--blue" @click.stop.prevent ="editNote(note.id)">edit note</button>
-					<p class="btn" @click.stop="OPEN_NOTE = false">close</p>
+					<p class="btn" @click.stop="closeNote()">close</p>
 				</div>
 			</div>
 
 		</article>
 
-		<div class="open-note-background" v-if="openNote" @click="OPEN_NOTE = false"></div>
+		<!-- <div class="modal-background" v-if="OPEN_NOTE" @click="OPEN_NOTE = false"></div> -->
 
 		<!-- <router-view name="open-note" :key="$route.fullPath" :note="note"></router-view> -->
-	</div>
+	<!-- </div> -->
 </template>
 
 <script>
@@ -64,13 +79,15 @@ export default {
 
 	props: {
 		note: Object,
-		index: Number, // ovo je za koju notu otvaramo kada kliknemo valjda
+		index: Number, // ovo je za koju notu otvaramo kada kliknemo valjda, ovo je key
+		// index: String
 		// tagsOpen: Boolean
 	},
 
 	data() {
 		return {
 			openNote: false,
+			titleTime: 'Created: \n' + this.note.createdTime,
 			// tagsOpen: false,
 			// openNoteBG: true,
 			// currNote: false,
@@ -90,6 +107,10 @@ export default {
 			return this.$store.getters.GET_TAGS_IN_NOTES(this.note.id)
 		},
 
+		OPEN_TAGS () {
+			return this.$store.getters['ui/GET_OPEN_NOTE']
+		},
+
 		OPEN_NOTE: {
 			get() {
 				return this.openNote
@@ -97,7 +118,25 @@ export default {
 			set(value) {
 				this.openNote = value
 			}
+		},
+
+		OPEN_NOTE_BG: {
+			get() {
+				return this.$store.getters['ui/GET_OPEN_BG']
+			},
+			set(newVal) {
+				this.$store.commit('ui/SET_OPEN_BG', newVal)
+			}
 		}
+
+		// OPEN_NOTE: {
+		// 	get() {
+		// 		return this.$store.getters['ui/GET_OPEN_NOTE']
+		// 	},
+		// 	set(newVal) {
+		// 		this.$store.commit('ui/SET_OPEN_NOTE', newVal)
+		// 	}
+		// },
 	},
 
 	// watch: { // TODO ovo ako se odlucim da otvara note u poseban NotesModal, a ne ovako koji ce imati i params IDnote
@@ -120,14 +159,15 @@ export default {
 			this.content = e.target.innerText
 		},
 
-		// onOpenNote(idNote) {
-		// 	this.openNote = true
-		// 	// console.log(idNote);
-		// },
+		onOpenNote() {
+			this.OPEN_NOTE = true
+			this.OPEN_NOTE_BG = true
+		},
 
-		// closeNote() {
-		// 	this.openNote = false
-		// },
+		closeNote() {
+			this.OPEN_NOTE = false
+			this.OPEN_NOTE_BG = false
+		},
 
 		resetNote() {
 			this.title = ''
@@ -135,8 +175,10 @@ export default {
 			this.color = 'white'
 			this.pinned = false
 			this.archived = false
+			this.OPEN_NOTE = false
+			this.OPEN_NOTE_BG = false
 			// this.arrTags = []
-			this.tagsOpen = false
+			// this.tagsOpen = false
 		},
 
 		onPinned(idNote) {
@@ -162,17 +204,16 @@ export default {
 		editNote(idNote) {
 			if(this.title != '' || this.content != '') {
 
-				const note = {
+				const noteData = {
 					title: this.title,
 					content: this.content,
 					color: this.color,
 					pinned: this.pinned,
 					archived: this.archived
-					// arrTags: this.arrTags
 				}
 
-				console.log(note)
-				this.$store.dispatch('POST_NOTE', note)
+				console.log(noteData)
+				this.$store.dispatch('UPDATE_NOTE', { idNote: this.note.id, noteData }) // TODO ovde treba UPDATE_NOTE a ne POST_NOTE, to POST je u NewNote.vue
 
 				// TODO ovde treba kao za note samo za tags!
 				// this.$store.dispatch('POST_TAGS', tags)
@@ -191,8 +232,14 @@ export default {
 
 
 		deleteNote(idNote) {
-			this.$store.dispatch('DELETE_NOTE', idNote)
-		}
+			if (confirm("Are you sure you want to delete this note?")) {
+				this.$store.dispatch('DELETE_NOTE', idNote)
+			}
+		},
+
+		// created() {
+		// 	this.$store.commit('SET_DEFAULT_CHECKED', this.note.id)
+		// }
 	},
 }
 </script>
