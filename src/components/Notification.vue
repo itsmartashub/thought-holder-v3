@@ -1,9 +1,11 @@
 <template>
-	<div class="notification" :class="GET_NOTIFY.className" v-if="showHide">
-		<div class="position-wrapper">
-			<i class="mdi mdi-bell-ring"></i> <p>{{ GET_NOTIFY.text }} </p><i class="mdi mdi-close-circle-outline" @click="showHide = false"></i>
+	<transition name="notify">
+		<div class="notification" :class="GET_NOTIFY.className" v-if="showHide">
+			<div class="position-wrapper">
+				<i class="mdi mdi-bell-ring"></i> <p>{{ GET_NOTIFY.text }} </p><i class="mdi mdi-close-circle-outline" @click="showHide = false"></i>
+			</div>
 		</div>
-	</div>
+	</transition>
 </template>
 
 <script>

@@ -4,8 +4,10 @@ import db from '@/db'
 export default {
 	state: {
 		arrNotes: [],
-		arrArchived: [],
 		arrPinned: [],
+		arrArchived: [],
+
+
 		arrTags: [],
 		arrTagsInNotes: [],
 		arrIDsNotesWithSpecialTag: [],
@@ -23,9 +25,9 @@ export default {
 		// GET_NOTES: state => state.arrNotes = state.arrNotes.filter(note => note.archived === false),
 		GET_NOTES: state => state.arrNotes,
 
-		GET_ARCHIVED: state => state.arrArchived = state.arrNotes.filter(note => note.archived === true),
-
 		GET_PINNED: state => state.arrPinned = state.arrNotes.filter(note => note.pinned === true),
+		GET_ARCHIVED: state => state.arrArchived = state.arrNotes.filter(note => note.archived === true),
+		// GET_PINNED: state => state.arrPinned,
 
 		GET_TAGS: state => state.arrTags,
 
@@ -70,17 +72,28 @@ export default {
 		SET_NOTES (state, notes) {
 			state.arrNotes = notes
 		},
+		ADD_NOTE (state, note) {
+			state.arrNotes.unshift(note)
+		},
+		REMOVE_NOTE(state, idNote) {
+			state.arrNotes = state.arrNotes.filter(note => note.id !== idNote)
+		},
+
+		SET_PINNED (state, {idNote, isPinned}) {
+			// state.arrPinned.unshift(note)
+			state.arrNotes.find(note => note.id === idNote).pinned = isPinned
+			// console.log(state.arrNotes.find(note => note.id === idNote));
+		},
+		SET_ARCHIVED (state, {idNote, isArchived}) {
+			state.arrNotes.find(note => note.id === idNote).archived = isArchived
+		},
+
+		SET_COLOR (state, {idNote, colorName}) {
+			state.arrNotes.find(note => note.id === idNote).color = colorName
+		},
 
 		SET_TAGS (state, tags) {
 			state.arrTags = tags
-		},
-
-		SET_PINNED (state, note) {
-			state.arrPinned.unshift(note)
-		},
-
-		SET_ARCHIVED (state, note) {
-			state.arrPinned.unshift(note)
 		},
 
 		SET_NOTES_WITH_SPECIAL_TAG (state, tagName) {
@@ -188,9 +201,12 @@ export default {
 					editedTime: timeDate
 					// tags: note.arrTags
 				})
-				console.log(docNote.id);
+				// console.log(docNote.id);
+				commit('ADD_NOTE', note)
+				// commit('SET_PINNED', {idNote: note.id, isPinned: note.pinned})
+				dispatch('FETCH_NOTES')
 
-				dispatch('FETCH_DB_NOTES_CHANGES')
+				// dispatch('FETCH_DB_NOTES_CHANGES')
 				
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
@@ -236,160 +252,282 @@ export default {
 		},
 
 
-		UPDATE_PINNED({commit, dispatch}, {idNote, isPinned}) {
-			let refNote = db.collection('notes').doc(idNote)
+		// UPDATE_PINNED({commit, dispatch}, {idNote, isPinned}) {
+		// 	let refNote = db.collection('notes').doc(idNote)
 
-			if(isPinned) {
-				return refNote.update({
-					pinned: true,
-					archived: false
-				})
-				.then(() => {
-					dispatch('FETCH_DB_NOTES_CHANGES')
+		// 	if(isPinned) {
+		// 		return refNote.update({
+		// 			pinned: true,
+		// 			archived: false
+		// 		})
+		// 		.then(() => {
+		// 			console.log(res);
 
-					if(isPinned) {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note pinned.',
-							alertClass: 'info'
-						})
-					} else {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note unpinned.',
-							alertClass: 'info'
-						})
-					}
-				})
-				.catch(error => {
-					console.error("Error updating IS PINNED: ", error);
+		// 			// dispatch('FETCH_DB_NOTES_CHANGES')
+		// 			commit('SET_PINNED', {
+		// 				idNote,
+		// 				pinned: true
+		// 			})
+
+		// 			if(isPinned) {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note pinned.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			} else {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note unpinned.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			}
+		// 		})
+		// 		.catch(error => {
+		// 			console.error("Error updating IS PINNED: ", error);
+		// 			dispatch('ui/ACT_NOTIFICATION', {
+		// 				display: true,
+		// 				text: error.message,
+		// 				alertClass: 'warning'
+		// 			})
+		// 		})
+		// 	} else if(!isPinned) {
+		// 		return refNote.update({
+		// 			pinned: false,
+		// 		})
+		// 		.then((res) => {
+		// 			console.log(res);
+		// 			// dispatch('FETCH_DB_NOTES_CHANGES')
+		// 			commit('SET_PINNED', {idNote, pinned: false})
+
+
+		// 			if(isPinned) {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note pinned.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			} else {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note unpinned.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			}
+		// 		})
+		// 		.catch(error => {
+		// 			console.error("Error updating IS PINNED: ", error);
+		// 			dispatch('ui/ACT_NOTIFICATION', {
+		// 				display: true,
+		// 				text: error.message,
+		// 				alertClass: 'warning'
+		// 			})
+		// 		})
+		// 	}
+		// },
+
+		async UPDATE_PINNED({commit, dispatch}, {idNote, isPinned}) {
+			let docNote = db.collection('notes').doc(idNote)
+
+			try {
+				if(isPinned == true) {
+					await docNote.update({
+						pinned: true,
+						archived: false
+					})
+
+					commit('SET_PINNED', {idNote: idNote, isPinned: true})
+
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
-						text: error.message,
-						alertClass: 'warning'
+						text: 'Note pinned.',
+						alertClass: 'info'
 					})
-				})
-			} else if(!isPinned) {
-				return refNote.update({
-					pinned: false,
-				})
-				.then(() => {
-					dispatch('FETCH_DB_NOTES_CHANGES')
+				
 
-					if(isPinned) {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note pinned.',
-							alertClass: 'info'
-						})
-					} else {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note unpinned.',
-							alertClass: 'info'
-						})
-					}
-				})
-				.catch(error => {
-					console.error("Error updating IS PINNED: ", error);
+				} else if (isPinned == false) {
+					await docNote.update({
+						pinned: false
+					})
+					
+					commit('SET_PINNED', {idNote: idNote, isPinned: false})
+
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
-						text: error.message,
-						alertClass: 'warning'
+						text: 'Note unpinned.',
+						alertClass: 'info'
 					})
+				}
+
+				// dispatch('FETCH_NOTES')
+				
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		// UPDATE_ARCHIVED({commit, dispatch}, {idNote, isArchived}) {
+		// 	let refNote = db.collection('notes').doc(idNote)
+
+		// 	if(isArchived) {
+		// 		return refNote.update({
+		// 			archived: true,
+		// 			pinned: false
+		// 		})
+		// 		.then(() => {
+		// 			dispatch('FETCH_DB_NOTES_CHANGES')
+
+		// 			if(isArchived) {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note is archived.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			} else {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note is unarchived.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			}
+		// 		})
+		// 		.catch(error => {
+		// 			console.error("Error updating IS PINNED: ", error);
+		// 			dispatch('ui/ACT_NOTIFICATION', {
+		// 				display: true,
+		// 				text: error.message,
+		// 				alertClass: 'warning'
+		// 			})
+		// 		})
+		// 	} else if(!isArchived) {
+		// 		return refNote.update({
+		// 			archived: false
+		// 		})
+		// 		.then(() => {
+		// 			dispatch('FETCH_DB_NOTES_CHANGES')
+
+		// 			if(isArchived) {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note is archived.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			} else {
+		// 				dispatch('ui/ACT_NOTIFICATION', {
+		// 					display: true,
+		// 					text: 'Note is unarchived.',
+		// 					alertClass: 'info'
+		// 				})
+		// 			}
+		// 		})
+		// 		.catch(error => {
+		// 			console.error("Error updating IS PINNED: ", error);
+		// 			dispatch('ui/ACT_NOTIFICATION', {
+		// 				display: true,
+		// 				text: error.message,
+		// 				alertClass: 'warning'
+		// 			})
+		// 		})
+		// 	}
+		// },
+
+
+
+		async UPDATE_ARCHIVED({commit, dispatch}, {idNote, isArchived}) {
+			let docNote = db.collection('notes').doc(idNote)
+
+			try {
+				if(isArchived == true) {
+					await docNote.update({
+						archived: true,
+						pinned: false
+					})
+
+					commit('SET_ARCHIVED', {idNote: idNote, isArchived: true})
+
+					dispatch('ui/ACT_NOTIFICATION', {
+						display: true,
+						text: 'Note is archived.',
+						alertClass: 'info'
+					})
+
+				} else if(isArchived == false) {
+					await docNote.update({
+						archived: false
+					})
+
+					commit('SET_ARCHIVED', {idNote: idNote, isArchived: false})
+					
+					dispatch('ui/ACT_NOTIFICATION', {
+						display: true,
+						text: 'Note is unarchived.',
+						alertClass: 'info'
+					})
+				}
+
+				// dispatch('FETCH_NOTES')
+			} catch (error) {
+				console.error("Error updating IS ARCHIVED: ", error);
+
+				dispatch('ui/ACT_NOTIFICATION', {
+					display: true,
+					text: 'Something went wrong!',
+					alertClass: 'warning'
 				})
 			}
 		},
 
-		UPDATE_ARCHIVED({commit, dispatch}, {idNote, isArchived}) {
-			let refNote = db.collection('notes').doc(idNote)
 
-			if(isArchived) {
-				return refNote.update({
-					archived: true,
-					pinned: false
-				})
-				.then(() => {
-					dispatch('FETCH_DB_NOTES_CHANGES')
+		// UPDATE_COLOR({commit, dispatch}, {idNote, colorName}) {
+		// 	let refNote = db.collection('notes').doc(idNote)
 
-					if(isArchived) {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note is archived.',
-							alertClass: 'info'
-						})
-					} else {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note is unarchived.',
-							alertClass: 'info'
-						})
-					}
-				})
-				.catch(error => {
-					console.error("Error updating IS PINNED: ", error);
-					dispatch('ui/ACT_NOTIFICATION', {
-						display: true,
-						text: error.message,
-						alertClass: 'warning'
-					})
-				})
-			} else if(!isArchived) {
-				return refNote.update({
-					archived: false
-				})
-				.then(() => {
-					dispatch('FETCH_DB_NOTES_CHANGES')
+		// 	return refNote.update({
+		// 		color: colorName
+		// 	})
+		// 	.then(() => {
+		// 		dispatch('FETCH_DB_NOTES_CHANGES')
 
-					if(isArchived) {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note is archived.',
-							alertClass: 'info'
-						})
-					} else {
-						dispatch('ui/ACT_NOTIFICATION', {
-							display: true,
-							text: 'Note is unarchived.',
-							alertClass: 'info'
-						})
-					}
+		// 		dispatch('ui/ACT_NOTIFICATION', {
+		// 			display: true,
+		// 			text: `Color ${colorName}`,
+		// 			alertClass: 'info'
+		// 		})
+		// 	})
+		// 	.catch(error => {
+		// 		console.error("Error updating COLOR: ", error);
+		// 		dispatch('ui/ACT_NOTIFICATION', {
+		// 			display: true,
+		// 			text: error.message,
+		// 			alertClass: 'warning'
+		// 		})
+		// 	})
+		// },
+
+		async UPDATE_COLOR({commit, dispatch}, {idNote, colorName}) {
+			let docNote = db.collection('notes').doc(idNote)
+
+			try {
+				await docNote.update({
+					color: colorName
 				})
-				.catch(error => {
-					console.error("Error updating IS PINNED: ", error);
-					dispatch('ui/ACT_NOTIFICATION', {
-						display: true,
-						text: error.message,
-						alertClass: 'warning'
-					})
-				})
-			}
-		},
-
-
-		UPDATE_COLOR({commit, dispatch}, {idNote, colorName}) {
-			let refNote = db.collection('notes').doc(idNote)
-
-			return refNote.update({
-				color: colorName
-			})
-			.then(() => {
-				dispatch('FETCH_DB_NOTES_CHANGES')
 
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: `Color ${colorName}`,
 					alertClass: 'info'
 				})
-			})
-			.catch(error => {
+
+				commit('SET_COLOR', {idNote, colorName})
+
+				// dispatch('FETCH_DB_NOTES_CHANGES')
+			} catch(error) {
 				console.error("Error updating COLOR: ", error);
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: error.message,
 					alertClass: 'warning'
 				})
-			})
+			}
 		},
 
 		UPDATE_NOTE({commit, dispatch}, { idNote, noteData }) {
@@ -433,7 +571,8 @@ export default {
 			db.collection('notes').doc(idNote)
 				.delete()
 				.then(() => {
-					dispatch('FETCH_DB_NOTES_CHANGES')
+					// dispatch('FETCH_DB_NOTES_CHANGES')
+					commit('REMOVE_NOTE', idNote)
 
 					dispatch('REMOVE_NOTE_FROM_TAG', idNote)
 

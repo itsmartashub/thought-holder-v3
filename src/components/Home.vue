@@ -7,7 +7,9 @@
 		<router-view :key="$route.fullPath" />
 		<!-- <router-view :key="$route.fullPath" name="open-modal"/> -->
 
-		<EditTags v-if="OPEN_EDIT_TAGS"/>
+		<transition name="welcome">
+			<EditTags v-if="OPEN_EDIT_TAGS"/>
+		</transition>
 		
 		<ModalBackground />
 	</div>

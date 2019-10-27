@@ -58,9 +58,8 @@ export default {
 				setTimeout(() => {
 					state.notification.display = false
 				}, 3000);
+				
 				commit('SET_NOTIFICATION', {display, text, alertClass})
-
-
 			}
 		}
 	}

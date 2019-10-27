@@ -186,11 +186,16 @@ export default {
 		onPinned(idNote) {
 			this.pinned = !this.pinned
 			// this.archived = false
+
+			// console.log(this.pinned);
 			
 			this.$store.dispatch('UPDATE_PINNED', {
 				idNote: idNote,
 				isPinned: this.pinned
 			})
+
+			this.closeNote()
+			// console.log(this.pinned);
 		},
 
 		onArchived(idNote) {
@@ -198,9 +203,11 @@ export default {
 
 			this.$store.dispatch('UPDATE_ARCHIVED', {
 				idNote: idNote,
-				isArchived: this.archived,
-				isPinned: this.pinned
+				isArchived: this.archived
 			})
+
+			this.closeNote()
+
 		},
 
 		editNote(idNote) {

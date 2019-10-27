@@ -95,6 +95,10 @@
 	font-size: 1.5rem;
 }
 
+.open-note:hover {
+	transform: translate(-50%, -50%) !important;
+}
+
 .open-note-opacity {
 	opacity: 1 !important;
 	visibility: visible !important;

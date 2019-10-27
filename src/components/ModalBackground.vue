@@ -1,5 +1,7 @@
 <template>
-	<div class="modal-background" v-if="OPEN_NOTE || OPEN_NOTE_BG || OPEN_EDIT_TAGS" @click="close"></div>
+	<!-- <transition name="welcome"> -->
+		<div class="modal-background" v-if="OPEN_NOTE || OPEN_NOTE_BG || OPEN_EDIT_TAGS" @click="close"></div>
+	<!-- </transition> -->
 </template>
 
 <script>

@@ -59,9 +59,12 @@
 		box-shadow: $box-shadow-note;
 
 		width: calc(100% / 1);
+		// transition: @extend .transition-3;
+		transition: all .3s ease-in-out;
 		// float: left;
 
 		&:hover {
+			transform: translateY(-5%);
 			.note__pin,
 			.note__options {
 				opacity: 1;

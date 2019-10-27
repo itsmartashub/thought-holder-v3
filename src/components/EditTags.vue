@@ -1,29 +1,30 @@
 <template>
-		<div class="edit-tags" @keydown.esc="OPEN_EDIT_TAGS = false" tabindex="0">
-			<h3 class="h3 underline">Edit tags</h3>
-			<form @submit.prevent>
+	<div class="edit-tags" @keydown.esc="OPEN_EDIT_TAGS = false" tabindex="0">
+		<h3 class="h3 underline">Edit tags</h3>
+		<form @submit.prevent>
 
-				<label for="addTag" class="label-add-tag">
-					<i class="mdi mdi-plus" v-if="!focusInput"></i>
-					<i class="mdi mdi-close" v-else @click.prevent="closeIcon()"></i>
-					<input type="text" v-model.trim="inputAddTag" placeholder="Create new tag" class="input-add-tag" @focus="focusInput = true">
-					<i class="mdi mdi-check icon-check" @click.prevent="createNewTag()" :class="{'opacity-1': focusInput}"></i>
-				</label>
+			<label for="addTag" class="label-add-tag">
+				<i class="mdi mdi-plus" v-if="!focusInput"></i>
+				<i class="mdi mdi-close" v-else @click.prevent="closeIcon()"></i>
+				<input type="text" v-model.trim="inputAddTag" placeholder="Create new tag" class="input-add-tag" @focus="focusInput = true">
+				<i class="mdi mdi-check icon-check" @click.prevent="createNewTag()" :class="{'opacity-1': focusInput}"></i>
+			</label>
 
-				<ul class="mt-2">
-					<li v-for="tag in GET_TAGS" :key="tag.id">
-						<label :for="tag.id">
-							<!-- <i class="fas fa-trash" @click="deleteTag(tag.id)">	 -->
-							<i class="mdi mdi-delete icon-delete" @click="deleteTag(tag.id)"></i>
-							<input type="text" :value="tag.name" :id="tag.id" class="input-edit-tag" @focus="focusEdit(tag.id, $event)" @blur="inputValue"/>
-							<!-- BITNO! Nije htelo da apdejtuje tag sa v-model tj sa  two way binding, mora sa :value! -->
-							<i :class="tag.id == currKey ? 'mdi mdi-check' : 'mdi mdi-pencil'" @click="updateTag(tag, tag.id)"></i>
-						</label>
-					</li>
-				</ul>
-			</form>
-				<button class="mt-3 btn__underline" @click.prevent="OPEN_EDIT_TAGS = false">Done</button>
-		</div>
+			<ul class="mt-2">
+				<li v-for="tag in GET_TAGS" :key="tag.id">
+					<label :for="tag.id">
+						<!-- <i class="fas fa-trash" @click="deleteTag(tag.id)">	 -->
+						<i class="mdi mdi-delete icon-delete" @click="deleteTag(tag.id)"></i>
+						<input type="text" :value="tag.name" :id="tag.id" class="input-edit-tag" @focus="focusEdit(tag.id, $event)" @blur="inputValue"/>
+						<!-- BITNO! Nije htelo da apdejtuje tag sa v-model tj sa  two way binding, mora sa :value! -->
+						<i :class="tag.id == currKey ? 'mdi mdi-check' : 'mdi mdi-pencil'" @click="updateTag(tag, tag.id)"></i>
+					</label>
+				</li>
+			</ul>
+		</form>
+
+		<button class="mt-3 btn__underline" @click.prevent="OPEN_EDIT_TAGS = false">Done</button>
+	</div>
 </template>
 
 <script>
