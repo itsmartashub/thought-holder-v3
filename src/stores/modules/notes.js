@@ -435,6 +435,8 @@ export default {
 				.then(() => {
 					dispatch('FETCH_DB_NOTES_CHANGES')
 
+					dispatch('REMOVE_NOTE_FROM_TAG', idNote)
+
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
 						text: 'Note deleted!',
@@ -528,6 +530,22 @@ export default {
 					text: error.message,
 					alertClass: 'warning'
 				})
+			})
+		},
+
+		REMOVE_NOTE_FROM_TAG({commit, dispatch}, idNote) {
+			// let docTags = db.collection('tags').
+			let docTags = db.collection('tags')
+			.where('user_id', '==', firebase.auth().currentUser.uid)
+			.where('note_ids','array-contains', idNote)
+
+			docTags.get().then(snapshot => {
+				snapshot.docs.forEach(doc => {
+					// console.log(doc.id);
+					db.collection('tags').doc(doc.id).update('note_ids', firebase.firestore.FieldValue.arrayRemove(idNote))
+				})
+			}).then(() => {
+				dispatch('FETCH_TAGS')
 			})
 		},
 

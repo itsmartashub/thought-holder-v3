@@ -8,26 +8,28 @@
 					class="note__title"
 					contenteditable="true"
 					data-placeholder="Title"
+					ref="refTitle"
 					v-text="note.title"
 					@blur="editTitle"
-				>
-				</div>
+				></div>
 				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click.stop="onPinned(note.id)" :class="{'txt-blue': note.pinned}"></i> -->
-				<i class="mdi mdi-pin" title="Pin note" @click.stop="onPinned(note.id)" :class="{'txt-blue': note.pinned}"></i>
+				<!-- <i class="mdi mdi-pin" title="Pin note" @click.stop="onPinned(note.id)" :class="{'txt-blue': note.pinned}"></i> -->
+
+				<i :class="note.pinned ? 'mdi mdi-pin txt-blue' : 'mdi mdi-pin-outline'" title="Pin note" @click.stop="onPinned(note.id)"></i>
 			</div>
 
 			<div
 				class="note__body"
-				ref="refContent"
 				contenteditable="true"
 				data-placeholder="Take a note..."
+				ref="refContent"
 				v-text="note.content"
 				@blur="editContent"
 			></div>
 
 			<div class="note__tag-date-wrapper">
-				<div>
-					<h4 class="note__tag mt-3" v-for="(tag, key) in GET_TAGS_IN_NOTES" :key="key">{{ tag.name }}</h4>
+				<div class="mt-3">
+					<h4 class="note__tag" v-for="(tag, key) in GET_TAGS_IN_NOTES" :key="key">{{ tag.name }}</h4>
 				</div>
 
 				<div class="note__date" :title="titleTime">
@@ -92,9 +94,9 @@ export default {
 			// openNoteBG: true,
 			// currNote: false,
 
-			title: '',
-			content: '',
-			color: 'white',
+			title: this.note.title,
+			content: this.note.content,
+			color: this.note.color,
 			pinned: this.note.pinned,
 			archived: this.note.archived,
 			// arrTags: [],
@@ -217,6 +219,9 @@ export default {
 
 				// TODO ovde treba kao za note samo za tags!
 				// this.$store.dispatch('POST_TAGS', tags)
+
+				// this.OPEN_NOTE = false
+				// this.OPEN_NOTE_BG = false
 				
 				this.resetNote()
 			} else {

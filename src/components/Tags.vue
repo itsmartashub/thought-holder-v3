@@ -1,5 +1,5 @@
 <template>
-	<section class="notes" :class="{ 'no-notes-wrapper': !GET_NOTES_WITH_SPECIAL_TAG_NAME.length }">
+	<section class="tags" :class="{ 'no-notes-wrapper': !GET_NOTES_WITH_SPECIAL_TAG_NAME.length }">
 
 		<div v-if="!GET_NOTES_WITH_SPECIAL_TAG_NAME.length" class="no-notes">
 			<i class="mdi mdi-tag-multiple"></i>

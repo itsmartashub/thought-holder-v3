@@ -1,49 +1,55 @@
 <template>
 	<nav class="sidebar">
 		<ul>
-			<router-link tag="li" :to="{ name: 'home' }" ><i class="mdi mdi-note-multiple-outline"></i> All Notes</router-link>
+			<router-link tag="li" :to="{ name: 'home' }" ><i class="mdi mdi-file-multiple-outline"></i> All Notes</router-link>
 
 			<li @click="expandTags()">
-				<i class="mdi mdi-tag-text-outline"></i>See Tags <span class="expand" v-bind:class="{ 'expanded': isActive }">&nbsp;</span><br>
+				<i class="mdi mdi-tag-outline"></i>See Tags <span class="expand" v-bind:class="{ 'expanded': isActive }">&nbsp;</span><br>
 			</li>
 
 				
-				<div v-if="isActive" class="sidebar__tags" >
-					<!-- <router-link :to="{ name: 'tags', params: { tagName: tag.name, arrNoteIds: tag.note_ids }}" v-for="(tag, key) in TAGS" :key="key" >
-						<p class="mb-1"><i class="fas fa-tags"></i> {{ tag.name }}</p>
-					</router-link> -->
+			<transition name="fade">
+				<div v-if="isActive" class="sidebar__tags-wrapper" >
+				<!-- <router-link :to="{ name: 'tags', params: { tagName: tag.name, arrNoteIds: tag.note_ids }}" v-for="(tag, key) in TAGS" :key="key" >
+					<p class="mb-1"><i class="fas fa-tags"></i> {{ tag.name }}</p>
+				</router-link> -->
 
-					<template v-for="(tag, key) in TAGS">
-						<router-link :to="{ name: 'tags', params: { tagName: tag.name } }" :key="key">
-							<p class="mb-1"><i class="mdi mdi-tag-multiple"></i> {{ tag.name }}</p>
-						</router-link>
-					</template>
+					<div class="sidebar__tags">
+						<template v-for="(tag, key) in TAGS">
+							<router-link :to="{ name: 'tags', params: { tagName: tag.name } }" :key="key">
+								<p class="mb-1"><i class="mdi mdi-tag-multiple"></i> {{ tag.name }} ({{ tag.note_ids.length }})</p>
+							</router-link>
+						</template>
+					</div>
 
-					<button class="btn btn--icon" @click="OPEN_EDIT_TAGS = true"><i class="mdi mdi-pencil"></i>Edit tags</button>
-					
+					<p class="underline btn--icon mt-2" @click="OPEN_EDIT_TAGS = true">
+						<i class="mdi mdi-pencil"></i>Edit tags
+					</p>
+				</div>
+			</transition>
 
-					<!-- <div class="modal-background"></div>
-					<div class="edit-tags">
-						<h4>Edit tags</h4>
-						<form>
-							<i></i>
-							<input type="text" v-model="inputTag" placeholder="Create new tag">
-							<ul>
-								<li v-for="(tag, key) in TAGS" :key="key">
-									<label :for="tag.id"><input type="text" v-model="inputTags" :id="tag.id" :value="tag.name" /> {{ tag.name }} </label>
-								</li>
-							</ul>
-						</form>
-					</div> -->
-				</div><br>
-			
-			<!-- <router-link tag="li" :to="{ name: 'archived' }"><i class="fas fa-archive"></i> Archive</router-link> -->
+			<br>
+
 			<router-link tag="li" :to="{ name: 'archived' }"><i class="mdi mdi-arrow-down-bold-box-outline"></i>Archive</router-link>
 		</ul>
 
 
-		<footer class="sidebar__footer">
-			<p>Site by <a href="https://www.linkedin.com/in/marta-bireš" target="_blank">  Marta Bireš</a></p>
+		<footer class="sidebar__footer mb-5">
+			<p>
+				<span class="logo">
+					&copy; 2019.
+					<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
+				</span>
+			</p>
+
+			<p>
+				<span>All rights reserved. </span>
+				<span>Site by <a href="https://www.linkedin.com/in/marta-bireš" target="_blank" class="underline">  Marta Bireš</a></span>
+			</p>
+
+			<!-- <p >
+				Site by <a href="https://www.linkedin.com/in/marta-bireš" target="_blank" class="underline">  Marta Bireš</a>
+			</p> -->
 		</footer>
 	</nav>
 </template>

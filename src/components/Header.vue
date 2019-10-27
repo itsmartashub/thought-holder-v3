@@ -1,42 +1,41 @@
 <template>
 	<div class="header">
 
-		<div class="header__hamburger" @click="sidebarToggle"></div>
+		<i class="header__hamburger mdi mdi-text" @click="sidebarToggle"></i>
 
-		<router-link to="/" class="header__logo">
-			<div class="header__logo">
-				<i class="fab fa-think-peaks"></i> Though<strong>Holder</strong> 
+		<router-link to="/">
+			<div class="logo">
+				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
 			</div>
 		</router-link>
 
 		<div class="header__search">
-			<form>
-				<i class="fas fa-search"></i>
-				<input type="search" placeholder="Search"/>
+			<form @submit.prevent="search()">
+				<i class="mdi mdi-magnify"></i>
+				<input type="search" placeholder="Search" v-model="inputSearch"/>
 			</form>
+
+			<div class="header__notes-view" @click="listviewToggle">
+				<div></div>
+				<div></div>
+				<div v-if="isList"></div>
+				<div v-if="isList"></div>
+			</div>
+
+			<div class="header__theme" @click="darkToggle">
+				<span v-bind:class="{ dark: isDark }"></span>
+			</div>
 		</div>
 
-		<div class="header__notes-view" @click="listviewToggle">
-			<div></div>
-			<div></div>
-			<div v-if="isList"></div>
-			<div v-if="isList"></div>
-		</div>
-
-		<div class="header__theme" @click="darkToggle">
-			<span v-bind:class="{ dark: isDark }"></span>
-		</div>
+		
 
 		<!-- <div class="header__greeting" @click="showToggle"> -->
-		<div class="header__greeting">
-			Hi,&nbsp;<strong>{{ currentUser.email }} </strong>
-			<i class="fab fa-staylinked"></i>
-			<!-- <span>&rsaquo;</span> -->
-			
-			<!-- <div class="logout" v-if="show"> -->
-				<button class="btn" @click.prevent="logout()">Logout</button>
-			<!-- </div> -->
+		<div class="header__login">
+			<i class="mdi mdi-email-outline"></i>
+			<p class="underline">{{ currentUser.email }} </p>
+			<button class="btn btn--blue" @click.prevent="logout()">Logout</button>
 		</div>
+
 	</div>
 </template>
 
@@ -52,7 +51,9 @@ export default {
 			isList: false,
 			isDark: false,
 			show: false,
-			isScrolled: false
+			isScrolled: false,
+
+			inputSearch: ''
 		}
 	},
 
@@ -67,8 +68,8 @@ export default {
 		...mapActions(['LOGOUT']),
 
 		sidebarToggle() {
-			document.querySelector('.sidebar').classList.toggle('translateX'); // TODO ovo ce ici u modules/ui.js
-			document.querySelector('.grid-container').classList.toggle('grid-sidebar-hidden'); // TODO ovo ce ici u modules/ui.js
+			document.querySelector('.sidebar').classList.toggle('translateX') // TODO ovo ce ici u modules/ui.js
+			document.querySelector('.grid-container').classList.toggle('grid-sidebar-hidden') // TODO ovo ce ici u modules/ui.js
 			// document.querySelector('.notes').classList.toggle('translateX'); // TODO ovo ce ici u modules/ui.js
 		},
 

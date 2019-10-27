@@ -1,7 +1,7 @@
 <template>
 	<section class="note newNote mb-5 m-auto" :class="setColor">
 
-			<div class="note__title-container mb-3">
+			<div class="note__title-container" @click="onTitleClicked" >
 				<div
 					class="note__title"
 					contenteditable="true"
@@ -11,46 +11,52 @@
 				></div>
 				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
 				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
-				<i class="mdi mdi-pin" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i>
-				
+				<i title="Pin note" @click="onPinned" :class="pinned ? 'mdi mdi-pin txt-blue' : 'mdi mdi-pin-outline'"></i>
 			</div>
 
 
-			<div
-				class="note__body"
-				ref="refContent"
-				contenteditable="true"
-				data-placeholder="Take a note..."
-				v-text="content"
-				@blur="editContent"
-			></div>
+			<transition-group name="fade" tag="div">
+				<!-- <div v-if="titleClicked"> -->
+					<div
+						class="note__body mt-3"
+						ref="refContent"
+						contenteditable="true"
+						data-placeholder="Take a note..."
+						v-text="content"
+						@blur="editContent"
+						autofocus
+						v-if="titleClicked"
+						:key="1"
+					></div>
 
-			<h4 class="note__tag mt-3">neki tag</h4>
+					<h4 class="note__tag mt-3" v-if="titleClicked" :key="2">#neki tag</h4>
 
-			<div class="note__footer">
-				<div class="note__options mt-1">
+					<div class="note__footer" v-if="titleClicked" :key="3">
+						<div class="note__options mt-1">
 
-					<NoteTags />
+							<NoteTags />
 
-					<div class="note__pallete">
-						<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
-						<i class="mdi mdi-palette" title="Change color"></i>
+							<div class="note__pallete">
+								<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
+								<i class="mdi mdi-palette" title="Change color"></i>
 
-						<div class="note__colors-container" >
-							<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
+								<div class="note__colors-container" >
+									<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
+								</div>
+							</div>
+
+							<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i> -->
+							<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
+						</div>
+
+
+						<div class="note__btn-container">
+							<button class="btn btn--blue" @click.prevent="addNote">add note</button>
+							<button class="btn" @click.prevent="closeNote">close</button>
 						</div>
 					</div>
-
-					<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i> -->
-					<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
-				</div>
-
-
-				<div class="note__btn-container">
-					<button class="btn btn--blue" @click.prevent="addNote">add note</button>
-					<button class="btn" @click.prevent="closeNote">close</button>
-				</div>
-			</div>
+				<!-- </div> -->
+			</transition-group>
 
 		<!-- <h1>{{ noteTitle }}</h1>		
 		<h1>{{ noteBody }}</h1>		 -->
@@ -82,7 +88,9 @@ export default {
 				{ id: 4, name: 'green' },
 				{ id: 5, name: 'purple' },
 				{ id: 6, name: 'orange' }
-			]
+			],
+
+			titleClicked: false
 		}
 	},
 
@@ -103,6 +111,7 @@ export default {
 			this.archived = false
 			// this.arrTags = []
 			this.tagsOpen = false
+			this.titleClicked = false
 		},
 
 		onPinned() { // TODO srediti
@@ -174,13 +183,17 @@ export default {
 			}
 		},
 
-		
-
-
 		closeNote() {
 			console.log('CLOSE  NOTE')
 			this.resetNote()
 			// TODO vratiti samo da vidljivo bude content polje
+		},
+
+		onTitleClicked() {
+			this.titleClicked = true
+			// this.$nextTick(() => {
+			// 	this.$refs.refContent.focus()
+			// })
 		}
 	},
 }

@@ -2,32 +2,54 @@
 	padding: 6rem 5rem;
 	background: $white;
 	width: 28vw;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	display: grid;
 	justify-content: center;
+	justify-items: center;
+	// display: flex;
+	// align-items: center;
+	// flex-direction: column;
+	// justify-content: center;
 	border-radius: 1.5rem;
 	box-shadow: 0 3px 5px rgba($black, .1);
 
-	.input-group {
-		width: 100%;
+	.form-group {
+		// width: 100%;
+			width: 20vw;
+
+		background: red;
 		display: flex;
 		flex-direction: column;
-		position: relative;
-		// margin-bottom: 1rem;
+		justify-content: center;
 
 		&:not(:last-child) { margin-bottom: 2.5rem; }
+
+		.input-field {
+			position: relative;
+			@extend .flex;
+		}
+
+		.input-icon {
+			color: $blue;
+			position: absolute;
+			left: 3%;
+		}
 
 		input {
 			padding: 1.4rem 5rem;
 			border-radius: .8rem;
-			border: 2px solid $grey;
+			border: 1px solid $grey;
 			background: $grey;
+			// width: 20vw;
+			width: 100%;
+
+			// &::before {
+			// 	content: 'f1ee'
+			// }
+
 
 			&:focus {
 				outline: none;
-				background: transparent;
-
+				background: rgba($blue, .2);
 			}
 		}
 
@@ -43,21 +65,12 @@
 			transition: all .3s;
 		}
 
+		// TODO sredi ovo! ne radi
 		.input:placeholder-shown + .label {
 			opacity: 0;
 			visibility: hidden;
 			transform: translateY(10%);
 		}
-
-
-		.input-icon {
-			position: absolute;
-			top: 1.5rem;
-			left: 1.5rem;
-			color: $blue;
-			font-size: 1.8rem;
-		}
-
 	}
 
 	.validate-alert {

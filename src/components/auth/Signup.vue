@@ -3,57 +3,63 @@
 		
 		<form class="form">
 			<div class="header__logo ">
-					<i class="fab fa-think-peaks"></i> Though<strong>Holder</strong> 
+					<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
 			</div>
 			<h1 class="mb-4">Fill up and signup! </h1>
 
-			<div class="input-group">
-				<i class="mdi mdi-email input-icon"></i>
-				<input
-					type="email"
-					name="email" 
-					required
-					placeholder="Enter your e-mail"
-					class="input"
-					v-model.trim="email"
-					@blur="checkEmail()"
-					:class="{invalid: !validEmail}"
-				/>
+			<div class="form-group">
+				<div class="input-field">
+					<i class="mdi mdi-email input-icon"></i>
+					<input
+						type="email"
+						name="email" 
+						required
+						placeholder="Enter your e-mail"
+						class="input"
+						v-model.trim="email"
+						@blur="checkEmail()"
+						:class="{invalid: !validEmail}"
+					/>
+				</div>
 				<!-- <label for="email" class="label">Email</label> -->
 
 				<span class="validate-alert mb-2" v-if="!validEmail">Invalid e-mail.</span>
 				<span class="validate-alert mb-2" v-if="GET_SIGNUP_SERVER_ERR !== ''">{{ GET_SIGNUP_SERVER_ERR }}</span>
 			</div>
 
-			<div class="input-group">
-				<i class="mdi mdi-lock-open input-icon"></i>
-				<input
-					type="password"
-					name="password"
-					required
-					placeholder="Enter your password"
-					class="input"
-					v-model.trim="password"
-					@blur="checkPassword()"
-					:class="{invalid: !validPassword}"
-				/>
+			<div class="form-group">
+				<div class="input-field">
+					<i class="mdi mdi-lock-open input-icon"></i>
+					<input
+						type="password"
+						name="password"
+						required
+						placeholder="Enter your password"
+						class="input"
+						v-model.trim="password"
+						@blur="checkPassword()"
+						:class="{invalid: !validPassword}"
+					/>
+				</div>
 				<!-- <label for="password" class="label">Password</label> -->
 
 				<span class="validate-alert mb-2" v-if="!validPassword">Password must contains at least 6 characters.</span>
 			</div>
 
-			<div class="input-group">
-				<i class="mdi mdi-lock input-icon"></i>
-				<input
-					type="password"
-					name="confirm_password"
-					required placeholder="Confirm your password"
-					class="input"
-					v-model.trim="confirm_password"
-					@blur="checkConfirmPassword()"
-					:class="{invalid: !validConfirmPassword}"
-					
-				/>
+			<div class="form-group">
+				<div class="input-field">
+					<i class="mdi mdi-lock input-icon"></i>
+					<input
+						type="password"
+						name="confirm_password"
+						required placeholder="Confirm your password"
+						class="input"
+						v-model.trim="confirm_password"
+						@blur="checkConfirmPassword()"
+						:class="{invalid: !validConfirmPassword}"
+						
+					/>
+				</div>
 				<!-- <label for="confirm_password" class="label">Confrim password</label> -->
 
 				<span class="validate-alert mb-2" v-if="!validConfirmPassword">Password doesn't match.</span>

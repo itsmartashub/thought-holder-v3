@@ -1,7 +1,8 @@
 .grid-container {
 	display: grid;
-	grid-template-rows: 9vh minmax(100vh, max-content); // =
-	grid-template-columns: 18vw 1fr; // \\
+	grid-template-rows: 9vh minmax(90vh, max-content); // =
+	// grid-template-columns: 32rem calc(100% - 32rem); // \\
+	grid-template-columns: 32rem 1fr; // \\
 	grid-template-areas:
 		"header header"
 		"side main";
@@ -16,7 +17,6 @@
 // }
 
 .grid-sidebar-hidden {
-	grid-template-rows: 9vh 90vh;
 	grid-template-columns: 100vw !important;
 	grid-template-areas:
 		"header"

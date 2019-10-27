@@ -9,13 +9,13 @@
 			<input type="text" placeholder="Enter tag name" v-model.trim="inputSearchOrAdd" @input="searchOrAddTag()"  />
 			<ul>
 				<li v-for="(tag, key) in GET_TAGS" :key="key">
-					<label :for="tag.id"><i class="mdi mdi-tag-plus"></i><input type="checkbox" v-model="inputChecks" :id="tag.id" :value="tag.name" @change="checkTag(tag)" /> {{ tag.name }} </label>
+					<label :for="key"><i class="mdi mdi-tag-plus"></i><input type="checkbox" v-model="inputChecks" :id="key" :value="tag.name" @change="checkTag(tag)" /> {{ tag.name }} </label>
 				</li>
 
 				<!-- <li>{{ GET_DEFAULT_CHECKED }}</li> -->
 				<!-- <hr>
 				<li>{{ inputChecks }}</li> -->
-				<li class="mt-1 btn" v-if="create" @click.stop="createNewTag()"><i class="mdi mdi-plus"></i> Create tag: <span>{{ this.inputSearchOrAdd }}</span></li>
+				<li class="mt-1 btn__underline" v-if="create" @click.stop="createNewTag()"><i class="mdi mdi-plus"></i> Create tag: <span>{{ this.inputSearchOrAdd }}</span></li>
 			</ul>
 
 			<!-- <button class="btn mt-2" @click.prevent="addTags(note)" v-if="!create">add tag(s) to note</button> -->

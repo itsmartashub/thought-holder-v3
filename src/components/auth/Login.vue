@@ -3,21 +3,25 @@
 		
 		<form class="form">
 			<div class="header__logo ">
-					<i class="fab fa-think-peaks"></i> Though<strong>Holder</strong> 
+					<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
 			</div>
 			<h1 class="mb-4">Fill up and login! </h1>
 
-			<div class="input-group">
-				<i class="mdi mdi-email input-icon"></i>
-				<input type="email" v-model="email" name="email" required placeholder="Enter your e-mail" class="input">
+			<div class="form-group">
+				<div class="input-field">
+					<i class="mdi mdi-email input-icon"></i>
+					<input type="email" v-model="email" name="email" required placeholder="Enter your e-mail" class="input">
+				</div>
 				<label for="email" class="label">Email</label>
 
 				<!-- <span class="validate-alert" v-if="error">The email is incorrect.</span> -->
 			</div>
 
-			<div class="input-group">
-				<i class="mdi mdi-lock input-icon"></i>
-				<input type="password" v-model="password" name="password" required placeholder="Enter your password" class="input">
+			<div class="form-group">
+				<div class="input-field">
+					<i class="mdi mdi-lock input-icon"></i>
+					<input type="password" v-model="password" name="password" required placeholder="Enter your password" class="input">
+				</div>
 				<label for="password" class="label">Password</label>
 				<!-- <i class="fas fa-eye input-icon-append"></i> -->
 				<!-- <i class="fas fa-eye-slash input-icon-append"></i> -->

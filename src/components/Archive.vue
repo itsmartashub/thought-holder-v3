@@ -1,5 +1,5 @@
 <template>
-	<section class="notes" :class="{ 'no-notes-wrapper': !GET_ARCHIVED.length }">
+	<section class="archive" :class="{ 'no-notes-wrapper': !GET_ARCHIVED.length }">
 
 		<div v-if="!GET_ARCHIVED.length" class="no-notes">
 			<i class="mdi mdi-arrow-down-bold-box-outline"></i>

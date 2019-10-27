@@ -1,0 +1,41 @@
+// .fade-enter-active, .fade-leave-active {
+// //   transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+// 	transition: all .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+// //   transform: translateY(-1%);
+// }
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(-5%);
+}
+
+.fade-leave-active {
+  transition: all .3s ease;
+}
+.fade-enter-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to {
+  opacity: 0;
+}
+
+// v-enter: Starting state for enter. Added before element is inserted, removed one frame after element is inserted.
+
+// v-enter-active: Active state for enter. Applied during the entire entering phase. Added before element is inserted, removed when transition/animation finishes. This class can be used to define the duration, delay and easing curve for the entering transition.
+
+// v-enter-to: Only available in versions 2.1.8+. Ending state for enter. Added one frame after element is inserted (at the same time v-enter is removed), removed when transition/animation finishes.
+
+// v-leave: Starting state for leave. Added immediately when a leaving transition is triggered, removed after one frame.
+
+// v-leave-active: Active state for leave. Applied during the entire leaving phase. Added immediately when leave transition is triggered, removed when the transition/animation finishes. This class can be used to define the duration, delay and easing curve for the leaving transition.
+
+// v-leave-to: Only available in versions 2.1.8+. Ending state for leave. Added one frame after a leaving transition is triggered (at the same time v-leave is removed), removed when the transition/animation finishes.
+
+
+// Each of these classes will be prefixed with the name of the transition. Here the v- prefix is the default when you use a <transition> element with no name. If you use <transition name="my-transition"> for example, then the v-enter class would instead be my-transition-enter.
+
+// v-enter-active and v-leave-active give you the ability to specify different easing curves for enter/leave transitions, which you’ll see an example of in the following section.

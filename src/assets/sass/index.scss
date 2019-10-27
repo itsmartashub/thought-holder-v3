@@ -11,8 +11,10 @@
 @import "base/defaults";
 @import "base/typography";
 @import "base/helpers";
+@import "base/transitions";
 @import "base/animations";
 
+@import "components/logo";
 @import "components/button";
 @import "components/form";
 @import "components/note";

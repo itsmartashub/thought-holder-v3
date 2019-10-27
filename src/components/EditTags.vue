@@ -1,12 +1,13 @@
 <template>
 		<div class="edit-tags" @keydown.esc="OPEN_EDIT_TAGS = false" tabindex="0">
-			<h4>Edit tags</h4>
+			<h3 class="h3 underline">Edit tags</h3>
 			<form @submit.prevent>
 
 				<label for="addTag" class="label-add-tag">
-					<i class="mdi mdi-plus"></i>
-					<input type="text" v-model.trim="inputAddTag" placeholder="Create new tag" class="input-add-tag">
-					<i class="mdi mdi-check icon-check" @click.prevent="createNewTag()"></i>
+					<i class="mdi mdi-plus" v-if="!focusInput"></i>
+					<i class="mdi mdi-close" v-else @click.prevent="closeIcon()"></i>
+					<input type="text" v-model.trim="inputAddTag" placeholder="Create new tag" class="input-add-tag" @focus="focusInput = true">
+					<i class="mdi mdi-check icon-check" @click.prevent="createNewTag()" :class="{'opacity-1': focusInput}"></i>
 				</label>
 
 				<ul class="mt-2">
@@ -16,15 +17,12 @@
 							<i class="mdi mdi-delete icon-delete" @click="deleteTag(tag.id)"></i>
 							<input type="text" :value="tag.name" :id="tag.id" class="input-edit-tag" @focus="focusEdit(tag.id, $event)" @blur="inputValue"/>
 							<!-- BITNO! Nije htelo da apdejtuje tag sa v-model tj sa  two way binding, mora sa :value! -->
-							<!-- <i class="fas fa-edit" @click="updateTag(tag)"> -->
-							<!-- <i class="mdi mdi-check icon-check" @click="updateTag(tag)" v-if="focusEdit"></i> -->
-							<!-- <i class="mdi mdi-pencil alo" @click="updateTag(tag)"></i> -->
 							<i :class="tag.id == currKey ? 'mdi mdi-check' : 'mdi mdi-pencil'" @click="updateTag(tag, tag.id)"></i>
 						</label>
 					</li>
 				</ul>
 			</form>
-				<button class="btn mt-2" @click.prevent="OPEN_EDIT_TAGS = false">Done</button>
+				<button class="mt-3 btn__underline" @click.prevent="OPEN_EDIT_TAGS = false">Done</button>
 		</div>
 </template>
 
@@ -36,7 +34,8 @@ export default {
 		return {
 			inputAddTag: '',
 			currKey: '',
-			input: ''
+			input: '',
+			focusInput: false
 			// focusEdit: ''
 		}
 	},
@@ -63,6 +62,7 @@ export default {
 			console.log(arrTags);
 			if(this.inputAddTag != '' && arrTags.length == 0) {
 				this.$store.dispatch('ADD_TAG', this.inputAddTag)
+				this.inputAddTag = ''
 
 			} else if (this.inputAddTag != '' && arrTags.length > 0) {
 				this.$store.dispatch('ui/ACT_NOTIFICATION', {
@@ -107,11 +107,14 @@ export default {
 		inputValue(e) {
 			// console.log(e.target.value);
 			this.input = e.target.value
+		},
+		
+		closeIcon() {
+			this.inputAddTag = ''
+			this.focusInput = false
 		}
-	}
+	},
+
+	
 }
 </script>
-
-<style>
-
-</style>
