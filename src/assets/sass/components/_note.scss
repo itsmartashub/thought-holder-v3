@@ -1,10 +1,11 @@
 //! OVO JE VELIKA NOTE
 .note {
 	padding: 1rem 2rem;
-	background: $white;
-	box-shadow: $box_shadow_note;
+	background: var(--white);
+	box-shadow: var(--shadow);
 	border-radius: .8rem;
-	color: lighten($black, 18%);
+	color: var(--black);
+
 	// width: 55%;
 	// margin: auto;
 	// max-height: 70%;
@@ -36,6 +37,7 @@
 		// min-height: 8rem;
 		// height: auto;
 		// font-weight: 400;
+		color: inherit;
 		overflow-y: auto;
 		max-height: 50rem;
 	}
@@ -43,7 +45,7 @@
 	&__title:empty:before,
 	&__body:empty:before {
 		content: attr(data-placeholder);
-		color: $dgrey;
+		color: var(--black);
 	}
 
 	&__title:focus,
@@ -53,16 +55,6 @@
 
 	&__pinned {
 		opacity: .5;
-	}
-
-	&__tag {
-		display: inline-block;
-		border-radius: 10rem;
-		padding: .5rem 1.5rem;
-		background: rgba($blue, .1);
-		color: $blue;
-		font-size: 1.2rem;
-		margin-bottom: 1rem;
 	}
 
 	&__add-tags {
@@ -75,24 +67,28 @@
 
 	&__add-tags-container {
 		
-		background: blue;
+		// background: blue;
 		// width: auto;
 		position: absolute;
 		top: 100%;
 		left: 0;
 		z-index: 100;
 		height: auto;
-		box-shadow: $box_shadow_note;
+		box-shadow: var(--shadow);
 		border-radius: .2rem;
-		background: $white;
-		border: 1px solid $grey;
+		background: var(--white);
+		border: 1px solid var(--grey);
 		padding: 1rem 1.2rem; 
+		color: inherit;
+		font-size: 1.4rem;
 		@extend .flex;
 		flex-direction: column;
 		// width: 10vw;
 
 		input[type=text] {
-			padding: 1.5rem .4rem;
+			padding: .8rem .4rem;
+			margin-bottom: 1.5rem;
+			// background: red;
 			// width: 100%;
 		}
 
@@ -101,8 +97,8 @@
 			grid-gap: .5rem;
 
 			label {
-				display: flex;
-				align-items: center;
+				@extend .flex;
+				cursor: pointer;
 
 				input { 
 					margin-right: 1rem;
@@ -112,17 +108,21 @@
 					// display: inline-block;
 					width: 1.3rem;
 					height: 1.3rem;
-					border: 2px solid $dgrey;
+					border: 2px solid var(--blue);
 					opacity: .4;
 					outline: none;
 					vertical-align: middle;
 
 					&:checked {
-						background: $blue;
-						border: 2px solid $blue;
+						background: var(--blue);
+						border: 2px solid var(--blue);
 						opacity: 1;
 					}
 				}
+			}
+
+			label:hover {
+				color: var(--blue);
 			}
 		}
 
@@ -132,11 +132,9 @@
 	}
 
 	&__footer {
-		display: flex;
-		align-items: center;
+		@extend .flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-
 	}
 
 	&__options {
@@ -173,8 +171,8 @@
 		position: absolute;
 		bottom: 100%;
 		left: 0;
-		box-shadow: $box_shadow_note;
-		background: $white;
+		box-shadow: var(--shadow);
+		background: var(--white);
 
 		padding: .8rem;
 		// display: grid;
@@ -184,13 +182,14 @@
 		& > div {
 			width: 2.3rem;
 			height: 2.3rem;
-			border: 1px solid rgba($dgrey, .3);
+			border: 1px solid var(--black);
 			border-radius: 50%;
 			cursor: pointer;
 			opacity: .8;
 
 			&:hover {
-				border: 1px solid $dgrey;
+				// border: 1px solid var(--dgrey);
+				border: 1px solid var(--blue) !important;
 			}
 		}
 	}

@@ -5,10 +5,10 @@
 	// background: $red;
 	// background: $green;
 	// background: #00e676;
-	background: rgba($blue, .4);
+	// background: rgba(var(--blue), .4);
 	z-index: 10000;
 	padding: 2rem;
-	color: $black;
+	color: var(--dgrey);
 	width: 25%;
 	height: auto;
 	box-shadow: $box-shadow-note;

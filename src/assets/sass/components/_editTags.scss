@@ -1,7 +1,7 @@
 .edit-tags {
-	box-shadow: $box-shadow-note;
-	background: $white;
-	position: absolute !important;
+	box-shadow: var(--shadow_modal);
+	background: var(--white);
+	position: fixed !important;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -19,7 +19,7 @@
 	}
 	.input-add-tag {
 		padding: 1rem;
-		// border-bottom: 1px solid $dgrey;
+		// border-bottom: 1px solid var(--dgrey);
 	}
 
 	form {
@@ -39,9 +39,9 @@
 		@extend .transition-2;
 
 		&:hover {
-			background:rgba($grey, .5);
+			background:rgba(var(--grey), .5);
 			input {
-				color: darken($blue, 5%);
+				color: var(--blue);
 			}
 		}
 	}

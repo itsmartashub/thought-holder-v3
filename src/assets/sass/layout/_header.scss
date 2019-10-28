@@ -4,7 +4,7 @@
 	position: fixed;
 	top: 0;
 	width: 100vw;
-	background: $white;
+	background: var(--white);
 	padding: 2.5rem 6rem;
 	// @extend .flex;
 	// justify-content: space-between;
@@ -18,46 +18,18 @@
 	box-shadow: $box-shadow-note;
 
 	&__hamburger {
-		// margin: 0 2rem;
-		// width: 3rem;
-		// height: .3rem;
-		// background: black;
-		// cursor: pointer;
-		// position: relative;
-
 		font-size: 3rem;
 		opacity: 1;
 
 		&:hover {
 			opacity: .6;
 		}
-		
-		// &::before,
-		// &::after {
-		// 	content: '';
-		// 	position: absolute;
-		// 	display: block;
-		// 	width: 100%;
-		// 	height: inherit;
-		// 	background: inherit;
-		// }
-
-		// &::before {
-		// 	top: .8rem;
-		// }
-		// &::after {
-		// 	bottom: .8rem;
-		// }
 	}
-
-
 
 
 	&__search {
 		width: 80%;
-		// background: red;
 		@extend .flex;
-		// justify-content: space-evenly;
 
 		form {
 			width: 60%;
@@ -66,12 +38,11 @@
 				width: 100%;
 				padding: 1.2rem 1.2rem 1.2rem 5rem;
 				font-size: 1.5rem;
-				background: $grey;
+				background: var(--grey);
 
 				&:focus {
 					background: transparent;
 				}
-
 			}
 
 			i {
@@ -97,11 +68,11 @@
 		transform: rotate(90deg);
 
 		&:hover div {
-			border-color: $blue;
+			border-color: var(--blue);
 		}
 
 		div {
-			border: .2rem solid $black;
+			border: .2rem solid var(--black);
 			@extend .transition-2;
 		}
 
@@ -126,33 +97,34 @@
 		// }
 	}
 
-	&__theme {
-		background: darken($grey, 10%);
-		width: 6rem;
-		height: 2rem;
-		margin: 0 2rem;
-		padding: 1.3rem;
-		border-radius: 4rem;
-		position: relative;
-		@extend .flex;
-		cursor: pointer;
+	// &__theme {
+	// 	background: var(--grey);
+	// 	width: 6rem;
+	// 	height: 2rem;
+	// 	margin: 0 2rem;
+	// 	padding: 1.4rem;
+	// 	border-radius: 3rem;
+	// 	position: relative;
+	// 	@extend .flex;
+	// 	cursor: pointer;
 
-		span {
-			position: absolute;
-			left: .5rem;
-			height: 1.9rem;
-			width: 1.9rem;
-			border-radius: 50%;
+	// 	span {
+	// 		position: absolute;
+	// 		left: .8rem;
+	// 		height: 2.1rem;
+	// 		width: 2.1rem;
+	// 		border-radius: 50%;
+	// 		background: var(--blue);
+	// 		transition: all .3s ease;
 
-			background: $blue;
-		}
-	}
+	// 	}
+	// }
 
 	&__login {
 		@extend .flex;
 
 		i {
-			color: $blue;
+			color: var(--blue);
 			font-size: 2rem;
 		}
 
@@ -169,7 +141,8 @@
 }
 
 
-.dark {
-	background: darken($grey, 60%) !important;
-	left: 3.7rem !important;
-}
+// .dark {
+// 	background: var(--blue) !important;
+// 	left: 0 !important;
+// 	right: 0 !important;
+// }

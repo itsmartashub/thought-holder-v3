@@ -1,65 +1,63 @@
 <template>
 	<section class="note newNote mb-5 m-auto" :class="setColor">
 
-			<div class="note__title-container" @click="onTitleClicked" >
+
+		<div class="note__title-container" @click="onTitleClicked" >
+			<div
+				class="note__title"
+				contenteditable="true"
+				data-placeholder="Title"
+				v-text="title"
+				@blur="editTitle"
+			></div>
+			<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
+			<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
+			<i title="Pin note" @click="onPinned" :class="pinned ? 'mdi mdi-pin txt-blue' : 'mdi mdi-pin-outline'"></i>
+		</div>
+
+
+		<transition-group name="fade" tag="div">
+			<!-- <div v-if="titleClicked"> -->
 				<div
-					class="note__title"
+					class="note__body mt-3"
+					ref="refContent"
 					contenteditable="true"
-					data-placeholder="Title"
-					v-text="title"
-					@blur="editTitle"
+					data-placeholder="Take a note..."
+					v-text="content"
+					@blur="editContent"
+					autofocus
+					v-if="titleClicked"
+					:key="1"
 				></div>
-				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
-				<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
-				<i title="Pin note" @click="onPinned" :class="pinned ? 'mdi mdi-pin txt-blue' : 'mdi mdi-pin-outline'"></i>
-			</div>
 
+				<h4 class="mt-3 h4" v-if="titleClicked" :key="2">#neki tag</h4>
 
-			<transition-group name="fade" tag="div">
-				<!-- <div v-if="titleClicked"> -->
-					<div
-						class="note__body mt-3"
-						ref="refContent"
-						contenteditable="true"
-						data-placeholder="Take a note..."
-						v-text="content"
-						@blur="editContent"
-						autofocus
-						v-if="titleClicked"
-						:key="1"
-					></div>
+				<div class="note__footer" v-if="titleClicked" :key="3">
+					<div class="note__options mt-1">
 
-					<h4 class="note__tag mt-3" v-if="titleClicked" :key="2">#neki tag</h4>
+						<NoteTags />
 
-					<div class="note__footer" v-if="titleClicked" :key="3">
-						<div class="note__options mt-1">
+						<div class="note__pallete">
+							<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
+							<i class="mdi mdi-palette" title="Change color"></i>
 
-							<NoteTags />
-
-							<div class="note__pallete">
-								<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
-								<i class="mdi mdi-palette" title="Change color"></i>
-
-								<div class="note__colors-container" >
-									<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
-								</div>
+							<div class="note__colors-container" >
+								<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
 							</div>
-
-							<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i> -->
-							<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
 						</div>
 
-
-						<div class="note__btn-container">
-							<button class="btn btn--blue" @click.prevent="addNote">add note</button>
-							<button class="btn" @click.prevent="closeNote">close</button>
-						</div>
+						<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i> -->
+						<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
 					</div>
-				<!-- </div> -->
-			</transition-group>
 
-		<!-- <h1>{{ noteTitle }}</h1>		
-		<h1>{{ noteBody }}</h1>		 -->
+
+					<div class="note__btn-container">
+						<button class="btn btn--blue" @click.prevent="addNote">add note</button>
+						<button class="btn" @click.prevent="closeNote">close</button>
+					</div>
+				</div>
+			<!-- </div> -->
+		</transition-group>
 
 	</section>
 </template>

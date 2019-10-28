@@ -3,7 +3,9 @@
 .archive {
 	grid-area: main;
 	padding: 5rem 18rem;
-	background: $lgrey;
+	background: var(--lgrey);
+	overflow-x: hidden;
+	text-align: center;
 	@extend .transition-2;
 }
 
@@ -18,19 +20,20 @@
 	@extend .flex;
 	flex-direction: column;
 	justify-content: center;
-	color: $dgrey;
+	color: var(--black);
 
 	i { 
 		font-size: 5rem;
-		color: $blue;
+		color: var(--blue);
 	}
 
 	.logo {
-		color: $blue;
+		color: var(--blue);
 	}
 }
 
 .grid-notes {
+	text-align: left;
 	margin: 0 auto;
 	height: auto;
 	// padding: 1rem;
@@ -61,6 +64,7 @@
 		width: calc(100% / 1);
 		// transition: @extend .transition-3;
 		transition: all .3s ease-in-out;
+		z-index: 100;
 		// float: left;
 
 		&:hover {

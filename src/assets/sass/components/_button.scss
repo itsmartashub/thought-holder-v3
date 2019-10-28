@@ -6,8 +6,8 @@
 		display: inline-block;
 		border-radius: .8rem;
 		padding: 1rem 3rem;
-		background: $grey;
-		color: grey;
+		background: var(--grey);
+		color: var(--black);
 		position: relative;
 		font-family: inherit;
 		cursor: pointer;
@@ -18,7 +18,7 @@
 	&:active,
 	&:focus {
 		outline: none;
-		box-shadow: $box-shadow-note;
+		box-shadow: var(--shadow);
 	}
 
 	&:active {
@@ -35,27 +35,28 @@
 	// 	top: 0;
 	// 	left: 0;
 	// 	z-index: -1;
-	// 	background: $white;
+	// 	background: var(--white);
 	// 	@extend .transition-1;
 	// }
 
 	&:hover {
-		// background: $blue;
-		background: rgba($cgrey, 1);
-		// color: $white;
-		color: $black;
+		// background: var(--blue);
+		background: var(--grey);
+		// color: var(--white);
+		color: var(--black);
 
 	}
 
 	&--blue {
 		font-size: inherit;
-		background: $blue;
-		color: $white;
-		// box-shadow: 0 3px 5px rgba($blue, .7);
+		background: var(--blue);
+		color: var(--white);
+		// box-shadow: 0 3px 5px rgba(var(--blue), .7);
 
 		&:hover {
-			background: darken($blue, 10%);
-			color: $white;
+			background: var(--blue);
+			color: var(--white);
+			box-shadow: var(--shadow);
 		}
 	}
 
@@ -68,7 +69,8 @@
 			margin: 0;
 
 			&:hover {
-				color: $white;
+				box-shadow: var(--shadow);
+				color: var(--white);
 			}
 		}
 	}
@@ -77,8 +79,8 @@
 		display: block;
 		overflow: hidden;
 		font-size: inherit;
-		background: $blue;
-		color: $lgrey;
+		background: var(--blue);
+		color: var(--lgrey);
 		width: 80%;
 		padding: 1.5rem 3rem;
 		margin-left: auto;
@@ -100,9 +102,8 @@
 			// transition: all .2s ease-in-out;
 			@extend .underline::after;
 			height: 0;
-			background: $grey;
+			background: var(--grey);
 			border: none;
-
 		}
 
 		&:hover {

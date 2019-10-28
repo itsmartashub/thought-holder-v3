@@ -24,10 +24,11 @@
 		// margin: 1rem 0;
 		// border-top-right-radius: 5rem;
 		// border-bottom-right-radius: 5rem;
-		// color: darken($blue, 8%);
+		// color: darken(var(--blue), 8%);
 		// border-top-left-radius: .3rem;
 		// border-bottom-left-radius: .3rem;
 		// border-left: 8px solid transparent;
+		// border-radius: 4rem;
 		@extend .flex;
 		// @extend .transition-3;
 		position: relative;
@@ -43,40 +44,36 @@
 			// background: red;
 			// border-top-right-radius: 5rem;
 			// border-bottom-right-radius: 5rem;
-			border-top-left-radius: .2rem;
-			border-bottom-left-radius: .2rem;
-			color: darken($blue, 8%);
+			// border-top-left-radius: .2rem;
+			// border-bottom-left-radius: .2rem;
+			border-radius: .5rem;
+
+			color: var(--blue);
 			z-index: -1;
 			border-left: 8px solid transparent;
-
-		@extend .transition-3;
-
-
+			@extend .transition-3;
 		}
 
 		&:hover {
 			// border-radius: .5rem;
-			// background: rgba($blue, .3);
-			// border-left: 8px solid darken($blue, 8%) !important;
-			// background: $lgrey;
-			color: darken($blue, 8%);
+			background: var(--h4_bg);
+			// background: var(--lgrey);
+			color: var(--blue);
 			cursor: pointer;
 
 			&::after {
-				background: $lgrey;
+				background: var(--lgrey);
 				height: 100%;
-				border-left: 8px solid darken($blue, 8%);
+				border-left: 8px solid var(--blue);
 
 			}
 
 			i {
 				opacity: 1;
+				// color: var(--blue);
 			}
 
-			.expand { background: darken($blue, 8%); }
-
-			
-
+			.expand { background: var(--blue); }
 		}
 
 		i {
@@ -93,11 +90,12 @@
 		
 		p {
 			padding: .5rem;
+			word-break: break-word;
 			// margin-right: 2rem;
 			// background: red;
 			@extend .flex;
 			&:hover {
-				color: darken($blue, 8%);
+				color: var(--blue);
 			}
 		}
 
@@ -108,11 +106,11 @@
 
 		.underline {
 			font-size: 1.8rem;
-			color: darken($blue, 8%);
+			color: var(--blue);
 			width: 50%;
 			cursor: pointer;
 			&:hover {
-				color: $white;
+				color: var(--white);
 			}
 		}
 	}
@@ -122,17 +120,21 @@
 		overflow-y: auto;
 		// background: orange;
 		margin-right: 2rem;
+
 	}
 
 	&__footer {
-		padding: 0rem 3.5rem;
+		position: absolute;
+		bottom: 10%;
+		left: 3.5rem;
+		// padding: 0rem 3.5rem;
 		font-size: 1.28rem;
 
 		// text-align: right;
 		// background: $green;
 
 		a {
-			color: $blue;
+			color: var(--blue);
 		}
 
 		.logo {
@@ -172,9 +174,9 @@ li.router-link-exact-active, .active {
 	@extend li:hover;
 
 	// cursor: pointer;
-	// border-left: 5px solid darken($blue, 8%) !important;
-	// background: $lgrey;
-	// color: darken($blue, 8%);
+	// border-left: 5px solid darken(var(--blue), 8%) !important;
+	// background: var(--lgrey);
+	// color: darken(var(--blue), 8%);
 
 
 

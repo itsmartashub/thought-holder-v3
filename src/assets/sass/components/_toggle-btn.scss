@@ -1,0 +1,100 @@
+.toggle-wrapper {
+	display: flex;
+	align-items: center;
+	margin: 0 1.5rem;
+}
+
+.toggle-input {
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+.toggle-label {
+	cursor: pointer;
+	// text-indent: -9999px;
+	width: 6rem;
+	height: 3rem;
+	display: block;
+	border-radius: 10rem;
+	background: var(--grey);
+	position: relative;
+}
+
+.toggle-label:after {
+	content: '';
+	position: absolute;
+	top: .5rem;
+	left: .5rem;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 9rem;
+	background: var(--blue);
+	transition: .2s;
+}
+
+.toggle-input:checked + .toggle-label {
+	// background: rgba(var(--black), .8);
+	background: var(--grey);
+}
+
+.toggle-input:checked + .toggle-label:after {
+	left: calc(100% - .5rem);
+	transform: translateX(-100%);
+}
+
+.toggle-label:active:after {
+	width: 6rem;
+}
+
+
+
+
+
+// .toggle {
+//   position: relative;
+//   display: inline-block;
+//   width: 60px;
+//   height: 34px;
+// }
+// .toggle input {
+//   opacity: 0;
+//   width: 0;
+//   height: 0;
+// }
+// .toggler {
+//   position: absolute;
+//   cursor: pointer;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background: #15202B;
+//   transition: 0.4s;
+// }
+// .toggler:before {
+//   position: absolute;
+//   content: "";
+//   height: 26px;
+//   width: 26px;
+//   left: 4px;
+//   bottom: 4px;
+//   background: #FFF;
+//   -webkit-transition: 0.4s;
+//   transition: 0.4s;
+// }
+// input:checked + .toggler {
+//   background: #2196F3;
+// }
+// input:focus + .toggler {
+//   box-shadow: 0 0 2px #2196F3;
+// }
+// input:checked + .toggler:before {
+//   transform: translateX(26px);
+// }
+// .toggler.round {
+//   border-radius: 34px;
+// }
+// .toggler.round:before {
+//   border-radius: 50%;
+// }

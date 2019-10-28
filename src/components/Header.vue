@@ -1,5 +1,5 @@
 <template>
-	<div class="header">
+	<header class="header">
 
 		<i class="header__hamburger mdi mdi-text" @click="sidebarToggle"></i>
 
@@ -22,8 +22,20 @@
 				<div v-if="isList"></div>
 			</div>
 
-			<div class="header__theme" @click="darkToggle">
+			<!-- <div class="header__theme" @click="darkToggle">
 				<span v-bind:class="{ dark: isDark }"></span>
+			</div> -->
+			<!-- <label class="toggle">
+				<input 
+					type="checkbox" 
+					:checked="isDark ? 'checked' : false" 
+					@change="darkToggle"
+				/>
+				<span class="toggler round"></span>
+			</label> -->
+			<div class="toggle-wrapper">
+				<input type="checkbox" id="switch" class="toggle-input" @change="darkToggle" :checked="isDark ? 'checked' : false" />
+				<label for="switch" class="toggle-label"></label>
 			</div>
 		</div>
 
@@ -36,7 +48,7 @@
 			<button class="btn btn--blue" @click.prevent="logout()">Logout</button>
 		</div>
 
-	</div>
+	</header>
 </template>
 
 <script>
@@ -79,7 +91,19 @@ export default {
 
 		darkToggle() {
 			this.isDark = !this.isDark
+			if(this.isDark) {
+				// this.trans()
+				document.body.setAttribute('data-theme', 'dark')
+			} else {
+				document.body.removeAttribute('data-theme')
+			}
 		},
+		// trans() {
+		// 	document.documentElement.classList.add('transition')
+		// 	window.setTimeout(() => {
+		// 		document.documentElement.classList.remove('transition')
+		// 	}, 1000)
+		// },
 
 		showToggle() {
 			this.show = !this.show

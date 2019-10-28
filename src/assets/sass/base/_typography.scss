@@ -3,13 +3,61 @@ h1,h2, h3, h4, h5, h6 {
 }
 
 .h1 {
-	font-size: 6rem;
-	font-weight: 300;
-	letter-spacing: 3.5rem;
+	display: inline-block;
+	margin-bottom: 8rem;
+	font-size: 4rem;
+	letter-spacing: 1rem;
+	color: var(--blue);
+	position: relative;
+	// padding: 0 5rem;
+	// border-left: 1rem solid var(--blue);
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -10%;
+		left: 0;
+		// left: 50%;
+		// transform: translateX(-50%);
+		background: var(--blue);
+		width: 30%;
+		height: .7rem;
+		border-radius: .2rem;
+	}
+
+	// &:hover {
+	// 	color: var(--blue);
+
+	// 	// &:after {
+	// 	// 	background: var(--white);
+	// 	// 	width: 100%;
+	// 	// }
+	// }
 }
 
 .h2 {
+	display: inline-block;
+	font-size: 2rem;
+	font-weight: 300;
+	margin-bottom: .5rem;
+	padding: .5rem 1rem;
+	border-radius: .8rem;
+	color: var(--blue);
 
+	&:after {
+		background: var(--rgba-lgrey);
+		border: none;
+		width: 5%;
+	}
+
+	&:hover {
+		color: var(--blue);
+
+		&:after {
+			background: var(--rgba-lgrey);
+			width: 100%;
+		}
+	}
 }
 
 .h3 {
@@ -19,32 +67,33 @@ h1,h2, h3, h4, h5, h6 {
 	margin-bottom: 2rem;
 	padding: 1rem 2rem;
 	border-radius: .8rem;
-	color: $blue;
+	color: var(--blue);
 
 	&:after {
-		background: rgba($lgrey, .8);
+		background: var(--rgba-lgrey);
 		border: none;
 		width: 5%;
 	}
 
 	&:hover {
-			color: $blue;
-
-		// background: rgba($lgrey, .8);
+		color: var(--blue);
+		
 		&:after {
-			background: rgba($lgrey, .8);
+			background: var(--rgba-lgrey);
 			width: 100%;
-
-			// border: none;
 		}
 	}
-
-	
-        
 }
 
 .h4 {
-
+	display: inline-block;
+	border-radius: 10rem;
+	padding: .5rem 1.5rem;
+	background: var(--h4_bg);
+	color: var(--blue);
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+	word-break: break-word;
 }
 
 .h5 {
