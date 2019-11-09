@@ -5,6 +5,7 @@ export default {
 		noteOpen: false,
 		tagsOpen: false,
 		editTagsOpen: false,
+		open: true,
 
 		notification: {
 			display: false,
@@ -24,7 +25,9 @@ export default {
 
 		GET_OPEN_TAGS: state => state.tagsOpen,
 
-		GET_OPEN_EDIT_TAGS: state => state.editTagsOpen
+		GET_OPEN_EDIT_TAGS: state => state.editTagsOpen,
+
+		OPEN: state => state.open
 	},
 	mutations: {
 		SET_NOTIFICATION (state, {display, text, alertClass}) {
@@ -50,6 +53,10 @@ export default {
 		SET_OPEN_EDIT_TAGS (state, payload) {
 			state.editTagsOpen = payload
 			state.modalBackground = payload
+		},
+
+		SET_OPEN (state, payload) {
+			state.open = payload
 		}
 	},
 	actions: {

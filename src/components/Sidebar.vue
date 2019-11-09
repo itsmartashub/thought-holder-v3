@@ -22,7 +22,7 @@
 						</template>
 					</div>
 
-					<p class="underline btn--icon mt-2" @click="OPEN_EDIT_TAGS = true">
+					<p class="underline btn--icon mt-2" @click="openEditTags()">
 						<i class="mdi mdi-pencil"></i>Edit tags
 					</p>
 				</div>
@@ -84,7 +84,16 @@ export default {
 			set(newVal) {
 				this.$store.commit('ui/SET_OPEN_EDIT_TAGS', newVal)
 			}
-		}
+		},
+
+		// OPEN: {
+		// 	get() {
+		// 		return this.$store.getters['ui/OPEN']
+		// 	},
+		// 	set(newVal) {
+		// 		this.$store.getters['ui/SET_OPEN', newVal]
+		// 	}
+		// }
 	},
 
 	methods: {
@@ -94,6 +103,11 @@ export default {
 
 		editTags() {
 
+		},
+
+		openEditTags() {
+			// this.OPEN = true
+			this.OPEN_EDIT_TAGS = true
 		}
 	},
 

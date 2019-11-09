@@ -17,10 +17,10 @@ h1,h2, h3, h4, h5, h6 {
 		position: absolute;
 		bottom: -10%;
 		left: 0;
-		// left: 50%;
-		// transform: translateX(-50%);
+		left: 50%;
+		transform: translateX(-50%);
 		background: var(--blue);
-		width: 30%;
+		width: 5rem;
 		height: .7rem;
 		border-radius: .2rem;
 	}
@@ -64,7 +64,7 @@ h1,h2, h3, h4, h5, h6 {
 	display: inline-block;
 	font-size: 2.2rem;
 	font-weight: 300;
-	margin-bottom: 2rem;
+	// margin-bottom: 2rem;
 	padding: 1rem 2rem;
 	border-radius: .8rem;
 	color: var(--blue);
@@ -92,7 +92,7 @@ h1,h2, h3, h4, h5, h6 {
 	background: var(--h4_bg);
 	color: var(--blue);
 	font-size: 1.2rem;
-	margin-bottom: 1rem;
+	// margin-bottom: 1rem;
 	word-break: break-word;
 }
 

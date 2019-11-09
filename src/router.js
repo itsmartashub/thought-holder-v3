@@ -6,6 +6,8 @@ import Router from 'vue-router'
 import Home from './components/Home.vue'
 import Archive from './components/Archive.vue'
 import Tags from './components/Tags.vue'
+import Search from './components/Search.vue'
+import FoundColorNote from './components/FoundColorNote.vue'
 
 import Login from './components/auth/Login.vue'
 import Signup from './components/auth/Signup.vue'
@@ -53,7 +55,19 @@ const router = new Router({
 					path: 'archived',
 					name: 'archived',
 					component: Archive
-				}
+				},
+				{
+					path: 'search',
+					name: 'search',
+					component: Search
+				},
+				
+				{
+					path: 'search-colors',
+					name: 'colors',
+					component: FoundColorNote
+				},
+
 			]
 		},
 

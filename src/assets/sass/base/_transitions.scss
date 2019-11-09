@@ -66,19 +66,168 @@
     transform: scale(1);
   }
 }
+
+
+
+
+
+
+.slide-leave-active {
+	transition: opacity .5s ease;
+	opacity: 0;
+	animation: slide-out .5s ease-out forwards;
+}
+
+.slide-leave {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.slide-enter-active {
+	animation: slide-in .5s ease-out forwards;
+}
+
+@keyframes slide-out {
+	0% {
+	transform: translateY(0);
+	}
+	100% {
+	transform: translateY(-3rem);
+	}
+}
+
 // v-enter: Starting state for enter. Added before element is inserted, removed one frame after element is inserted.
+.modal-enter {
+	transform: translate(-200%, -50%) rotate(-90deg);
+	opacity: 0;
+}
 
 // v-enter-active: Active state for enter. Applied during the entire entering phase. Added before element is inserted, removed when transition/animation finishes. This class can be used to define the duration, delay and easing curve for the entering transition.
+.modal-enter-active {
+	transform: translate(-46%, -50%) rotate(4deg);
+	transition: all .3s ease-in-out;
+}
 
 // v-enter-to: Only available in versions 2.1.8+. Ending state for enter. Added one frame after element is inserted (at the same time v-enter is removed), removed when transition/animation finishes.
-
+.modal-enter-to, .modal-leave {
+	transform: translate(-50%, -50%) rotate(0deg);
+	opacity: 1;
+}
 // v-leave: Starting state for leave. Added immediately when a leaving transition is triggered, removed after one frame.
 
 // v-leave-active: Active state for leave. Applied during the entire leaving phase. Added immediately when leave transition is triggered, removed when the transition/animation finishes. This class can be used to define the duration, delay and easing curve for the leaving transition.
+.modal-leave-active {
+	transform: translate(-54%, -50%) rotate(-4deg);
+}
 
 // v-leave-to: Only available in versions 2.1.8+. Ending state for leave. Added one frame after a leaving transition is triggered (at the same time v-leave is removed), removed when the transition/animation finishes.
+.modal-leave-to {
+	transform: translate(150%, -50%) rotate(90deg);
+}
 
 
 // Each of these classes will be prefixed with the name of the transition. Here the v- prefix is the default when you use a <transition> element with no name. If you use <transition name="my-transition"> for example, then the v-enter class would instead be my-transition-enter.
 
 // v-enter-active and v-leave-active give you the ability to specify different easing curves for enter/leave transitions, which you’ll see an example of in the following section.
+
+
+//! HAHAHAHAHA
+@keyframes modalAnim {
+
+  0% {  
+    transform: translateX(-200%) rotate(-90deg);
+    opacity: 0;
+  }
+  
+  10% {
+    transform: translateX(4%) rotate(4deg);
+  }
+
+  
+  15%, 85% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  
+  90% {
+    transform: translateX(-4%) rotate(-4deg);
+  }
+
+  
+  100% {
+    transform: translateX(200%) rotate(90deg);
+  }
+}
+
+@keyframes modal {
+
+  0% {  
+    transform: translate(-200%, -50%) rotate(-90deg);
+    opacity: 0;
+  }
+  
+  10% {
+    transform: translate(-54%, -50%) rotate(4deg);
+  }
+
+  
+  15%, 85% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  
+  90% {
+    transform: translate(-46%, -50%) rotate(-4deg);
+  }
+
+  
+  100% {
+    transform: translate(200%, -50%) rotate(90deg);
+  }
+}
+
+.modal {
+	animation: modal 3s ease-in-out forwards
+}
+
+
+@keyframes modalIn {
+	0% {  
+		transform: translate(-200%, -50%) rotate(-90deg);
+		opacity: 0;
+	}
+
+	10% {
+		transform: translate(-40%, -50%) rotate(4deg);
+	}
+
+	15%, 100% {
+		transform: translate(-50%, -50%);
+		opacity: 1;
+	}
+}
+
+@keyframes modalOut {
+	0% {  
+		transform: translate(-50%, -50%);
+		opacity: 1;
+	}
+
+	15% {
+		transform: translate(-60%, -50%) rotate(-4deg);
+	}
+
+	100% {
+		transform: translate(400%, -50%) rotate(90deg);
+		opacity: 0;
+	}
+}
+
+
+.modal-in {
+	animation: modalIn 700ms ease-in-out forwards
+}
+
+.modal-out {
+	animation: modalOut 700ms ease-in-out forwards
+}

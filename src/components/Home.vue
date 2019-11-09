@@ -2,14 +2,20 @@
 	<div class="grid-container">
 		<Header/>
 		<Sidebar/>
-		<Notes v-if="$route.path == '/'"/>
+
+		<transition name="slide" mode="out-in">
+			<Notes v-if="$route.path == '/'"/>
+		</transition>
+		
 		<!-- <router-view name="notes"/> -->
-		<router-view :key="$route.fullPath" />
+		<transition name="slide" mode="out-in">
+			<router-view :key="$route.fullPath" />
+		</transition>
 		<!-- <router-view :key="$route.fullPath" name="open-modal"/> -->
 
-		<transition name="welcome">
+		<!-- <transition name="modal"> -->
 			<EditTags v-if="OPEN_EDIT_TAGS"/>
-		</transition>
+		<!-- </transition> -->
 		
 		<ModalBackground />
 	</div>

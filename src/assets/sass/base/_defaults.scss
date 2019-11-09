@@ -182,3 +182,16 @@
 	background: var(--corange) !important; // ok
 	color: #222 !important;
 }
+
+
+.red,
+.green,
+.blue,
+.purple,
+.orange {
+	.note__title:empty:before,
+	.note__body:empty:before {
+		content: attr(data-placeholder);
+		color: var(--dgrey);
+	}
+}

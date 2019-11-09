@@ -107,14 +107,15 @@ html [data-theme="dark"] {
 	--modal-bg: rgba(32, 33, 63, .8);
 	--rgba-lgrey: rgba(39, 40, 70, .8);
 
-	--shadow: 0px 2px 6px -4px var(--blue);
+	// --shadow: 0px 2px 6px -4px var(--blue);
+	--shadow: none;
 	--shadow_modal: 0px 0px 150px -50px var(--blue);
 
-	--cred: rgba(250, 132, 121, 0.8);
-	--cblue: rgba(201, 239, 247, 0.8);
-	--cgreen: rgba(213, 242, 211, 0.8);
-	--cpurple: rgba(214, 172, 251, 0.8);
-	--corange: rgba(254, 231, 183, 0.8); // #fbbc04;
-	--cgrey: rgba(209, 208, 220, 0.8); // #e8eaed
-	--cpeach: rgba(249, 201, 175, 0.8);
+	--cred: hsl(5, 32%, 44%);
+	--cblue: hsl(189, 23%, 38%);
+	--cgreen: hsl(116, 18%, 53%);
+	--cpurple: hsl(271, 25%, 57%);
+	--corange: hsl(41, 30%, 49%); // #fbbc04;
+	--cgrey: hsl(245, 15%, 54%); // #e8eaed
+	--cpeach: hsl(21, 26%, 59%);
 }

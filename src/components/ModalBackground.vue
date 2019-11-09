@@ -38,6 +38,15 @@ export default {
 			set(newVal) {
 				this.$store.commit('ui/SET_OPEN_EDIT_TAGS', newVal)
 			}
+		},
+
+		OPEN: {
+			get() {
+				return this.$store.getters['ui/OPEN']
+			},
+			set(newVal) {
+				this.$store.getters['ui/SET_OPEN', newVal]
+			}
 		}
 	},
 
@@ -46,6 +55,7 @@ export default {
 			this.OPEN_NOTE = false
 			this.OPEN_NOTE_BG = false
 			this.OPEN_EDIT_TAGS = false
+			this.OPEN = false
 		}
 	}
 }

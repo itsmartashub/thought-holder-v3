@@ -12,7 +12,7 @@
 		<div class="header__search">
 			<form @submit.prevent="search()">
 				<i class="mdi mdi-magnify"></i>
-				<input type="search" placeholder="Search" v-model="inputSearch"/>
+				<input type="search" placeholder="Search" v-model="inputSearch" @focus="searchFocused()" @input="search()" />
 			</form>
 
 			<div class="header__notes-view" @click="listviewToggle">
@@ -37,6 +37,7 @@
 				<input type="checkbox" id="switch" class="toggle-input" @change="darkToggle" :checked="isDark ? 'checked' : false" />
 				<label for="switch" class="toggle-label"></label>
 			</div>
+
 		</div>
 
 		
@@ -45,7 +46,7 @@
 		<div class="header__login">
 			<i class="mdi mdi-email-outline"></i>
 			<p class="underline">{{ currentUser.email }} </p>
-			<button class="btn btn--blue" @click.prevent="logout()">Logout</button>
+			<button class="btn btn--blue" @click.prevent="logout()">Logout {{ INPUT_SEARCH }}</button>
 		</div>
 
 	</header>
@@ -72,6 +73,16 @@ export default {
 	computed: {
 		currentUser() {
 			return this.$store.getters.GET_USER
+		},
+
+		INPUT_SEARCH: {
+			get() {
+				return this.$store.getters.GET_INPUT_SEARCH
+			},
+			set(newInput) {
+				this.$store.commit('SET_INPUT_SEARCH', newInput)
+				// this.inputSearch = newInput
+			}
 		}
 		// ...mapGetters(['GET_USER'])
 	},
@@ -111,6 +122,20 @@ export default {
 
 		logout() {
 			this.LOGOUT()
+		},
+
+		searchFocused() {
+			if(this.$route.path !== '/search') {
+				this.$router.replace('/search')
+			}
+			// console.log(this.$route.path);
+		},
+
+		search() {
+			this.INPUT_SEARCH = this.inputSearch
+			console.log(this.INPUT_SEARCH);
+
+			// this.$store.commit('SEARCHED_NOTES', this.INPUT_SEARCH)
 		}
 	}
 }

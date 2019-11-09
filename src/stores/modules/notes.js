@@ -6,6 +6,9 @@ export default {
 		arrNotes: [],
 		arrPinned: [],
 		arrArchived: [],
+		arrColors: [],
+		arrColorNotes: [],
+		arrSearchedNotes: [],
 
 
 		arrTags: [],
@@ -14,6 +17,8 @@ export default {
 
 		arrCuratedSearchTags: [], //* search
 		searchTags: '', //* search
+
+		searchNote: '',
 
 		arrCheckedTags: [],
 		NEKINIZ: [],
@@ -27,7 +32,33 @@ export default {
 
 		GET_PINNED: state => state.arrPinned = state.arrNotes.filter(note => note.pinned === true),
 		GET_ARCHIVED: state => state.arrArchived = state.arrNotes.filter(note => note.archived === true),
+		GET_COLORS: state => {
+			state.arrNotes.forEach(note => state.arrColors.push(note.color))
+			return state.arrColors = [... new Set(state.arrColors)] // https://www.youtube.com/watch?v=dvPybpgk5Y4 // 
+
+			// let a = [1,2,5,2,1,8]
+			// let b = Object.keys(a.reduce((acc, value) => {
+				// acc[value] = true
+				// return acc
+			// }, {}))
+
+			// return state.arrColors
+		},
+
+		GET_COLOR_NOTE: state => colorName => {
+			return state.arrColorNotes = state.arrNotes.filter(note => note.color == colorName)
+		},
+
+		GET_INPUT_SEARCH: state => state.searchNote,
 		// GET_PINNED: state => state.arrPinned,
+		GET_SEARCHED_NOTES: (state, getters) => {
+			if(getters.GET_INPUT_SEARCH != '') {
+				// return state.arrSearchedNotes
+				return state.arrSearchedNotes = state.arrNotes.filter(note => note.content.toLowerCase().includes(getters.GET_INPUT_SEARCH) || note.title.toLowerCase().includes(getters.GET_INPUT_SEARCH))
+			} else {
+				return state.arrSearchedNotes = []
+			}
+		},
 
 		GET_TAGS: state => state.arrTags,
 
@@ -90,6 +121,10 @@ export default {
 
 		SET_COLOR (state, {idNote, colorName}) {
 			state.arrNotes.find(note => note.id === idNote).color = colorName
+		},
+
+		SET_INPUT_SEARCH (state, searchTerm) {
+			state.searchNote = searchTerm
 		},
 
 		SET_TAGS (state, tags) {
@@ -764,7 +799,16 @@ export default {
 					alertClass: 'warning'
 				})
 			}
-		}
+		},
+
+		// SEARCHED_NOTES({commit, state}, searchTerm) {
+		// 	// console.log(inputSearchValue);
+		// 	state.arrSearchedNotes = state.arrNotes.filter(note => note.title.toLowerCase().includes(searchTerm))
+		// 	console.log(state.arrSearchedNotes);
+		// 	// || note.content.toLowerCase.includes(searchTerm)
+
+		// 	// commit('SET_CURATED_SEARCH_NOTES', matchedSearch)
+		// }
 
  	}
 }

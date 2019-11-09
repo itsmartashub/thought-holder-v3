@@ -1,11 +1,12 @@
 .notes,
 .tags,
-.archive {
+.archive,
+.search {
 	grid-area: main;
-	padding: 5rem 18rem;
+	// padding: 5rem 18rem;
+	padding: 5vh 5vw;
 	background: var(--lgrey);
 	overflow-x: hidden;
-	text-align: center;
 	@extend .transition-2;
 }
 
@@ -34,41 +35,52 @@
 
 .grid-notes {
 	text-align: left;
-	margin: 0 auto;
 	height: auto;
+	// width: 100%;
 	// padding: 1rem;
-	// -webkit-column-width: 21rem;
-	// -webkit-column-gap: 2rem;
-	// -moz-column-width: 21rem;
-	// -moz-column-gap: 2rem;
-	column-width: 21rem;
-	// column-span: all;
+	column-width: 21.5rem;
+	column-span: all;
 	// column-gap: 1vw;
-	// column-fill: auto;
-	// column-count: 2;
+	// column-count: auto;
 	display: block; //! BITNOOO, ILI IPAK NE
-	
+
+	// background: lightgreen;
+	// // display: flex;
+	// // flex-direction: row;
+	// display: grid;
+	// grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+	// grid-template-rows:repeat(auto-fill, minmax(10rem, 55rem));
+	// grid-auto-flow: row;
+	// // align-items: flex-start;
+	// // align-content: flex-start;
+
 	.note {
+		// display: inline-grid;
+		// flex-direction: column;
+		// display: table-cell;
 		padding: .8rem 1.8rem;
 		margin: 1rem;
 		// height: auto;
 		// width: auto;
 		width: 21.5rem;
 		display: inline-block; //! BITNOOO, ILI IPAK NE
-		-webkit-column-break-inside: avoid; //! BITNOO
-          page-break-inside: avoid; //! BITNOOO
-               break-inside: avoid; //! BITNOOO
+		// -webkit-column-break-inside: avoid; //! BITNOO
+      //     page-break-inside: avoid; //! BITNOOO
+      //          break-inside: avoid; //! BITNOOO
 		font-size: 1.3rem;
 		box-shadow: $box-shadow-note;
 
-		width: calc(100% / 1);
+		// width: calc(100% / 1);
 		// transition: @extend .transition-3;
 		transition: all .3s ease-in-out;
+		@extend .transition-2;
 		z-index: 100;
 		// float: left;
 
 		&:hover {
-			transform: translateY(-5%);
+			transform: translateY(-3%);
+			box-shadow: 0px 27px 30px -20px rgba(0,0,0,0.4);
+
 			.note__pin,
 			.note__options {
 				opacity: 1;

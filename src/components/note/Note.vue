@@ -29,7 +29,7 @@
 
 			<div class="note__tag-date-wrapper">
 				<div class="mt-3">
-					<h4 class="h4" v-for="(tag, key) in GET_TAGS_IN_NOTES" :key="key">{{ tag.name }}</h4>
+					<h4 class="h4 mb-1" v-for="(tag, key) in GET_TAGS_IN_NOTES" :key="key">{{ tag.name }}</h4>
 				</div>
 
 				<div class="note__date" :title="titleTime">
