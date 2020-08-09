@@ -1,26 +1,19 @@
 <template>
-	<div class="note__add-tags" @click.stop tabindex="1" @keydown.esc="tag_open = false">
-		<!-- <i class="fas fa-tags" title="Add tag" @click.self="tag_open = !tag_open"></i> -->
-
-		<i class="mdi mdi-tag" @click.self="tag_open = !tag_open"></i>
-
-		<form class="note__add-tags-container" @submit.prevent v-if="tag_open">
-			<h3 class="h2 underline">Tag note</h3>
-			<input type="text" placeholder="Enter tag name" v-model.trim="inputSearchOrAdd" @input="searchOrAddTag()"  />
-			<ul>
-				<li v-for="(tag, key) in GET_TAGS" :key="key">
-					<label :for="key"><input type="checkbox" v-model="inputChecks" :id="key" :value="tag.name" @change="checkTag(tag)" /> {{ tag.name }} </label>
-				</li>
-
-				<!-- <li>{{ GET_DEFAULT_CHECKED }}</li> -->
-				<!-- <hr>
-				<li>{{ inputChecks }}</li> -->
-				<li class="mt-1" v-if="create" @click.stop="createNewTag()"><i class="mdi mdi-plus"></i> Create tag: <span>{{ this.inputSearchOrAdd }}</span></li>
-			</ul>
-
-			<!-- <button class="btn mt-2" @click.prevent="addTags(note)" v-if="!create">add tag(s) to note</button> -->
-		</form>
-	</div>
+	<form class="note__add-tags-form" @submit.prevent @click.stop tabindex="1">
+		<h3 class="h2 underline">Tag note</h3>
+		<span class="note__add-tags-closebtn" @click="emitNoteTagsOpen">&#10005;</span>
+		<input class="note__add-tags-input" type="text" placeholder="Enter tag name" v-model.trim="inputSearchOrAdd" @input="searchOrAddTag()"  />
+		<ul class="note__add-tags-ul">
+			<li class="note__add-tags-li" v-for="(tag, key) in GET_TAGS" :key="key">
+				<label :for="key">
+					<input type="checkbox" v-model="inputChecks" :id="key" :value="tag.name" @change="checkTag(tag)" />
+					{{ tag.name }}
+				</label>
+			</li>
+			<li class="mt-1" v-if="create" @click.stop="createNewTag()"><i class="mdi mdi-plus"></i> Create tag: <span>{{ this.inputSearchOrAdd }}</span>
+			</li>
+		</ul>
+	</form>
 </template>
 
 <script>
@@ -29,13 +22,11 @@ export default {
 
 	props: {
 		note: Object,
-		unique: Number
-		// unique: String
+		isNoteAddTagsOpen: Boolean
 	},
 	
 	data() {
 		return {
-			tagsOpen: false,
 			create: false,
 			inputSearchOrAdd: '',
 			inputChecks: [],
@@ -49,37 +40,21 @@ export default {
 			return this.$store.getters.GET_CURATED_TAGS
 		},
 
-		ARR_ONLY_CURATED_SEARCH () {
-			return this.$store.getters.ARR_ONLY_CURATED_SEARCH
+		ARR_ONLY_CURATED_SEARCH () { return this.$store.getters.ARR_ONLY_CURATED_SEARCH },
+
+		GET_DEFAULT_CHECKED() {
+			return this.$store.getters.GET_DEFAULT_CHECKED(this.note.id)
 		},
 
-		tag_open: { // TODO  Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "tagsOpen"
+		GET_DEFAULT_CHECKED: {
 			get() {
-				return this.tagsOpen
-				// return this.$store.getters['ui/GET_TAGS_OPEN'] // TODO make this
+				return this.$store.getters.GET_DEFAULT_CHECKED(this.note.id) 
 			},
-			set(value) {
-				this.tagsOpen = value
-				// return this.$store.commit('ui/SET_TAGS_OPEN', value) // TODO make this
+			set(newVal) {
+				console.log(newVal) //with computed we have true/false value instead of array
+				this.inputChecks = newVal
 			}
 		},
-
-		// GET_DEFAULT_CHECKED() {
-		// 	return this.$store.getters.GET_DEFAULT_CHECKED(this.note.id)
-		// 	// return this.$store.getters.GET_DEFAULT_CHECKED
-		// },
-
-		// GET_DEFAULT_CHECKED: {
-		// 	get() {
-		// 		return this.$store.getters.GET_DEFAULT_CHECKED(this.note.id) 
-		// 	},
-		// 	set(newVal) {
-		// 		console.log(newVal) //with computed we have true/false value instead of array
-		// 		this.inputChecks = newVal
-		// 	}
-		// },
-
-
 	},
 
 	methods: {
@@ -142,7 +117,11 @@ export default {
 		// },
 
 		
-
+		emitNoteTagsOpen() {
+			let noteTagsOpen = this.noteTagsOpen;
+			noteTagsOpen = false
+			this.$emit("update-noteTagsOpen", noteTagsOpen);
+		}
 		
 	}
 }

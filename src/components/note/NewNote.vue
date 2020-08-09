@@ -1,8 +1,10 @@
 <template>
-	<section class="note newNote mb-5 m-auto" :class="setColor">
+	<!-- <section class="note newNote new-note m-auto" :class="setColor"> -->
+	<section class="new-note" :class="setColor" >
+	<!-- <section class="new-note m-auto" :class="mobileNewNoteShow ? 'new-note m-auto new-note--open' : '' " :style="{backgroundColor: setColor}"> -->
+	<!-- <section :class="is_mobile_newnote_open.className" :style="{backgroundColor: setColor}"> -->
 
-
-		<div class="note__title-container" @click="onTitleClicked" >
+		<header class="new-note__title-container" @click="onTitleClicked">
 			<div
 				class="note__title"
 				contenteditable="true"
@@ -10,55 +12,46 @@
 				v-text="title"
 				@blur="editTitle"
 			></div>
-			<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
-			<!-- <i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': pinned}"></i> -->
-			<i title="Pin note" @click="onPinned" :class="pinned ? 'mdi mdi-pin txt-blue' : 'mdi mdi-pin-outline'"></i>
-		</div>
+			<i title="Pin note" @click="onPinned" :class="pinned ? 'mdi mdi-pin color-blue' : 'mdi mdi-pin-outline'"></i>
+		</header>
 
 
-		<transition-group name="fade" tag="div">
+		<transition-group name="fade" tag="article" class="new-note__after-title-content">
 			<!-- <div v-if="titleClicked"> -->
-				<div
-					class="note__body mt-3"
-					ref="refContent"
-					contenteditable="true"
-					data-placeholder="Take a note..."
-					v-text="content"
-					@blur="editContent"
-					autofocus
-					v-if="titleClicked"
-					:key="1"
-				></div>
+			<div
+				class="new-note__body mt-3"
+				ref="refContent"
+				contenteditable="true"
+				data-placeholder="Take a note..."
+				v-text="content"
+				@blur="editContent"
+				autofocus
+				v-if="titleClicked"
+				:key="1"
+			></div>
 
-				<h4 class="mt-3 h4" v-if="titleClicked" :key="2">#neki tag</h4>
+			<footer class="new-note__footer mt-1" v-if="titleClicked" :key="3">
+				<div class="new-note__options">
+					<div class="new-note__pallete">
+						<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
+						<i class="mdi mdi-palette" title="Change color"></i>
 
-				<div class="note__footer" v-if="titleClicked" :key="3">
-					<div class="note__options mt-1">
-
-						<NoteTags />
-
-						<div class="note__pallete">
-							<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
-							<i class="mdi mdi-palette" title="Change color"></i>
-
-							<div class="note__colors-container" >
-								<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
-							</div>
+						<div class="new-note__colors-container">
+							<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
 						</div>
-
-						<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i> -->
-						<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
 					</div>
 
-
-					<div class="note__btn-container">
-						<button class="btn btn--blue" @click.prevent="addNote">add note</button>
-						<button class="btn" @click.prevent="closeNote">close</button>
-					</div>
+					<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'color-blue': archived}"></i> -->
+					<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'color-blue': archived}"></i>
 				</div>
-			<!-- </div> -->
-		</transition-group>
 
+
+				<div class="new-note__btn-container">
+					<button class="btn btn--blue mt-1 mb-1" @click.prevent="addNote">add note</button>
+					<button class="btn mt-1 mb-1" @click.prevent="closeNote">close</button>
+				</div>
+			</footer>
+		</transition-group>
 	</section>
 </template>
 
@@ -70,6 +63,12 @@ import NoteTags from '@/components/note/NoteTags'
 export default {
 	name: 'newNote',
 	components: { NoteColors, NoteTags },
+// 
+	// props: {
+		// show_new_note: Boolean,
+		// title_clicked: Boolean
+		// className: String
+	// },
 
 	data() {
 		return {
@@ -88,18 +87,40 @@ export default {
 				{ id: 6, name: 'orange' }
 			],
 
-			titleClicked: false
+			// isNoteAddTagsOpen: false,
+
+			// titleClicked: true
+			// titleClicked: this.title_clicked,
+			// showNewNote: this.show_new_note,
+		}
+	},
+
+	computed: {
+		// mobileNewNoteShow: {
+		// 	get() { return this.showNewNote },
+		// 	set(newValue) { this.showNewNote = newValue }
+		// }
+		// is_mobile_newnote_open: {
+		// 	get() {
+		// 		return this.$store.getters['ui/GET_MOBILE_NEWNOTE_OPEN']
+		// 	},
+		// 	set(newValue) {
+		// 		this.$store.commit('ui/SET_MOBILE_NEWNOTE_OPEN', {
+		// 			display: newValue
+		// 		})
+		// 	}
+		// }
+
+		titleClicked: {
+			get() { return this.$store.getters['ui/GET_MOBILE_NEWNOTE_OPEN'] },
+			set(newValue) { this.$store.commit('ui/SET_MOBILE_NEWNOTE_OPEN', newValue)}
 		}
 	},
 
 	methods: {
-		editTitle(e) {
-			this.title = e.target.innerText
-		},
+		editTitle(e) { this.title = e.target.innerText },
 
-		editContent(e) {
-			this.content = e.target.innerText
-		},
+		editContent(e) { this.content = e.target.innerText },
 		
 		resetNote() {
 			this.title = ''
@@ -182,8 +203,10 @@ export default {
 		},
 
 		closeNote() {
-			console.log('CLOSE  NOTE')
+			// console.log('CLOSE  NOTE')
 			this.resetNote()
+			this.titleClicked = false
+			document.querySelector('.new-note__wrapper').classList.remove('new-note__wrapper--show');
 			// TODO vratiti samo da vidljivo bude content polje
 		},
 
@@ -192,7 +215,11 @@ export default {
 			// this.$nextTick(() => {
 			// 	this.$refs.refContent.focus()
 			// })
-		}
+		},
+
+		// updateNoteTagsOpen(isNoteAddTagsOpen) {
+		// 	this.isNoteAddTagsOpen = isNoteAddTagsOpen
+		// }
 	},
 }
 </script>

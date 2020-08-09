@@ -1,0 +1,82 @@
+.notes {
+	--note-width-min: 22rem;
+
+	&__pinned-title {
+		letter-spacing: 1px;
+		// font-weight: 800;
+		text-transform: uppercase;
+		font-size: 1.3rem;
+		margin-bottom: 4rem;
+
+		i {
+			display: inline-block;
+			line-height: 1;
+			padding: 0;
+			font-size: 0;
+			transition: all .3s ease, transform .3s .1s;
+		}
+		&:hover {
+			i {
+				padding: 0 .3rem;
+				font-size: 1.4rem;
+				transform: rotate(-20deg) scale(2) translateY(-35%);
+			}
+		}
+
+	}
+
+	.note {
+		font-size: 1.35rem;
+
+		&__body { overflow: hidden; }
+	}
+
+	@include device(phone) {
+		--note-width-min: 18rem;
+	}
+}
+
+.notes-home, .notes-tags, .notes-archive, .notes-search {
+	grid-area: main;
+	position: relative;
+	padding: 8vh 5vw;
+	// background: var(--lgrey);
+	overflow-x: hidden;
+	@extend .transition-3;
+
+	.notes { @extend %grid-notes; }
+
+	i { color: var(--blue); }
+}
+
+.notes-home {
+	display: grid;
+	align-content: center;
+	justify-content: center;
+}
+
+.notes-tags {
+	&__title {
+		@extend %flex-center;
+		display: inline-flex;
+		border-radius: 10rem;
+		background: var(--h4_bg);
+		color: var(--blue);
+		padding: 1.5rem 3rem;
+		margin: 0rem auto 8vh auto;
+		font-size: 2rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		word-break: break-all;
+
+		span {
+			font-size: 3rem;
+			margin-right: 1rem;
+			line-height: 1;
+			font-weight: 200;
+			transform: scale(1.5);
+			opacity: .6;
+		}
+	}
+}

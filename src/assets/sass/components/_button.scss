@@ -2,15 +2,24 @@
 	&,
 	&:link,
 	&:visited {
+		--btn-height: 5rem;
 		// text-decoration: none;
-		display: inline-block;
-		border-radius: .8rem;
-		padding: 1rem 3rem;
+		// display: inline-block;
+		
+		// text-align: center;
+		border-radius: var(--radius);
+		padding: 0rem 3rem;
+		// margin: 1rem 1.5rem;
+		// width: auto;
+		// width: 20rem;
+		height: var(--btn-height);
+		line-height: var(--btn-height);
 		background: var(--grey);
 		color: var(--black);
+		text-align: center;
 		position: relative;
 		font-family: inherit;
-		cursor: pointer;
+		@extend %cursor;
 		@extend .transition-1;
 		// transition: all .2s ease-in-out, transform .2s ease-in-out;
 	}
@@ -62,7 +71,8 @@
 
 	&--icon {
 		@extend .flex;
-		padding: 1rem 2rem;
+		justify-content: center;
+		// padding: 1rem 2rem;
 
 		i {
 			padding: 0;
@@ -113,5 +123,9 @@
 				@extend .underline::after:hover;
 			}
 		}
+	}
+
+	@include device(phone) {
+		--btn-height: 6rem;
 	}
 }

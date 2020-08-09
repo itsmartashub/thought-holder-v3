@@ -2,8 +2,8 @@
 	<section class="signup">
 		
 		<form class="form">
-			<div class="header__logo ">
-					<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
+			<div class="logo">
+				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
 			</div>
 			<h1 class="mb-4">Fill up and signup! </h1>
 
@@ -66,10 +66,6 @@
 			</div>
 
 			<button @click.prevent="signup()" class="btn btn--blue mb-4 mt-1" type="submit" :disabled="!validForm">Signup</button>
-
-			<p>{{ email }}</p>
-			<p>{{ password }}</p>
-			<p>{{ confirm_password }}</p>
 			<!-- <p>{{ errorMsg }}</p> -->
 			
 			<router-link :to="{ name: 'login' }">

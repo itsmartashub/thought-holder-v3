@@ -1,5 +1,40 @@
-h1,h2, h3, h4, h5, h6 {
-	// display: block;
+$font-family: 'Inter', sans-serif;
+$font-size: 1.6rem;
+$font-weight: 400;
+$line-height: 1.5;
+// $letter-spacing: -.049375rem;
+// $letter-spacing: -1px;
+
+
+html {
+	font-size: 62.5%; // 1rem = 10px, j 10px/16px = 62.5%
+	// //! uvek VECI ide pre MANJEG msm font-size, ne device koji je, kada je DESKTOP-FIRST, za MOBILE-FIRST od MANJEG ka VECEM
+
+	@include device(tab-land) { // width < 1200 ?
+		font-size: 56.25%; // 1rem = 9px, 9/16 = 50%
+	}
+	// @include device(tab) { // width < 900 ?
+	// 	font-size: 50%; // 1rem = 8px, 8/16 = 50%, da li je width manja od 50%, i mogu da pbrisem jedan, tj phone, jer oboje apply 50%
+	// }
+	// @include device(phone) {
+	// 	font-size: 43.75%; // 1rem = 7px, 7/16 =  43.75%
+	// }
+	@include device(phone-ant) {
+		font-size: 37.5%; // 1rem = 6px, 6/16 =  37.5%
+	}
+
+	@include device(big) {
+		font-size: 75%; // 1rem = 12px, 12/16 = 75%
+	}
+}
+
+
+body {
+	font-family: $font-family;
+	font-size: $font-size;
+	font-weight: $font-weight;
+	line-height: $line-height;
+	// letter-spacing: $letter-spacing;
 }
 
 .h1 {
@@ -9,6 +44,7 @@ h1,h2, h3, h4, h5, h6 {
 	letter-spacing: 1rem;
 	color: var(--blue);
 	position: relative;
+	word-break: break-all;
 	// padding: 0 5rem;
 	// border-left: 1rem solid var(--blue);
 
@@ -43,6 +79,7 @@ h1,h2, h3, h4, h5, h6 {
 	padding: .5rem 1rem;
 	border-radius: .8rem;
 	color: var(--blue);
+	word-break: break-all;
 
 	&:after {
 		background: var(--rgba-lgrey);
@@ -68,6 +105,7 @@ h1,h2, h3, h4, h5, h6 {
 	padding: 1rem 2rem;
 	border-radius: .8rem;
 	color: var(--blue);
+	word-break: break-all;
 
 	&:after {
 		background: var(--rgba-lgrey);
@@ -88,12 +126,13 @@ h1,h2, h3, h4, h5, h6 {
 .h4 {
 	display: inline-block;
 	border-radius: 10rem;
-	padding: .5rem 1.5rem;
 	background: var(--h4_bg);
 	color: var(--blue);
-	font-size: 1.2rem;
+	font-size: 1.1rem;
+	padding: .6rem 1.6rem;
 	// margin-bottom: 1rem;
-	word-break: break-word;
+	word-break: break-all;
+	
 }
 
 .h5 {

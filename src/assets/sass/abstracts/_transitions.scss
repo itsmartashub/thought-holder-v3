@@ -1,6 +1,6 @@
 // .fade-enter-active, .fade-leave-active {
 // //   transition: opacity .3s ease-in-out, transform .3s ease-in-out;
-// 	transition: all .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+// 	transition: all .25s ease;
 // //   transform: translateY(-1%);
 // }
 
@@ -13,7 +13,7 @@
   transition: all .3s ease;
 }
 .fade-enter-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .3s ease;
 }
 
 
@@ -27,7 +27,7 @@
 
 
 .notify-enter-active, .notify-leave-active {
-	transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	transition: all .2s ease;
 }
 .notify-enter, .notify-leave-to {
 	opacity: 0;
@@ -42,7 +42,7 @@
 	opacity: 0;
 }
 .welcome-enter-active {
-	transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	transition: all .1s ease;
 }
 .welcome-leave-active, .welcome-leave-to {
 	opacity: 0;
@@ -230,4 +230,21 @@
 
 .modal-out {
 	animation: modalOut 700ms ease-in-out forwards
+}
+
+
+//! ========================= BREAAK =========================
+.scaley-enter-to, .scaley-leave {
+	transform: scaleY(1);
+	opacity: 1;
+	// height: 20vh;
+}
+.scaley-leave-to, .scaley-enter {
+	transform: scaleY(0);
+	opacity: 0;
+	// height: 0;
+}
+
+.scaley-leave-active, .scaley-enter-active {
+	transition: all .5s ease;
 }

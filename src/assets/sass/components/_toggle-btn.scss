@@ -1,100 +1,45 @@
-.toggle-wrapper {
-	display: flex;
-	align-items: center;
-	margin: 0 1.5rem;
+.toggle-btn {
+	--toggle-circle-size: 1.8rem;
+
+	&__chb{ display: none; }
+
+	&__label {
+		cursor: pointer;
+		width: 5.3rem;
+		height: 2.5rem;
+		@extend .flex;
+		border-radius: var(--radius);
+		background: var(--grey);
+		position: relative;
+		transition: .3s ease-in-out;
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: .5rem;
+			width: var(--toggle-circle-size);
+			height: var(--toggle-circle-size);
+			border-radius: 10rem;
+			background: var(--blue);
+			transition: .3s ease-in-out;
+		}
+	}
 }
 
-.toggle-input {
-	height: 0;
-	width: 0;
-	visibility: hidden;
+.toggle-btn__chb:checked + .toggle-btn__label {
+	// background: var(--blue);
+	background: var(--black);
 }
 
-.toggle-label {
-	cursor: pointer;
-	// text-indent: -9999px;
-	width: 6rem;
-	height: 3rem;
-	display: block;
-	border-radius: 10rem;
-	background: var(--grey);
-	position: relative;
-}
-
-.toggle-label:after {
-	content: '';
-	position: absolute;
-	top: .5rem;
-	left: .5rem;
-	width: 2rem;
-	height: 2rem;
-	border-radius: 9rem;
-	background: var(--blue);
-	transition: .2s;
-}
-
-.toggle-input:checked + .toggle-label {
-	// background: rgba(var(--black), .8);
-	background: var(--grey);
-}
-
-.toggle-input:checked + .toggle-label:after {
+.toggle-btn__chb:checked + .toggle-btn__label::after {
 	left: calc(100% - .5rem);
 	transform: translateX(-100%);
+	// background: var(--white);
+	background: var(--lgrey);
+
 }
 
-.toggle-label:active:after {
-	width: 6rem;
+.toggle-btn__label:active::after {
+	transform: scaleX(2.5) scaleY(.5);
+	transform-origin: right center;
 }
-
-
-
-
-
-// .toggle {
-//   position: relative;
-//   display: inline-block;
-//   width: 60px;
-//   height: 34px;
-// }
-// .toggle input {
-//   opacity: 0;
-//   width: 0;
-//   height: 0;
-// }
-// .toggler {
-//   position: absolute;
-//   cursor: pointer;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   background: #15202B;
-//   transition: 0.4s;
-// }
-// .toggler:before {
-//   position: absolute;
-//   content: "";
-//   height: 26px;
-//   width: 26px;
-//   left: 4px;
-//   bottom: 4px;
-//   background: #FFF;
-//   -webkit-transition: 0.4s;
-//   transition: 0.4s;
-// }
-// input:checked + .toggler {
-//   background: #2196F3;
-// }
-// input:focus + .toggler {
-//   box-shadow: 0 0 2px #2196F3;
-// }
-// input:checked + .toggler:before {
-//   transform: translateX(26px);
-// }
-// .toggler.round {
-//   border-radius: 34px;
-// }
-// .toggler.round:before {
-//   border-radius: 50%;
-// }

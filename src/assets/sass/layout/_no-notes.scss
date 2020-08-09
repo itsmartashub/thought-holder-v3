@@ -1,0 +1,21 @@
+.no-notes-wrapper {
+	// height: 90vh;
+	@extend %flex-center;
+	// flex-direction: column;
+	// justify-content: center;
+}
+
+.no-notes {
+	// @extend .flex;
+	@extend %flex-center;
+	flex-direction: column;
+	justify-content: center;
+	color: var(--black);
+
+	i { 
+		font-size: 5rem;
+		color: var(--blue);
+	}
+
+	.logo { color: var(--blue); }
+}

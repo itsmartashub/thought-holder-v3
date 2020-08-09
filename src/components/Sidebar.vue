@@ -1,57 +1,66 @@
 <template>
-	<nav class="sidebar">
-		<ul>
-			<router-link tag="li" :to="{ name: 'home' }" ><i class="mdi mdi-file-multiple-outline"></i> All Notes</router-link>
+	<aside class="sidebar">
+		<router-link to="/" class="sidebar__top">
+			<div class="logo">
+				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
+			</div>
+		</router-link>
 
-			<li @click="expandTags()">
-				<i class="mdi mdi-tag-outline"></i>See Tags <span class="expand" v-bind:class="{ 'expanded': isActive }">&nbsp;</span><br>
+		<ul class="sidebar__ul">
+			<router-link tag="li" :to="{ name: 'home' }" class="sidebar__li">
+				<i class="mdi mdi-file-multiple-outline"></i>
+				All Notes
+			</router-link>
+
+			<li @click="expandTags()" class="sidebar__li">
+				<i class="mdi mdi-tag-outline"></i>
+				See Tags
+				<span class="sidebar__expand" v-bind:class="{ 'sidebar__expand--true': isActive }">&#8226;&#8226;&#8226;</span>
 			</li>
 
 				
-			<transition name="fade">
+			<transition name="scaley" mode="in-out">
 				<div v-if="isActive" class="sidebar__tags-wrapper" >
-				<!-- <router-link :to="{ name: 'tags', params: { tagName: tag.name, arrNoteIds: tag.note_ids }}" v-for="(tag, key) in TAGS" :key="key" >
-					<p class="mb-1"><i class="fas fa-tags"></i> {{ tag.name }}</p>
-				</router-link> -->
-
 					<div class="sidebar__tags">
 						<template v-for="(tag, key) in TAGS">
-							<router-link :to="{ name: 'tags', params: { tagName: tag.name } }" :key="key">
-								<p class="mb-1"><i class="mdi mdi-tag-multiple"></i> {{ tag.name }} ({{ tag.note_ids.length }})</p>
+							<router-link :to="{ name: 'tags', params: { tagName: tag.name } }" :key="key" class="sidebar__tag">
+									<i class="mdi mdi-tag-multiple"></i>
+									<span>{{ tag.name }}</span> <span>{{ tag.note_ids.length }}</span>
 							</router-link>
 						</template>
 					</div>
 
-					<p class="underline btn--icon mt-2" @click="openEditTags()">
-						<i class="mdi mdi-pencil"></i>Edit tags
-					</p>
+					<button class="sidebar__tags-edit-btn btn btn--icon mt-3 mb-3" @click="openEditTags()">
+						<i class="mdi mdi-pencil"></i>
+						Edit tags
+					</button>
+					<!-- <br> -->
 				</div>
 			</transition>
 
-			<br>
+			
 
-			<router-link tag="li" :to="{ name: 'archived' }"><i class="mdi mdi-arrow-down-bold-box-outline"></i>Archive</router-link>
+			<router-link tag="li" :to="{ name: 'archived' }" class="sidebar__li">
+				<i class="mdi mdi-arrow-down-bold-box-outline"></i>
+				Archive
+			</router-link>
 		</ul>
 
-
-		<footer class="sidebar__footer mb-5">
-			<p>
-				<span class="logo">
-					&copy; 2019.
-					<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
-				</span>
+		<footer class="sidebar__footer">
+			<p class="logo">
+				&copy; 2019.&nbsp;
+				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
 			</p>
 
 			<p>
-				<span>All rights reserved. </span>
-				<span>Site by <a href="https://www.linkedin.com/in/marta-bireš" target="_blank" class="underline">  Marta Bireš</a></span>
-			</p>
-
-			<!-- <p >
+				All rights reserved.
 				Site by <a href="https://www.linkedin.com/in/marta-bireš" target="_blank" class="underline">  Marta Bireš</a>
-			</p> -->
+			</p>
 		</footer>
-	</nav>
+
+		<div class="sidebar__bg-circle sidebar__bg-circle--1" :class="isActive ? 'sidebar__bg-circle--1--tags-expanded' : 'sidebar__bg-circle sidebar__bg-circle--1'"></div>
+		<div class="sidebar__bg-circle sidebar__bg-circle--2" :class="isActive ? 'sidebar__bg-circle--2--tags-expanded' : 'sidebar__bg-circle sidebar__bg-circle--2'"></div>
+	</aside>
 </template>
 
 <script>
@@ -73,17 +82,11 @@ export default {
 	},
 
 	computed: {
-		TAGS () {
-			return this.$store.getters.GET_TAGS
-		},
+		TAGS () { return this.$store.getters.GET_TAGS },
 		// ...mapGetters(['GET_TAGS'])
 		OPEN_EDIT_TAGS: {
-			get() {
-				return this.$store.getters['ui/GET_OPEN_EDIT_TAGS']
-			},
-			set(newVal) {
-				this.$store.commit('ui/SET_OPEN_EDIT_TAGS', newVal)
-			}
+			get() { return this.$store.getters['ui/GET_OPEN_EDIT_TAGS'] },
+			set(newVal) { this.$store.commit('ui/SET_OPEN_EDIT_TAGS', newVal) }
 		},
 
 		// OPEN: {
@@ -97,13 +100,7 @@ export default {
 	},
 
 	methods: {
-		expandTags() {
-			this.isActive = !this.isActive
-		},
-
-		editTags() {
-
-		},
+		expandTags() { this.isActive = !this.isActive },
 
 		openEditTags() {
 			// this.OPEN = true
@@ -112,12 +109,8 @@ export default {
 	},
 
 	created() {
-		// this.$store.dispatch('FETCH_TAGS') // FETCHUJEM U Home.vue
-
-		if(this.TAGS !== []) {
-			this.isActive = !this.isActive
-		}
-
+		let tags = this.$store.getters.GET_TAGS;
+		tags.length > 0 ? this.isActive = true : null
 	}
 }
 </script>

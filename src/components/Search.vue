@@ -1,49 +1,47 @@
 <template>
-	<main class="search">
+	<main class="search notes-search">
 
-		<section class="search__finds grid-notes" v-if="SEARCHED_NOTES.length > 0">
+		<section class="search__finds notes" v-if="SEARCHED_NOTES.length > 0">
 			<template v-for="note in SEARCHED_NOTES">
 				<Note :note="note" :key="note.id"/>
 			</template>
 		</section>
 
 		<template v-else>
-			<section class="search__by-tags mb-4 m-auto" >
-				<header class="mb-2">
-					<h2 class="h3">Tags</h2>
-				</header>
+			<section class="search__by-tags" >
+				<h2 class="search__title"><i class="mdi mdi-tag-outline"></i><span>TAGS</span></h2>
 
-				<router-link
-					v-for="tag in TAGS" :key="tag.id"
-					tag="div"
-					:to="{ name: 'tags', params: {tagName: tag.name} }"
-					class="search__tag"
-				>
-					<i class="mdi mdi-tag-outline"></i>
-					{{ tag.name }}
-				</router-link>
+				<div class="search__body">
+					<router-link
+						v-for="tag in TAGS" :key="tag.id"
+						tag="div"
+						:to="{ name: 'tags', params: {tagName: tag.name} }"
+						class="search__tag"
+					>
+						<i class="mdi mdi-tag"></i>
+						<span>{{ tag.name.length > 12 ? tag.name.substring(0,9) + '...' : tag.name}}</span>
+					</router-link>
+				</div>
 			</section>
 
-			<section class="search__by-colors m-auto">
-					<header class="mb-2">
-						<h2 class="h3"> Colors</h2>
-					</header>
+			<section class="search__by-colors">
+				<h2 class="search__title"> <i class="mdi mdi-palette"></i> <span>COLORS</span></h2>
 
-					<div class="colors-wrapper">
-						<div
-							v-for="(color, index) in COLORS" :key="index" 
-							@click="showColorNotes(color)"
-							:class="color"
-							class="colors"
-						>
-								<p>{{ color }}</p>
-						</div>
+				<div class="search__body">
+					<div
+						v-for="(color, index) in COLORS" :key="index" 
+						@click="showColorNotes(color)"
+						:class="color"
+						class="search__colors"
+					>
+						<p>{{ color }}</p>
 					</div>
+				</div>
 			</section>
 		</template>
 
 
-		<!-- <section class="search__finds grid-notes" v-if="found">
+		<!-- <section class="search__finds notes" v-if="found">
 			<template v-for="note in COLOR_NOTES">
 				<Note :note="note" :key="note.id"/>
 			</template>

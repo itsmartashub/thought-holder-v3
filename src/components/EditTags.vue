@@ -82,7 +82,7 @@ export default {
 			} else if (this.inputAddTag != '' && arrTags.length > 0) {
 				this.$store.dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
-					text: 'Tag already exist',
+					text: 'Tag already exist. Try different.',
 					alertClass: 'warning'
 				})
 

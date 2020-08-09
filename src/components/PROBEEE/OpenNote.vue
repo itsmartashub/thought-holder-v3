@@ -12,7 +12,7 @@
 					@blur="editTitle"
 				>
 				</div>
-				<i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'txt-blue': note.pinned}"></i>
+				<i class="fas fa-thumbtack note__pinned" title="Pin note" @click="onPinned" :class="{'color-blue': note.pinned}"></i>
 			</div>
 
 			<div
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					
-					<i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'txt-blue': archived}"></i>
+					<i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'color-blue': archived}"></i>
 					<i class="fas fa-trash" title="Delete" @click="onDelete(note.id)"></i>
 				</div>
 

@@ -1,5 +1,5 @@
 <template>
-	<section class="archive" :class="{ 'no-notes-wrapper': !GET_ARCHIVED.length }">
+	<main class="archive notes-archive" :class="{ 'no-notes-wrapper': !GET_ARCHIVED.length }">
 
 		<div v-if="GET_ARCHIVED.length <= 0" class="no-notes">
 			<i class="mdi mdi-arrow-down-bold-box-outline"></i>
@@ -7,13 +7,13 @@
 		</div>
 
 
-		<div class="grid-notes m-auto" v-else>
+		<div class="notes m-auto" v-else>
 			<template v-for="(note, key) in GET_ARCHIVED">
 				<Note :key="key" :note="note" :index="key" v-if="!note.pinned && note.archived" />
 			</template>
 		</div>
 
-	</section>
+	</main>
 </template>
 
 <script>

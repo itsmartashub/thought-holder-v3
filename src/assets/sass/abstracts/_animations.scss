@@ -1,0 +1,40 @@
+@keyframes hide {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		transform: translateY(-20%);		
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(100%);    
+	}
+}
+@keyframes circle-color-hover {
+	// 0%, 100% { transform: scale(1); }
+	0% { transform: scale(1); }
+	40% { transform: scale(.88); }
+	100% { transform: scale(1); }
+}
+@keyframes note-hover {
+	0%, 100%{
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(3%);
+	}
+	// 100% {
+	// 	transform: translateY(0%);
+	// }
+}
+@keyframes svg-floating {
+	0%, 100% {
+		transform: none;
+		opacity: .85;
+	}
+	50% {
+		// transform: translateY(-50%) rotateX(40deg) skewX(-40deg);
+		transform: translateY(-5%);
+		opacity: .9;
+	}
+}

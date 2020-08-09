@@ -10,93 +10,33 @@ html {
 	font-size: 62.5%;
 	box-sizing: border-box;
 	scroll-behavior: smooth;
-
-	// --white: rgb(254, 254, 254);
-	// --lgrey: rgb(248, 248, 248);
-	// --grey: rgb(238, 238, 238);
-	// --dgrey: rgb(119, 119, 119);
-	// --black: rgb(71, 71, 71);
-	// --blue: rgb(110, 110, 255);
-	// --h4_bg: rgba(110, 110, 255, .2);
-	// --modal-bg: rgba(119, 119, 119, .5);
-	// --rgba-lgrey: rgba(248, 248, 248, .8);
-	// overflow-x: scroll;
 }
 
-// var(--white): #fefefe !default;
-// var(--lgrey): #f8f8f8 !default;
-// var(--grey): #eeeeee !default;
-// var(--dgrey): #777 !default;
-// var(--black): #111111 !default;
-// var(--blue): #6e6eff !default;
 
-// [data-theme="light"] {
-// 	var(--white): #fefefe !default;
-// 	var(--lgrey): #f8f8f8 !default;
-// 	var(--grey): #eeeeee !default;
-// 	var(--dgrey): #777 !default;
-// 	var(--black): #111111 !default;
-// 	var(--blue): #6e6eff !default;
+// html, html *::before, html *::after, body {
+// 	transition: all .5s;
 // }
 
-	// var(--white): #fefefe;
-	// var(--lgrey): #f8f8f8;
-	// var(--grey): #eee;
-	// var(--dgrey): #777;
-	// var(--black): #111111;
-	// var(--blue): #6e6eff;
-
-// html [data-theme="dark"] {
-// 	// darke theme 1
-// 	// --white: #333333;
-// 	// --lgrey: #434343;
-// 	// --grey: #434343;
-// 	// --dgrey: #777;
-// 	// --black: #B5B5B5;
-// 	// --blue: #3694FF;
-
-// 	// darke theme 2
-// 	--white: rgb(30, 31, 61);
-// 	--lgrey: rgb(39, 40, 70);
-// 	--grey: rgb(39, 40, 70);
-// 	--dgrey: rgb(32, 33, 63);
-// 	--black: rgb(117, 119, 155);
-// 	--blue: rgb(236, 101, 64);
-// 	--h4_bg: rgba(236, 101, 64, .2);
-// 	--modal-bg: rgba(32, 33, 63, .8);
-// 	--rgba-lgrey: rgba(39, 40, 70, .8);
-
-// }
-
-// html.transition,
-// html.transition *,
-// html.transition *:before,
-// html.transition *:after {
-//   transition: all .5s !important;
-// //   transition-delay: 0 !important;
-// }
-
-html, html *:before, html *:after, body {
-	transition: all .5s;
+html, body {
+	scroll-behavior: smooth;
+	width: 100%;
+	min-height: 100vh;
+	overflow-x: hidden;
+	transition: all 1s $outCirc;
 }
 
 body {
-	font-size: 1.5rem;
-	font-family: 'Roboto', sans-serif;
-	// font-family: 'Nunito', sans-serif;
-	// font-weight: 300;
-	background: var(--white);
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	background: var(--lgrey);
+	background: linear-gradient(var(--lgrey) 0%, var(--grey) 50%, var(--grey) 100%);
 	color: var(--black);
-	line-height: 1.5;
+	overflow-x: hidden;
 }
 
-// body::-webkit-scrollbar { 
-//     width: .5rem;
-// }
-
 ::selection {
-   //  background: $darkblue-3;
-   //  color: $bg-color;
 	background: var(--blue);
 	color: var(--grey);
 }
@@ -119,7 +59,7 @@ input {
 	border: none;
 	font-family: inherit;
 	border-bottom: 1px solid transparent;
-	border-radius: .5rem;
+	border-radius: var(--radius);
 	background: transparent;
 	color: var(--black);
 
@@ -138,16 +78,9 @@ input {
 
 i {
 	padding: 0 .5rem;
+	@extend %cursor;
 	font-size: 1.8rem;
-	// vertical-align: middle;
-	cursor: pointer;
-	// @extend .transition-1;
-
-	&:hover {
-		// border-radius: 50%;
-		// background: rgba(var(--grey), .3);
-		color: var(--blue);
-	}
+	// line-height: 1;
 }
 
 i.icon-delete {
@@ -165,8 +98,8 @@ i.icon-check {
 
 
 ::-webkit-scrollbar { 
-    width: .5rem;
-	 height: .5rem;
+	width: .5rem;
+	height: .5rem;
 }
 
 ::-webkit-scrollbar-track { 
@@ -182,13 +115,44 @@ i.icon-check {
     background: var(--grey);
 }
 
-// body::-webkit-scrollbar-button { 
-//     background: $bg-color;
-// }
-// body::-webkit-scrollbar-track-piece { 
-//     background: $darkblue-3;
-// }
+.bp {
+	font-size: 2rem;
+	padding: .3rem 1rem;
+	display: block;
+	@extend %text-center;
+	@extend %pos-fix;
+	bottom: 5%;
+	left: 50%;
+	
+	&::before { content: 'desktop ' }
 
-// body::-webkit-resizer {
-//     background:red;
-// }
+	@include device(tab-land) { // width < 1200 ?
+		background: purple;
+		&::before { content: 'tab-land'; }
+	}
+
+	@include device(tab) { // width < 900 ?
+		background: teal;
+		&::before { content: 'tab'; }
+	}
+
+	@include device(phone-land) { // width < 600 ?
+		background: lightgreen;
+		&::before { content: 'phone-land'; }
+	}
+
+	@include device(phone) { // width < 500 ?
+		background: orangered;
+		&::before { content: 'phone'; }
+	}
+
+	@include device(phone-ant) { // width < 320 ?
+		background: coral;
+		&::before { content: 'phone-ant'; }
+	}
+	
+	@include device(big) { // width > 1920 ?
+		background: red;
+		&::before { content: 'big'; }
+	}
+}

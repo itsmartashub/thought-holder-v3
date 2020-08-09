@@ -3,18 +3,21 @@
 
 		<i class="header__hamburger mdi mdi-text" @click="sidebarToggle"></i>
 
-		<router-link to="/">
+		<!-- <router-link to="/">
 			<div class="logo">
 				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
 			</div>
-		</router-link>
+		</router-link> -->
 
-		<div class="header__search">
-			<form @submit.prevent="search()">
-				<i class="mdi mdi-magnify"></i>
-				<input type="search" placeholder="Search" v-model="inputSearch" @focus="searchFocused()" @input="search()" />
-			</form>
+		<!-- <div class="header__search"> -->
+		<form @submit.prevent="search()" class="header__search-form">
+			<i class="mdi mdi-magnify"></i>
+			<input type="search" placeholder="Search" v-model="inputSearch" @focus="searchFocused()" @input="search()" />
+		</form>
+		<!-- </div> -->
 
+
+		<div class="header__view-theme">
 			<div class="header__notes-view" @click="listviewToggle">
 				<div></div>
 				<div></div>
@@ -22,31 +25,27 @@
 				<div v-if="isList"></div>
 			</div>
 
-			<!-- <div class="header__theme" @click="darkToggle">
-				<span v-bind:class="{ dark: isDark }"></span>
-			</div> -->
-			<!-- <label class="toggle">
-				<input 
-					type="checkbox" 
-					:checked="isDark ? 'checked' : false" 
-					@change="darkToggle"
-				/>
-				<span class="toggler round"></span>
-			</label> -->
-			<div class="toggle-wrapper">
-				<input type="checkbox" id="switch" class="toggle-input" @change="darkToggle" :checked="isDark ? 'checked' : false" />
-				<label for="switch" class="toggle-label"></label>
+			<div class="toggle-btn">
+				<input type="checkbox" id="switch" class="toggle-btn__chb" @change="darkToggle" :checked="isDark ? 'checked' : false" />
+				<label for="switch" class="toggle-btn__label"></label>
 			</div>
-
 		</div>
 
-		
+	
 
 		<!-- <div class="header__greeting" @click="showToggle"> -->
 		<div class="header__login">
-			<i class="mdi mdi-email-outline"></i>
-			<p class="underline">{{ currentUser.email }} </p>
-			<button class="btn btn--blue" @click.prevent="logout()">Logout {{ INPUT_SEARCH }}</button>
+			<div class="login-email-wrapper" v-if="isDisplayed">
+				<p>
+					<i class="mdi mdi-email-outline"></i>
+					{{ currentUser.email }}
+				</p>
+				<button class="btn btn--blue" @click.prevent="logout()">
+					LOGOUT {{ INPUT_SEARCH }}
+				</button>
+			</div>
+			<span class="login-avatar" @click.prevent="isDisplayed = !isDisplayed">{{ currentUser.email ? currentUser.email.split('')[0] : 'T' }}</span>
+
 		</div>
 
 	</header>
@@ -65,6 +64,7 @@ export default {
 			isDark: false,
 			show: false,
 			isScrolled: false,
+			isDisplayed: false,
 
 			inputSearch: ''
 		}
@@ -91,9 +91,11 @@ export default {
 		...mapActions(['LOGOUT']),
 
 		sidebarToggle() {
-			document.querySelector('.sidebar').classList.toggle('translateX') // TODO ovo ce ici u modules/ui.js
-			document.querySelector('.grid-container').classList.toggle('grid-sidebar-hidden') // TODO ovo ce ici u modules/ui.js
-			// document.querySelector('.notes').classList.toggle('translateX'); // TODO ovo ce ici u modules/ui.js
+			// document.querySelector('.sidebar').classList.toggle('translateX') // TODO ovo ce ici u modules/ui.js
+			// document.querySelector('.grid-container').classList.toggle('grid-sidebar-hidden') // TODO ovo ce ici u modules/ui.js
+			// // document.querySelector('.notes').classList.toggle('translateX'); // TODO ovo ce ici u modules/ui.js
+
+			document.querySelector('.grid-container').classList.toggle('grid-container--sidebar-show')
 		},
 
 		listviewToggle() {
@@ -122,6 +124,10 @@ export default {
 
 		logout() {
 			this.LOGOUT()
+		},
+
+		displayLogoutBtn() {
+			this.isDisplayed = !this.isDisplayed
 		},
 
 		searchFocused() {

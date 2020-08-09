@@ -1,12 +1,18 @@
 <template>
 	<!-- <transition name="welcome"> -->
-		<div class="modal-background" v-if="OPEN_NOTE || OPEN_NOTE_BG || OPEN_EDIT_TAGS" @click="close"></div>
+		<div class="modal-background" v-if="OPEN_NOTE || OPEN_NOTE_BG || OPEN_EDIT_TAGS"></div>
+		<!-- <div class="modal-background" v-if="isOpenModal" @click="close"></div> -->
 	<!-- </transition> -->
 </template>
 
 <script>
 export default {
 	name: 'modal-background',
+	data() {
+		return {
+			isOpenModal: true
+		}
+	},
 
 	computed: {
 		// OPEN_NOTE () {
@@ -51,12 +57,12 @@ export default {
 	},
 
 	methods: {
-		close() {
-			this.OPEN_NOTE = false
-			this.OPEN_NOTE_BG = false
-			this.OPEN_EDIT_TAGS = false
-			this.OPEN = false
-		}
+		// close() {
+		// 	this.OPEN_NOTE = false
+		// 	this.OPEN_NOTE_BG = false
+		// 	this.OPEN_EDIT_TAGS = false
+		// 	this.OPEN = false
+		// }
 	}
 }
 </script>

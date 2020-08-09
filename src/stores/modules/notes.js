@@ -245,7 +245,7 @@ export default {
 				
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
-					text: 'Note added!',
+					text: 'Note has been added!',
 					alertClass: 'success'
 				})
 
@@ -266,7 +266,7 @@ export default {
 			query.onSnapshot(snapshot => {
 				let notes = []
 
-            snapshot.docChanges().forEach(change => {
+				snapshot.docChanges().forEach(change => {
 					if (change.type == 'added') {
 						console.log('Added notes: ', change.doc.data());
 						notes.unshift(change.doc.data())
@@ -282,84 +282,9 @@ export default {
 					}
 
 					commit('SET_NOTES', notes)
-            })
+				})
 			})
 		},
-
-
-		// UPDATE_PINNED({commit, dispatch}, {idNote, isPinned}) {
-		// 	let refNote = db.collection('notes').doc(idNote)
-
-		// 	if(isPinned) {
-		// 		return refNote.update({
-		// 			pinned: true,
-		// 			archived: false
-		// 		})
-		// 		.then(() => {
-		// 			console.log(res);
-
-		// 			// dispatch('FETCH_DB_NOTES_CHANGES')
-		// 			commit('SET_PINNED', {
-		// 				idNote,
-		// 				pinned: true
-		// 			})
-
-		// 			if(isPinned) {
-		// 				dispatch('ui/ACT_NOTIFICATION', {
-		// 					display: true,
-		// 					text: 'Note pinned.',
-		// 					alertClass: 'info'
-		// 				})
-		// 			} else {
-		// 				dispatch('ui/ACT_NOTIFICATION', {
-		// 					display: true,
-		// 					text: 'Note unpinned.',
-		// 					alertClass: 'info'
-		// 				})
-		// 			}
-		// 		})
-		// 		.catch(error => {
-		// 			console.error("Error updating IS PINNED: ", error);
-		// 			dispatch('ui/ACT_NOTIFICATION', {
-		// 				display: true,
-		// 				text: error.message,
-		// 				alertClass: 'warning'
-		// 			})
-		// 		})
-		// 	} else if(!isPinned) {
-		// 		return refNote.update({
-		// 			pinned: false,
-		// 		})
-		// 		.then((res) => {
-		// 			console.log(res);
-		// 			// dispatch('FETCH_DB_NOTES_CHANGES')
-		// 			commit('SET_PINNED', {idNote, pinned: false})
-
-
-		// 			if(isPinned) {
-		// 				dispatch('ui/ACT_NOTIFICATION', {
-		// 					display: true,
-		// 					text: 'Note pinned.',
-		// 					alertClass: 'info'
-		// 				})
-		// 			} else {
-		// 				dispatch('ui/ACT_NOTIFICATION', {
-		// 					display: true,
-		// 					text: 'Note unpinned.',
-		// 					alertClass: 'info'
-		// 				})
-		// 			}
-		// 		})
-		// 		.catch(error => {
-		// 			console.error("Error updating IS PINNED: ", error);
-		// 			dispatch('ui/ACT_NOTIFICATION', {
-		// 				display: true,
-		// 				text: error.message,
-		// 				alertClass: 'warning'
-		// 			})
-		// 		})
-		// 	}
-		// },
 
 		async UPDATE_PINNED({commit, dispatch}, {idNote, isPinned}) {
 			let docNote = db.collection('notes').doc(idNote)
@@ -375,7 +300,7 @@ export default {
 
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
-						text: 'Note pinned.',
+						text: 'Note has been pinned.',
 						alertClass: 'info'
 					})
 				
@@ -389,7 +314,7 @@ export default {
 
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
-						text: 'Note unpinned.',
+						text: 'Note has been unpinned.',
 						alertClass: 'info'
 					})
 				}
@@ -548,7 +473,7 @@ export default {
 
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
-					text: `Color ${colorName}`,
+					text: `You've changed note color to ${colorName}.`,
 					alertClass: 'info'
 				})
 
@@ -613,7 +538,7 @@ export default {
 
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
-						text: 'Note deleted!',
+						text: 'Note is deleted!',
 						alertClass: 'info'
 					})
 				})
@@ -668,7 +593,7 @@ export default {
 
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
-					text: 'Tag added to this note!',
+					text: 'Tag has been added to this note!',
 					alertClass: 'success'
 				})
 			})
@@ -693,7 +618,7 @@ export default {
 
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
-					text: 'Tag removed from this note!',
+					text: 'Tag has been removed from this note!',
 					alertClass: 'info'
 				})
 			})
@@ -730,9 +655,11 @@ export default {
 				.then(() => {
 					dispatch('FETCH_TAGS')
 
+					// console.log('DELETED TAG');
+
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
-						text: 'Tag deleted!',
+						text: 'Tag has been deleted!',
 						alertClass: 'info'
 					})
 				})

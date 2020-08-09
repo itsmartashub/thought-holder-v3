@@ -1,5 +1,5 @@
 <template>
-	<section class="grid-notes">
+	<section class="notes">
 		<template v-for="note in TAGS">
 			<Note :note="note" :key="note.id"/>
 		</template>

@@ -1,24 +1,28 @@
 <template>
 	<div class="grid-container">
-		<Header/>
-		<Sidebar/>
 
-		<transition name="slide" mode="out-in">
-			<Notes v-if="$route.path == '/'"/>
-		</transition>
-		
-		<!-- <router-view name="notes"/> -->
-		<transition name="slide" mode="out-in">
-			<router-view :key="$route.fullPath" />
-		</transition>
-		<!-- <router-view :key="$route.fullPath" name="open-modal"/> -->
+		<!-- <div class="sidebar-notes"> -->
+			<Sidebar/>
+			
+			<Header/>
 
-		<!-- <transition name="modal"> -->
-			<EditTags v-if="OPEN_EDIT_TAGS"/>
-		<!-- </transition> -->
+			<transition name="slide" mode="out-in">
+				<Notes v-if="$route.path == '/'"/>
+			</transition>
+			
+			<!-- <router-view name="notes"/> -->
+			<transition name="slide" mode="out-in">
+				<router-view :key="$route.fullPath" />
+			</transition>
+			<!-- <router-view :key="$route.fullPath" name="open-modal"/> -->
+
+			<!-- <transition name="modal"> -->
+				<EditTags v-if="OPEN_EDIT_TAGS"/>
+			<!-- </transition> -->
+			<ModalBackground />
+		</div>
 		
-		<ModalBackground />
-	</div>
+	<!-- </div> -->
 </template>
 
 <script>
@@ -47,6 +51,7 @@ export default {
 	created() {
 		this.$store.dispatch('FETCH_TAGS') //! mora prvo tagove da fetchujemo pa onda notes inace se  javlja error notes_ids undefined kada rifresujemo page akda smo na ruti recimo /tags/muzika i sl
 		this.$store.dispatch('FETCH_NOTES')
-	}
+	},
+	
 }
 </script>

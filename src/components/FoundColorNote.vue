@@ -1,5 +1,5 @@
 <template>
-	<section class="search grid-notes">
+	<section class="search notes">
 		<template v-for="note in COLOR_NOTES">
 			<Note :note="note" :key="note.id"/>
 		</template>

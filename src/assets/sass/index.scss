@@ -4,28 +4,36 @@
 // layout
 // pages
 
-@import "base/mixins";
-@import "base/variables";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+@import "abstracts/extends";
+@import "abstracts/reset";
+@import "abstracts/animations";
+@import "abstracts/transitions";
+
+
 @import "base/base";
 @import "base/grid";
 @import "base/defaults";
 @import "base/typography";
 @import "base/helpers";
-@import "base/transitions";
-@import "base/animations";
+
+@import "layout/preloader";
 
 @import "components/toggle-btn";
 @import "components/logo";
 @import "components/button";
 @import "components/form";
 @import "components/note";
-@import "components/newNote";
+@import "components/new-note";
+@import "components/open-note";
 @import "components/sidebar";
 @import "components/editTags";
 @import "components/notification";
 
 @import "layout/header";
-@import "layout/allnotes";
+@import "layout/notes";
+@import "layout/no-notes";
 @import "layout/home";
 @import "layout/login";
 @import "layout/search";

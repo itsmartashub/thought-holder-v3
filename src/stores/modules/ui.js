@@ -7,13 +7,22 @@ export default {
 		editTagsOpen: false,
 		open: true,
 
+		mobileNewNoteOpen: false,
+
+		// mobileNewNoteOpen: {
+		// 	display: false,
+		// 	className: 'new-note'
+		// },
+
 		notification: {
 			display: false,
 			text: "Notification placeholder text",
 			className: 'success'
 		},
 
-		modalBackground: false
+		modalBackground: false,
+
+		loading: true,
 	},
 
 	getters: {
@@ -27,7 +36,11 @@ export default {
 
 		GET_OPEN_EDIT_TAGS: state => state.editTagsOpen,
 
-		OPEN: state => state.open
+		OPEN: state => state.open,
+
+		GET_MOBILE_NEWNOTE_OPEN: state => state.mobileNewNoteOpen,
+
+		GET_LOADING: state => state.loading,
 	},
 	mutations: {
 		SET_NOTIFICATION (state, {display, text, alertClass}) {
@@ -41,9 +54,7 @@ export default {
 			state.modalBackground = payload
 		},
 
-		SET_OPEN_BG (state, payload) {
-			state.modalBackground = payload
-		},
+		SET_OPEN_BG (state, payload) { state.modalBackground = payload },
 
 		SET_OPEN_TAGS (state, payload) {
 			state.tagsOpen = payload
@@ -55,9 +66,18 @@ export default {
 			state.modalBackground = payload
 		},
 
-		SET_OPEN (state, payload) {
-			state.open = payload
-		}
+		SET_OPEN (state, payload) { state.open = payload },
+
+		SET_MOBILE_NEWNOTE_OPEN (state, payload) {
+			state.mobileNewNoteOpen = payload
+		},
+
+		// SET_MOBILE_NEWNOTE_OPEN (state, {display, className}) {
+		// 	state.notification.display = display
+		// 	state.notification.className = className
+		// },
+
+		SET_LOADING (state, payload) { state.loading = payload },
 	},
 	actions: {
 		ACT_NOTIFICATION ({commit, state}, {display, text, alertClass}) {

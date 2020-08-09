@@ -1,0 +1,177 @@
+// colors
+// var(--white): #fefefe;
+// var(--lgrey): #f8f8f8 !default;
+// var(--grey): #eeeeee !default;
+// var(--dgrey): #777 !default;
+// var(--black): #111111 !default;
+// var(--blue): #6e6eff !default;
+
+// $dark-white: #333333;
+// $dark-lgrey: #434343;
+// $dark-grey: #434343;
+// $dark-dgrey: #777;
+// $dark-black: #B5B5B5;
+// $dark-blue: #f85f78;
+
+// $dark-white: #17223b;
+
+:root {
+	--header-height: 8rem;
+	--radius: 12px;
+	--sidebar-width: 32rem;
+	--z-header: 10;
+	--z-sidebar: 12;
+}
+
+// $cred: #DBAFB0;
+$cblue: #cbf0f8;
+$cgreen: #D4F2D2;
+$cpurple: #d7aefb;
+$corange: #FFE8BA; // #fbbc04;
+$cgrey: #D1D0DC; // #e8eaed
+$cpeach: #F9C9AF;
+// $red: #ee6e73;
+$red: #ff8a80;
+$green: #69f0ae;
+
+// transition
+$cub-1: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+// box-shadow
+$box-shadow-note: 0px 4px 5px -4px rgba(#000000, 0.5);
+// $box_shadow_note-2: 0px 0px 3px 1px rgba(var(--black), .1);
+
+$box-shadow-header: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+
+// box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+
+//   box-shadow: 0 2px 15px rgba(0,0,0,0.30);
+
+
+
+//! za dark theme!! popraviti jos neke stavri
+// // $dark-white: #20213F;
+// $dark-white: #1E1F3D;
+// $dark-lgrey: #272846;
+// $dark-grey: #272846;
+// $dark-dgrey: #20213F;
+// // $dark-black: #c7bcbb;
+// $dark-txt: #61637C; 
+// $dark-black: lighten($dark-txt, 10%);
+// $dark-blue: #EC6842;
+
+// var(--white): $dark-white !default;
+// var(--lgrey): $dark-lgrey !default;
+// var(--grey): $dark-grey !default;
+// var(--dgrey): $dark-dgrey !default;
+// var(--black): $dark-black !default;
+// var(--blue): $dark-blue !default;
+
+// $box-shadow-note: none !default;
+// $box-shadow-btn: none !default;
+// $box-shadow-header: none !default;
+
+html {
+	--white: rgb(254, 254, 254);
+	--lgrey: rgb(248, 248, 248);
+	--grey: rgb(238, 238, 238);
+	--dgrey: rgb(119, 119, 119);
+	--black: rgb(71, 71, 71);
+	// --blue: rgb(110, 110, 255);
+	// --blue: #6C63FF;
+	--blue: #5457f0;
+	--h4_bg: rgba(110, 110, 255, .1);
+	--modal-bg: rgba(84, 87, 240, .4);
+	--rgba-lgrey: rgba(248, 248, 248, .8);
+	--rgba-dgrey: rgba(122, 122, 122, .1);
+	--header-blur-bg: rgba(248, 248, 248, .4);
+
+	--shadow-notes: 0px 10px 20px 0px var(--grey);
+	--shadow: 0px 4px 20px -1px var(--rgba-dgrey);
+	--shadow_modal: 0px 20px 60px var(--h4_bg);
+
+	--cred: #df5a5a;
+	--cgreen: #29a571;
+	--cblue: #37b6dd;
+	--cpurple: #b870f8;
+	--corange: hsl(21, 26%, 59%); // #fbbc04;
+
+	--rgba-cred: hsl(0, 100%, 82%);
+	--rgba-cgreen: hsl(116, 42%, 87%);
+	--rgba-cblue: hsl(191, 50%, 88%);
+	--rgba-cpurple: hsl(273, 88%, 87%);
+	--rgba-corange: hsl(39, 81%, 80%);
+
+	--color-success: #69f0ae;
+	--color-warning: rgb(255, 92, 92);
+	--color-info: var(--blue);
+}
+
+html [data-theme="dark"] {
+	// darke theme 1
+	// --white: #333333;
+	// --lgrey: #434343;
+	// --grey: #434343;
+	// --dgrey: #777;
+	// --black: #B5B5B5;
+	// --blue: #3694FF;
+
+	// darke theme 2
+	--white: rgb(30, 31, 61);
+	--lgrey: rgb(39, 40, 70);
+	--grey: rgb(39, 40, 70);
+	--dgrey: rgb(32, 33, 63);
+	--black: rgb(117, 119, 155);
+	--blue: rgb(236, 101, 64);
+	--h4_bg: rgba(236, 101, 64, .1);
+	// --modal-bg: rgba(32, 33, 63, .8);
+	--modal-bg: rgba(236, 101, 64, .4);
+	--rgba-lgrey: rgba(39, 40, 70, .8);
+
+	--header-blur-bg: var(--grey);
+
+	--shadow: none;
+	--shadow_modal: 0px 20px 60px var(--h4_bg);
+
+	--cred: hsl(0, 64%, 39%);
+	--cgreen: hsl(143, 86%, 19%);
+	--cblue: hsl(188, 92%, 31%);
+	--cpurple: hsl(271, 58%, 40%);
+	--corange: hsl(23, 19%, 34%); // #fbbc04;
+
+	--rgba-cred: hsl(0, 54%, 59%);
+	--rgba-cgreen: hsl(156, 42%, 57%);
+	--rgba-cblue: hsl(192, 62%, 51%);
+	--rgba-cpurple: hsl(273, 49%, 62%);
+	--rgba-corange: hsl(21, 32%, 59%);
+
+	--color-success: var(--rgba-cgreen);
+	--color-warning: hsl(0, 54%, 59%);
+	--color-info:  ;
+}
+
+
+
+$inQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$inCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$inQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+$inQuint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$inExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$inCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+$outSmooth: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$outQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$outCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+$outQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
+$outQuint: cubic-bezier(0.23, 1, 0.32, 1);
+$outExpo: cubic-bezier(0.19, 1, 0.22, 1);
+$outCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+$outBack: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+$inOutQuad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+$inOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+$inOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
+$inOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
+$inOutExpo: cubic-bezier(1, 0, 0, 1);
+$inOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+$inOutBack: cubic-bezier(0.68, -0.6, 0.32, 1.6);

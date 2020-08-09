@@ -3,56 +3,60 @@
 
 	position: fixed;
 	top: 0;
-	width: 100vw;
-	background: var(--white);
-	padding: 2.5rem 6rem;
-	// @extend .flex;
-	// justify-content: space-between;
-	display: grid;
-	grid-auto-flow: column;
-	align-items: center;
-	justify-items: center;
-	grid-template-columns: repeat(2, min-content) 1fr repeat(2, min-content);
-	grid-gap: 2rem;
+	right: 0;
+	width: calc(100% - var(--sidebar-width));
+	height: var(--header-height);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	background-color: var(--header-blur-bg);
+	// background: rgba(var(--grey), .8);
+	// background: linear-gradient(var(--grey) 0%, var(--lgrey) 50%, var(--grey) 100%);
+	padding: 0rem 6vw;
+	@extend %flex-jsb;
+	z-index: var(--z-header);
 
-	box-shadow: $box-shadow-note;
-	z-index: 60;
+	& > :not(:last-child) { margin-right: 4vw; }
 
 	&__hamburger {
+		display: none;
 		font-size: 3rem;
 		opacity: 1;
 
-		&:hover {
-			opacity: .6;
-		}
+		&:hover { opacity: .6; }
 	}
 
 
-	&__search {
-		width: 80%;
-		@extend .flex;
+	&__search-form {
+		// outline: 1px solid red;
+		position: relative;
+		flex: 1;
+		// min-width: 40vw;
+		
+		input {
+			width: 100%;
+			padding: 1.2rem 1.2rem 1.2rem 6rem;
+			font-size: 1.5rem;
+			background: var(--grey);
+			transition: .3s ease-in-out;
 
-		form {
-			width: 60%;
-			
-			input {
-				width: 100%;
-				padding: 1.2rem 1.2rem 1.2rem 5rem;
-				font-size: 1.5rem;
-				background: var(--grey);
-
-				&:focus {
-					background: transparent;
-				}
-			}
-
-			i {
-				// transform: translate(3.5rem);
-				margin-right: -4.5rem;
-				opacity: .4;
-				font-size: 2.5rem;
-			}
+			&:focus { background: transparent; }
 		}
+
+		i {
+			opacity: .4;
+			font-size: 2.5rem;
+			position: absolute;
+			padding-left: 2rem;
+		}
+		
+	}
+
+	&__view-theme {
+		display: grid;
+		place-items: center;
+		grid-auto-flow: column;
+		grid-gap: 2rem;
+		// outline: 1px solid blue;
 	}
 
 
@@ -62,7 +66,7 @@
 		grid-template-rows: repeat(1fr, 2);
 		grid-gap: .3rem;
 
-		margin: 0 1rem 0 4rem;
+		// margin: 0 1rem 0 4rem;
 		width: 2rem;
 		height: 2.5rem;
 		cursor: pointer;
@@ -98,52 +102,69 @@
 		// }
 	}
 
-	// &__theme {
-	// 	background: var(--grey);
-	// 	width: 6rem;
-	// 	height: 2rem;
-	// 	margin: 0 2rem;
-	// 	padding: 1.4rem;
-	// 	border-radius: 3rem;
-	// 	position: relative;
-	// 	@extend .flex;
-	// 	cursor: pointer;
-
-	// 	span {
-	// 		position: absolute;
-	// 		left: .8rem;
-	// 		height: 2.1rem;
-	// 		width: 2.1rem;
-	// 		border-radius: 50%;
-	// 		background: var(--blue);
-	// 		transition: all .3s ease;
-
-	// 	}
-	// }
 
 	&__login {
-		@extend .flex;
+		--avatar-size: 5rem;
 
-		i {
-			color: var(--blue);
-			font-size: 2rem;
+		position: relative;
+
+		.login-email-wrapper {
+			@extend %flex-center;
+			flex-direction: column;
+			position: absolute;
+			top: 100%;
+			right: 0;
+			background: var(--white);
+			width: max-content;
+			height: max-content;
+			padding: 1.5rem 2rem;
+			border-radius: var(--radius);
+			z-index: 100;
+			box-shadow: var(--shadow);
+
+			p {
+				@extend %flex;
+				align-items: center;
+				margin-right: 1.5rem;
+				font-size: 1.4rem;
+				font-weight: 500;
+
+				margin-bottom: 1.5rem;
+
+				i {
+					color: var(--blue);
+					font-size: 2rem;
+				}
+			}
+			button {
+				display: block;
+				width: 100%;
+			}
 		}
 
-		p {
-			margin-right: 1.5rem;
+		.login-avatar {
+			width: var(--avatar-size);
+			height: var(--avatar-size);
+			@extend %flex-center;
+			border-radius: 50%;
+			color: var(--lgrey);
+			background: var(--blue);
+			font-weight: 500;
+			text-transform: uppercase;
+			cursor: pointer;
+			@extend .transition-3;
+			border: 3px solid rgba(255, 255, 255, .5);
+			
 			&:hover {
-				// color: inherit;
-				&::after {
-					// background: $corange;
-				}
+				// transform: scale(1.05);
+				border: 3px solid transparent;
 			}
 		}
 	}
+
+	@include device(tab) {
+		// width: 100%;
+		&__hamburger { display: initial; }
+	}
+	
 }
-
-
-// .dark {
-// 	background: var(--blue) !important;
-// 	left: 0 !important;
-// 	right: 0 !important;
-// }
