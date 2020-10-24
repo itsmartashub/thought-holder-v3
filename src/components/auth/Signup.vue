@@ -3,7 +3,7 @@
 		
 		<form class="form">
 			<div class="logo">
-				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
+				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong>Holder</strong> 
 			</div>
 			<h1 class="mb-4">Fill up and signup! </h1>
 
@@ -65,7 +65,7 @@
 				<span class="validate-alert mb-2" v-if="!validConfirmPassword">Password doesn't match.</span>
 			</div>
 
-			<button @click.prevent="signup()" class="btn btn--blue mb-4 mt-1" type="submit" :disabled="!validForm">Signup</button>
+			<button @click.prevent="signup()" class="btn btn--blue mb-4 mt-1" type="submit" :disabled="!validForm">SIGNUP</button>
 			<!-- <p>{{ errorMsg }}</p> -->
 			
 			<router-link :to="{ name: 'login' }">

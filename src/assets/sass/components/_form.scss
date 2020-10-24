@@ -1,5 +1,5 @@
 .form {
-	padding: 6rem 5rem;
+	padding: 6rem 7rem;
 	background: var(--white);
 	// width: 80vw;
 	display: grid;
@@ -15,9 +15,9 @@
 	.form-group {
 
 		// background: red;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		// display: flex;
+		// flex-direction: column;
+		// justify-content: center;
 		width: 100%;
 
 		&:not(:last-child) { margin-bottom: 2.5rem; }
@@ -38,6 +38,8 @@
 			border-radius: .8rem;
 			border: 1px solid var(--grey);
 			background: var(--grey);
+			margin: .5rem 0;
+
 			// width: 20vw;
 			// width: 100%;
 
@@ -57,10 +59,8 @@
 			font-size: 1.28rem;
 			font-weight: inherit;
 			color: var(--blue);
-			// margin-left: 1rem;
-		//   margin-top: .7rem;
 			// display: block;
-			transform: translateY(-440%);
+			// transform: translateY(-440%);
 			transition: all .3s;
 		}
 

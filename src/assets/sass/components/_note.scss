@@ -12,7 +12,7 @@
 	position: relative;
 
 	&:hover {
-		animation: 1s note-hover ease-in-out;
+		// animation: 1s note-hover ease-in-out;
 		.note__pin,
 		.note__options {
 			opacity: 1;
@@ -202,13 +202,11 @@
 
 		&-ul {
 			display: grid;
-			grid-gap: .5rem;
+			grid-gap: .6rem;
 			word-break: break-all;
 
 			label {
-				@extend .flex;
-				justify-content: flex-start;
-				cursor: pointer;
+				@extend %cursor;
 
 				input { 
 					text-align: center;
@@ -217,8 +215,8 @@
 					-moz-appearance: none;
 					appearance: none;
 					// display: inline-block;
-					width: 1.3rem;
-					height: 1.3rem;
+					width: 1.4rem;
+					height: 1.4rem;
 					// border-radius: 50%;
 					border: 2px solid var(--blue);
 					opacity: .4;

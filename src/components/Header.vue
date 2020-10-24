@@ -5,7 +5,7 @@
 
 		<!-- <router-link to="/">
 			<div class="logo">
-				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
+				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong>Holder</strong> 
 			</div>
 		</router-link> -->
 
@@ -100,6 +100,10 @@ export default {
 
 		listviewToggle() {
 			this.isList = !this.isList
+			document.querySelectorAll('.notes').forEach(n => {
+				if (n) n.classList.toggle('is-grid-list--true')
+				return
+			})
 		},
 
 		darkToggle() {

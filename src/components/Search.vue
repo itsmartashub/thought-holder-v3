@@ -18,8 +18,13 @@
 						:to="{ name: 'tags', params: {tagName: tag.name} }"
 						class="search__tag"
 					>
-						<i class="mdi mdi-tag"></i>
-						<span>{{ tag.name.length > 12 ? tag.name.substring(0,9) + '...' : tag.name}}</span>
+						<template v-if="tag.name">
+							<i class="mdi mdi-tag"></i>
+							<span>{{ tag.name && tag.name.length > 12 ? tag.name.substring(0,9) + '...' : tag.name}}</span>
+						</template>
+						<template v-else>
+							<p class="search__tag--notags">There is no tags</p>
+						</template>
 					</router-link>
 				</div>
 			</section>
@@ -67,24 +72,18 @@ export default {
 	},
 
 	computed: {
-		TAGS() {
-			return this.$store.getters.GET_TAGS
-		},
+		TAGS() { return this.$store.getters.GET_TAGS },
 
-		COLORS() {
-			return this.$store.getters.GET_COLORS
-		},
+		COLORS() { return this.$store.getters.GET_COLORS },
 
 		COLOR_NOTES() {
 			return this.$store.getters.GET_COLOR_NOTE(this.colorName)
 			// return this.$store.getters.GET_COLOR_NOTE(this.$route.query.color)
 		},
 
-		SEARCHED_NOTES() {
-			return this.$store.getters.GET_SEARCHED_NOTES
-		},
+		SEARCHED_NOTES() { return this.$store.getters.GET_SEARCHED_NOTES },
 
- 	},
+	},
 
 	methods: {
 		showColorNotes(colorName) {
@@ -104,7 +103,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-
-</style>

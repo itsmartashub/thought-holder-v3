@@ -10,7 +10,7 @@
 
 		<template v-if="GET_NOTES_WITH_SPECIAL_TAG_NAME.length > 0">
 			<div class="tac">
-				<h1 class="notes-tags__title"> <span>#</span> {{$route.params.tagName}}</h1><br>
+				<h1 class="notes-tags__title"> <i>#</i> {{$route.params.tagName}}</h1><br>
 				<!-- <h1 class="h1"> #{{ $route.params.tagName }} </h1> -->
 			</div>
 		</template>

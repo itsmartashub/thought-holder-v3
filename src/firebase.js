@@ -5,10 +5,10 @@ import 'firebase/auth'
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBopqckAnOJeqWHdbGUEtrHRrnIg7ByMYY",
-	authDomain: "thought-holder.firebaseapp.com",
-	databaseURL: "https://thought-holder.firebaseio.com",
-	projectId: "thought-holder",
-	storageBucket: "thought-holder.appspot.com",
+	authDomain: "Thoughtst-holder.firebaseapp.com",
+	databaseURL: "https://Thoughtst-holder.firebaseio.com",
+	projectId: "Thoughtst-holder",
+	storageBucket: "Thoughtst-holder.appspot.com",
 	messagingSenderId: "107170168002",
 	appId: "1:107170168002:web:df245d3366d3b7e76a8f5b",
 	measurementId: "G-X74CRV900F"
@@ -29,10 +29,10 @@ export default firebase;
 
 // const firebaseConfig = {
 // 	apiKey: "AIzaSyBopqckAnOJeqWHdbGUEtrHRrnIg7ByMYY",
-// 	authDomain: "thought-holder.firebaseapp.com",
-// 	databaseURL: "https://thought-holder.firebaseio.com",
-// 	projectId: "thought-holder",
-// 	storageBucket: "thought-holder.appspot.com",
+// 	authDomain: "Thoughtst-holder.firebaseapp.com",
+// 	databaseURL: "https://Thoughtst-holder.firebaseio.com",
+// 	projectId: "Thoughtst-holder",
+// 	storageBucket: "Thoughtst-holder.appspot.com",
 // 	messagingSenderId: "107170168002",
 // 	appId: "1:107170168002:web:df245d3366d3b7e76a8f5b",
 // 	measurementId: "G-X74CRV900F"

@@ -1,11 +1,18 @@
 <template>
-	<section class="search notes">
-		<template v-for="note in COLOR_NOTES">
-			<Note :note="note" :key="note.id"/>
-		</template>
-		<!-- <h1>OOOOOOO {{ $route.query.color }}</h1> -->
-		<!-- <h1>this.route</h1> -->
-	</section>
+	<main class="notes-colors">
+		<div class="tac">
+			<h2 class="notes-colors__title">
+				<i class="mdi mdi-palette"></i>
+				{{ $route.query.color }} <span>notes</span>
+			</h2>
+		</div>
+
+		<section class="notes">
+			<template v-for="note in COLOR_NOTES">
+				<Note :note="note" :key="note.id"/>
+			</template>
+		</section>
+	</main>
 </template>
 
 <script>
@@ -17,7 +24,7 @@ export default {
 
 	data() {
 		return {
-
+			
 		}
 	},
 

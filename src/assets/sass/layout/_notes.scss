@@ -36,7 +36,7 @@
 	}
 }
 
-.notes-home, .notes-tags, .notes-archive, .notes-search {
+.notes-home, .notes-tags, .notes-archive, .notes-search, .notes-colors {
 	grid-area: main;
 	position: relative;
 	padding: 8vh 5vw;
@@ -52,7 +52,8 @@
 .notes-home {
 	display: grid;
 	align-content: center;
-	justify-content: center;
+	grid-gap: calc(100vh/10);
+	// justify-content: center;
 }
 
 .notes-tags {
@@ -70,13 +71,24 @@
 		letter-spacing: 2px;
 		word-break: break-all;
 
-		span {
+		i {
 			font-size: 3rem;
 			margin-right: 1rem;
 			line-height: 1;
 			font-weight: 200;
 			transform: scale(1.5);
 			opacity: .6;
+			font-style: normal;
 		}
 	}
 }
+
+.notes-colors {
+	&__title {
+		@extend .notes-tags__title;
+		i { transform: scale(1.2); }
+		span { font-weight: 200;}
+	}
+}
+
+.is-grid-list--true { grid-template-columns: none !important; }

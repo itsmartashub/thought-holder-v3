@@ -39,7 +39,7 @@
 
 		<section v-else class="no-notes notes-home__empty">
 			<h1 class="logo mt-5">
-				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong>
+				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong>Holder</strong>
 			</h1>
 			<h2>Notes you add appear here</h2>
 		</section>

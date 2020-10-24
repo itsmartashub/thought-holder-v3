@@ -86,4 +86,14 @@
 			}
 		}
 	}
+
+
+	@include device(tab-land) {
+			&__by-tags, &__by-colors {
+				width: 82%;
+			}
+	}
+	@include device(phone) {
+			padding: 8vh 0;
+	}
 }

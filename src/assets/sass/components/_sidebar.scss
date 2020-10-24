@@ -8,18 +8,12 @@
 	transform: translateX(0);
 	width: var(--sidebar-width);
 	height: 100vh;
-	display: grid;
+	@extend %grid;
 	place-items: center;
 	grid-template-rows: 1fr max-content 1fr;
-	overflow: hidden;
 	opacity: 1;
-	// background: var(--white);
-	// background: linear-gradient(180deg, var(--grey), var(--white));
-	// background: radial-gradient(circle, var(--grey) 0%, var(--white) 20%, var(--grey) 100%);
+	@extend %overflow-hidden;
 	background: radial-gradient(circle, var(--grey) 0%, var(--white) 20%, var(--grey) 100%);
-	
-	// background: linear-gradient(135deg, rgba(#fff, 1), rgba(#f2f2f2, 1));
-	// box-shadow: 1px 0px 0px 0px var(--grey);
 	z-index: var(--z-sidebar);
 	transition: width .3s ease-in-out;
 	
@@ -40,36 +34,39 @@
 		border-radius: var(--radius);
 		overflow: hidden;
 		z-index: 20;
-		transition: .5s ease-in-out all;
+		// transition: .5s all $inCubic;
 
 		&.router-link-exact-active, &.active {
 			@extend .sidebar__li:hover;
 		}
 
 		&:nth-of-type(2) {
-			&::before { clip-path: circle(0% at 0% 0%); }
-			&:hover::before { clip-path: circle(200% at 100% 100%); }
+			&::before { clip-path: circle(0% at 60% 20%); }
 		}
-
+		
 		&::before {
 			@extend %after;
 			top: 0%;
 			left: 0%;
-			// clip-path: circle(0% at 0% 100%);
-			background: var(--h4_bg);
-			@extend  %radius-default;
-			clip-path: circle(0% at 100% 0%);
-			// clip-path: circle(40% at 100% 0%);
+			@extend %radius-default;
+			clip-path: circle(0% at 30% 90%);
 			// transform: scaleY(0);
 			// transform-origin: left center;
-			transform-origin: center top;
-			transition: .5s ease-in-out all;
+			// transform-origin: center top;
+			transition: .5s $inQuad;
 			z-index: -1;
 		}
 
+		i {
+			margin-right: 2rem;
+			font-size: 2.3rem;
+			opacity: .5;
+			transition: .5s $inQuad;
+		}
+		p { transition: .5s $inQuad; }
+
 		&:hover {
 			color: var(--white);
-			font-weight: 400;
 
 			&::before {
 				clip-path: circle(200% at 100% 100%);
@@ -81,23 +78,20 @@
 
 			.sidebar__expand {
 				color: currentColor;
-				letter-spacing: 2px;
 			}
 		}
 
-		i {
-			margin-right: 2rem;
-			font-size: 2.3rem;
-			opacity: .5;
-		}
+		
 	}
 
 	&__expand {
 		transform: rotate(90deg);
-		transition: .3s ease-in-out transform;
-		margin: 0 0 0 auto; 
+		margin: 0 0 0 auto;
+		transition: .5s $inQuad color, .7s $inOutBack transform;
+
 		&--true {
-			color: currentColor;
+			transform: rotate(0deg);
+			color: var(--blue);
 			letter-spacing: 2px;
 		}
 	}

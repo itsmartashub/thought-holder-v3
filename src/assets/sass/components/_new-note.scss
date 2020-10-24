@@ -1,12 +1,9 @@
 .new-note {
 	@extend .note;
 	padding: 1.4rem 2.8rem;
-	// width: 65%;
 	width: calc(100%/2 + 20rem);
-	// width: 42vw;
 	z-index: 5;
 	border: 2px solid var(--lgrey);
-	// height: max-content;
 
 	&__title-container { @extend .note__title-container; }
 	&__title { @extend .note__title; }
@@ -41,8 +38,8 @@
 			opacity: .95;
 			z-index: 1;
 			opacity: .9;
-			animation: 10s svg-floating ease-in-out;
-			animation-iteration-count: 5;
+			// animation: 10s svg-floating ease-in-out;
+			// animation-iteration-count: 5;
 		}
 	}
 
@@ -53,7 +50,9 @@
 		width: var(--float-btn-size);
 		height: var(--float-btn-size);
 		border-radius: 50%;
-		display: none; justify-content: center; align-items: center;
+		display: none;
+		justify-content: center;
+		align-items: center;
 		font-size: 3rem;
 		background: var(--blue);
 		color: var(--white);

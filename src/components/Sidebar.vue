@@ -2,20 +2,20 @@
 	<aside class="sidebar">
 		<router-link to="/" class="sidebar__top">
 			<div class="logo">
-				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
+				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong>Holder</strong> 
 			</div>
 		</router-link>
 
 		<ul class="sidebar__ul">
 			<router-link tag="li" :to="{ name: 'home' }" class="sidebar__li">
 				<i class="mdi mdi-file-multiple-outline"></i>
-				All Notes
+				<p>All Notes</p>
 			</router-link>
 
 			<li @click="expandTags()" class="sidebar__li">
 				<i class="mdi mdi-tag-outline"></i>
-				See Tags
-				<span class="sidebar__expand" v-bind:class="{ 'sidebar__expand--true': isActive }">&#8226;&#8226;&#8226;</span>
+				<p>See Tags</p>
+				<span class="sidebar__expand" :class="{ 'sidebar__expand--true': isActive }">&#8226;&#8226;&#8226;</span>
 			</li>
 
 				
@@ -34,7 +34,6 @@
 						<i class="mdi mdi-pencil"></i>
 						Edit tags
 					</button>
-					<!-- <br> -->
 				</div>
 			</transition>
 
@@ -42,14 +41,14 @@
 
 			<router-link tag="li" :to="{ name: 'archived' }" class="sidebar__li">
 				<i class="mdi mdi-arrow-down-bold-box-outline"></i>
-				Archive
+				<p>Archive</p>
 			</router-link>
 		</ul>
 
 		<footer class="sidebar__footer">
 			<p class="logo">
 				&copy; 2019.&nbsp;
-				<i class="mdi mdi-format-strikethrough"></i> Though<strong>Holder</strong> 
+				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong>Holder</strong> 
 			</p>
 
 			<p>
