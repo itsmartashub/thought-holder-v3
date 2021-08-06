@@ -72,8 +72,9 @@ export default {
 				// TODO dodati notification alert da smo successful signin i da se ulogujemo sa svojim podacima
 
 				// router.replace({ name: 'login' })
+				await router.replace({ name: 'home' })
 
-				dispatch('ui/ACT_NOTIFICATION', {
+				await dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: 'You successfuly signed in!',
 					alertClass: 'success'
@@ -92,7 +93,7 @@ export default {
 			}
 		},
 
-		async LOGIN ({commit, dispatch}, {email, password}) { // ovo treba iz Login.vue
+		async LOGIN ({commit, dispatch}, {email, password}) { // todo ovo treba iz Login.vue
 			try {
 				const results = await firebase.auth().signInWithEmailAndPassword(email, password)
 				// console.log(results.user)
@@ -103,14 +104,13 @@ export default {
 
 					dispatch('ui/ACT_NOTIFICATION', {
 						display: true,
-						text: 'Successfully logged in',
+						text: 'Successfully logged in!',
 						alertClass: 'success'
 					})
-	
 				}
 				
 			} catch (error) {
-				// console.log(error.message); //todo ovo cu dodati u notification alert dole desno
+				// console.log(error.message)
 				commit('SET_LOGIN_SERVER_ERR', error.message)
 
 				dispatch('ui/ACT_NOTIFICATION', {

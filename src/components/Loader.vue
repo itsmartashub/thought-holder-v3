@@ -1,62 +1,49 @@
 <template>
-	<section class="preloader" v-if="LOADING">
-		<svg width="45" height="45" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-			<g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">
-				<circle cx="22" cy="22" r="6" stroke-opacity="0">
-					<animate attributeName="r"
-						begin="1.5s" dur="3s"
-						values="6;22"
-						calcMode="linear"
-						repeatCount="indefinite" />
-					<animate attributeName="stroke-opacity"
-						begin="1.5s" dur="3s"
-						values="1;0" calcMode="linear"
-						repeatCount="indefinite" />
-					<animate attributeName="stroke-width"
-						begin="1.5s" dur="3s"
-						values="2;0" calcMode="linear"
-						repeatCount="indefinite" />
+	<transition name="preloader">
+		<!-- <section class="preloader">
+			<svg
+				version="1.1"
+				id="L3"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink"
+				x="0px"
+				y="0px"
+				viewBox="0 0 100 100"
+				enable-background="new 0 0 0 0"
+				xml:space="preserve"
+			>
+				<circle
+					fill="none"
+					stroke="#fff"
+					stroke-width="4"
+					cx="50"
+					cy="50"
+					r="44"
+					style="opacity: 0.5"
+				/>
+				<circle
+					fill="#fff"
+					stroke="#fff"
+					stroke-width="3"
+					cx="8"
+					cy="54"
+					r="6"
+				>
+					<animateTransform
+						attributeName="transform"
+						dur="2s"
+						type="rotate"
+						from="0 50 48"
+						to="360 50 52"
+						repeatCount="indefinite"
+					/>
 				</circle>
-				<circle cx="22" cy="22" r="6" stroke-opacity="0">
-					<animate attributeName="r"
-						begin="3s" dur="3s"
-						values="6;22"
-						calcMode="linear"
-						repeatCount="indefinite" />
-					<animate attributeName="stroke-opacity"
-						begin="3s" dur="3s"
-						values="1;0" calcMode="linear"
-						repeatCount="indefinite" />
-					<animate attributeName="stroke-width"
-						begin="3s" dur="3s"
-						values="2;0" calcMode="linear"
-						repeatCount="indefinite" />
-				</circle>
-				<circle cx="22" cy="22" r="8">
-					<animate attributeName="r"
-						begin="0s" dur="1.5s"
-						values="6;1;2;3;4;5;6"
-						calcMode="linear"
-						repeatCount="indefinite" />
-				</circle>
-			</g>
-		</svg>
-
-		<!-- <h1>ALOOO</h1> -->
-	</section>
+			</svg>
+		</section> -->
+		<section class="preloader">
+			<div class="preloader__container">
+				<div class="preloader__item"></div>
+			</div>
+		</section>
+	</transition>
 </template>
-
-<script>
-export default {
-
-	computed: {
-		LOADING() {
-			return this.$store.getters['ui/GET_LOADING']
-		},
-	},
-}
-</script>
-
-<style>
-
-</style>

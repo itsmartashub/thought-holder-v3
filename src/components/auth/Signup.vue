@@ -1,30 +1,37 @@
 <template>
 	<section class="signup">
-		
 		<form class="form">
 			<div class="logo">
-				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong>Holder</strong> 
+				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong
+					>Holder</strong
+				>
 			</div>
-			<h1 class="mb-4">Fill up and signup! </h1>
+			<h1 class="mb-4">Fill up and signup!</h1>
 
 			<div class="form-group">
 				<div class="input-field">
 					<i class="mdi mdi-email input-icon"></i>
 					<input
 						type="email"
-						name="email" 
+						name="email"
 						required
 						placeholder="Enter your e-mail"
 						class="input"
 						v-model.trim="email"
 						@blur="checkEmail()"
-						:class="{invalid: !validEmail}"
+						:class="{ invalid: !validEmail }"
 					/>
 				</div>
 				<!-- <label for="email" class="label">Email</label> -->
 
-				<span class="validate-alert mb-2" v-if="!validEmail">Invalid e-mail.</span>
-				<span class="validate-alert mb-2" v-if="GET_SIGNUP_SERVER_ERR !== ''">{{ GET_SIGNUP_SERVER_ERR }}</span>
+				<span class="validate-alert mb-2" v-if="!validEmail"
+					>Invalid e-mail.</span
+				>
+				<span
+					class="validate-alert mb-2"
+					v-if="GET_SIGNUP_SERVER_ERR !== ''"
+					>{{ GET_SIGNUP_SERVER_ERR }}</span
+				>
 			</div>
 
 			<div class="form-group">
@@ -38,12 +45,14 @@
 						class="input"
 						v-model.trim="password"
 						@blur="checkPassword()"
-						:class="{invalid: !validPassword}"
+						:class="{ invalid: !validPassword }"
 					/>
 				</div>
 				<!-- <label for="password" class="label">Password</label> -->
 
-				<span class="validate-alert mb-2" v-if="!validPassword">Password must contains at least 6 characters.</span>
+				<span class="validate-alert mb-2" v-if="!validPassword"
+					>Password must contains at least 6 characters.</span
+				>
 			</div>
 
 			<div class="form-group">
@@ -52,41 +61,60 @@
 					<input
 						type="password"
 						name="confirm_password"
-						required placeholder="Confirm your password"
+						required
+						placeholder="Confirm your password"
 						class="input"
 						v-model.trim="confirm_password"
 						@blur="checkConfirmPassword()"
-						:class="{invalid: !validConfirmPassword}"
-						
+						:class="{ invalid: !validConfirmPassword }"
 					/>
 				</div>
 				<!-- <label for="confirm_password" class="label">Confrim password</label> -->
 
-				<span class="validate-alert mb-2" v-if="!validConfirmPassword">Password doesn't match.</span>
+				<span class="validate-alert mb-2" v-if="!validConfirmPassword"
+					>Password doesn't match.</span
+				>
 			</div>
 
-			<button @click.prevent="signup()" class="btn btn--blue mb-4 mt-1" type="submit" :disabled="!validForm">SIGNUP</button>
+			<span class="before-btn-txt"
+				>Make sure it's at least 6 characters when you can't make 6
+				pack. <br />
+				<!-- //TODO dodati OBVIO.gif iz filma the platform -->
+				Strong security is our priority, OBVIO. <br />
+				Completely free.
+			</span>
+
+			<button
+				@click.prevent="signup()"
+				class="btn btn--blue mb-4 mt-1"
+				type="submit"
+				:disabled="!validForm"
+			>
+				SIGNUP
+			</button>
 			<!-- <p>{{ errorMsg }}</p> -->
-			
+
 			<router-link :to="{ name: 'login' }">
-				<p class="register-redirect">Already a member? <span>Login</span></p>
+				<p class="register-redirect">
+					Already a member? <span>Login</span>
+				</p>
 			</router-link>
 		</form>
 	</section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex"
 
 export default {
-	name: 'login',
+	name: "login",
 
 	data() {
 		return {
 			invalid: true,
-			email: '',
-			password: '',
-			confirm_password: '',
+			email: "",
+			password: "",
+			confirm_password: "",
 
 			validEmail: true,
 			validPassword: true,
@@ -95,17 +123,20 @@ export default {
 	},
 
 	computed: {
-		...mapGetters(['GET_SIGNUP_SERVER_ERR']),
+		...mapGetters(["GET_SIGNUP_SERVER_ERR"]),
 
-		validForm () {
-			return this.checkEmail() && this.checkPassword() && this.checkConfirmPassword()
-		}
+		validForm() {
+			return (
+				this.checkEmail() &&
+				this.checkPassword() &&
+				this.checkConfirmPassword()
+			)
+		},
 	},
 
 	methods: {
-
 		checkEmail() {
-			const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 			if (regEx.test(this.email)) {
 				this.validEmail = true
@@ -140,17 +171,20 @@ export default {
 		},
 
 		signup() {
-			if(this.checkEmail() && this.checkPassword() && this.checkConfirmPassword()) {
-				console.log('signup');
+			if (
+				this.checkEmail() &&
+				this.checkPassword() &&
+				this.checkConfirmPassword()
+			) {
+				console.log("signup")
 				const formData = {
 					email: this.email,
-					password: this.password
+					password: this.password,
 				}
-				
-				this.$store.dispatch('SIGNUP', formData)
 
+				this.$store.dispatch("SIGNUP", formData)
 			} else {
-				console.log('errors');
+				console.log("errors")
 				alert(err)
 				// this.username = '',
 				// this.email = '',
@@ -161,7 +195,7 @@ export default {
 				// this.validPassword = false,
 				// this.validConfirmPassword = false
 			}
-		}
-	}
+		},
+	},
 }
 </script>

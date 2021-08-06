@@ -1,8 +1,8 @@
 <template>
 	<!-- <section class="note newNote new-note m-auto" :class="setColor"> -->
-	<section class="new-note" :class="setColor" >
-	<!-- <section class="new-note m-auto" :class="mobileNewNoteShow ? 'new-note m-auto new-note--open' : '' " :style="{backgroundColor: setColor}"> -->
-	<!-- <section :class="is_mobile_newnote_open.className" :style="{backgroundColor: setColor}"> -->
+	<section class="new-note" :class="setColor">
+		<!-- <section class="new-note m-auto" :class="mobileNewNoteShow ? 'new-note m-auto new-note--open' : '' " :style="{backgroundColor: setColor}"> -->
+		<!-- <section :class="is_mobile_newnote_open.className" :style="{backgroundColor: setColor}"> -->
 
 		<header class="new-note__title-container" @click="onTitleClicked">
 			<div
@@ -12,11 +12,20 @@
 				v-text="title"
 				@blur="editTitle"
 			></div>
-			<i title="Pin note" @click="onPinned" :class="pinned ? 'mdi mdi-pin color-blue' : 'mdi mdi-pin-outline'"></i>
+			<i
+				title="Pin note"
+				@click="onPinned"
+				:class="
+					pinned ? 'mdi mdi-pin i-color-blue' : 'mdi mdi-pin-outline'
+				"
+			></i>
 		</header>
 
-
-		<transition-group name="fade" tag="article" class="new-note__after-title-content">
+		<transition-group
+			name="fadey"
+			tag="article"
+			class="new-note__after-title-content"
+		>
 			<!-- <div v-if="titleClicked"> -->
 			<div
 				class="new-note__body mt-3"
@@ -37,54 +46,69 @@
 						<i class="mdi mdi-palette" title="Change color"></i>
 
 						<div class="new-note__colors-container">
-							<div v-for="(color, key) in colors" :key="key" :class="color.name" @click.stop="addColor(color.name)"></div>
+							<div
+								v-for="(color, key) in colors"
+								:key="key"
+								:class="color.name"
+								@click.stop="addColor(color.name)"
+							></div>
 						</div>
 					</div>
 
-					<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'color-blue': archived}"></i> -->
-					<i class="mdi mdi-package-down" title="Archive" @click="onArchived" :class="{'color-blue': archived}"></i>
+					<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'i-color-blue': archived}"></i> -->
+					<i
+						class="mdi mdi-package-down"
+						title="Archive"
+						@click="onArchived"
+						:class="{ 'i-color-blue': archived }"
+					></i>
 				</div>
 
-
 				<div class="new-note__btn-container">
-					<button class="btn btn--blue mt-1 mb-1" @click.prevent="addNote">add note</button>
-					<button class="btn mt-1 mb-1" @click.prevent="closeNote">close</button>
+					<button
+						class="btn btn--blue mt-1 mb-1"
+						@click.prevent="addNote"
+					>
+						add note
+					</button>
+					<button class="btn mt-1 mb-1" @click.prevent="closeNote">
+						close
+					</button>
 				</div>
 			</footer>
 		</transition-group>
 	</section>
 </template>
 
-
 <script>
-import NoteColors from '@/components/note/NoteColors' 
-import NoteTags from '@/components/note/NoteTags' 
+import NoteColors from "@/components/note/NoteColors"
+import NoteTags from "@/components/note/NoteTags"
 
 export default {
-	name: 'newNote',
+	name: "newNote",
 	components: { NoteColors, NoteTags },
-// 
+	//
 	// props: {
-		// show_new_note: Boolean,
-		// title_clicked: Boolean
-		// className: String
+	// show_new_note: Boolean,
+	// title_clicked: Boolean
+	// className: String
 	// },
 
 	data() {
 		return {
-			title: '',
-			content: '',
-			setColor: 'white',
+			title: "",
+			content: "",
+			setColor: "white",
 			pinned: false,
 			archived: false,
 			// setColor: '',
 			colors: [
-				{ id: 1, name: 'white' },
-				{ id: 2, name: 'red' },
-				{ id: 3, name: 'blue' },
-				{ id: 4, name: 'green' },
-				{ id: 5, name: 'purple' },
-				{ id: 6, name: 'orange' }
+				{ id: 1, name: "white" },
+				{ id: 2, name: "red" },
+				{ id: 3, name: "blue" },
+				{ id: 4, name: "green" },
+				{ id: 5, name: "purple" },
+				{ id: 6, name: "orange" },
 			],
 
 			// isNoteAddTagsOpen: false,
@@ -112,20 +136,28 @@ export default {
 		// }
 
 		titleClicked: {
-			get() { return this.$store.getters['ui/GET_MOBILE_NEWNOTE_OPEN'] },
-			set(newValue) { this.$store.commit('ui/SET_MOBILE_NEWNOTE_OPEN', newValue)}
-		}
+			get() {
+				return this.$store.getters["ui/GET_MOBILE_NEWNOTE_OPEN"]
+			},
+			set(newValue) {
+				this.$store.commit("ui/SET_MOBILE_NEWNOTE_OPEN", newValue)
+			},
+		},
 	},
 
 	methods: {
-		editTitle(e) { this.title = e.target.innerText },
+		editTitle(e) {
+			this.title = e.target.innerText
+		},
 
-		editContent(e) { this.content = e.target.innerText },
-		
+		editContent(e) {
+			this.content = e.target.innerText
+		},
+
 		resetNote() {
-			this.title = ''
-			this.content = ''
-			this.color = 'white'
+			this.title = ""
+			this.content = ""
+			this.color = "white"
 			this.pinned = false
 			this.archived = false
 			// this.arrTags = []
@@ -133,38 +165,40 @@ export default {
 			this.titleClicked = false
 		},
 
-		onPinned() { // TODO srediti
+		onPinned() {
+			// TODO srediti
 			this.pinned = !this.pinned
 
-			if(this.pinned) {
-				this.$store.dispatch('ui/ACT_NOTIFICATION', {
+			if (this.pinned) {
+				this.$store.dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'Note pinned!',
-					alertClass: 'success'
+					text: "Note pinned!",
+					alertClass: "success",
 				})
 			} else {
-				this.$store.dispatch('ui/ACT_NOTIFICATION', {
+				this.$store.dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'Note unpinned!',
-					alertClass: 'info'
+					text: "Note unpinned!",
+					alertClass: "info",
 				})
 			}
 		},
 
-		onArchived() { // TODO srediti
+		onArchived() {
+			// TODO srediti
 			this.archived = !this.archived
 
-			if(this.archived) {
-				this.$store.dispatch('ui/ACT_NOTIFICATION', {
+			if (this.archived) {
+				this.$store.dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'Note archived!',
-					alertClass: 'success'
+					text: "Note archived!",
+					alertClass: "success",
 				})
 			} else {
-				this.$store.dispatch('ui/ACT_NOTIFICATION', {
+				this.$store.dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'Note unarchived!',
-					alertClass: 'info'
+					text: "Note unarchived!",
+					alertClass: "info",
 				})
 			}
 		},
@@ -173,31 +207,37 @@ export default {
 			this.setColor = colorName
 		},
 
-		addNote() { // TODO srediti
-			if(this.title != '' || this.content != '') {
-
+		addNote() {
+			// TODO srediti
+			if (this.title.trim() != "" || this.content.trim() != "") {
 				const note = {
 					title: this.title,
 					content: this.content,
 					color: this.setColor,
 					pinned: this.pinned,
-					archived: this.archived
+					archived: this.archived,
 					// arrTags: this.arrTags
 				}
 
 				console.log(note)
-				this.$store.dispatch('POST_NOTE', note)
+				this.$store.dispatch("POST_NOTE", note)
 
 				// TODO if tagss, add tags
-				
+
 				this.resetNote()
+				document
+					.querySelector(".new-note__wrapper")
+					.classList.remove("new-note__wrapper--show")
 			} else {
 				this.resetNote()
+				document
+					.querySelector(".new-note__wrapper")
+					.classList.remove("new-note__wrapper--show")
 
-				this.$store.dispatch('ui/ACT_NOTIFICATION', {
+				this.$store.dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'You need input some text content.',
-					alertClass: 'warning'
+					text: "You need input some text content.",
+					alertClass: "warning",
 				})
 			}
 		},
@@ -206,7 +246,9 @@ export default {
 			// console.log('CLOSE  NOTE')
 			this.resetNote()
 			this.titleClicked = false
-			document.querySelector('.new-note__wrapper').classList.remove('new-note__wrapper--show');
+			document
+				.querySelector(".new-note__wrapper")
+				.classList.remove("new-note__wrapper--show")
 			// TODO vratiti samo da vidljivo bude content polje
 		},
 

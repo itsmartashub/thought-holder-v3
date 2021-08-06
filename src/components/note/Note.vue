@@ -1,6 +1,13 @@
 <template>
-		<article class="note" :class="[{'open-note': OPEN_NOTE}, note.color]" ref="refNote" @click="onOpenNote()" tabindex="0" @keydown.esc="closeNote()">
-
+	<transition name="scaley">
+		<article
+			class="note"
+			:class="[{ 'open-note': OPEN_NOTE }, note.color]"
+			ref="refNote"
+			@click="onOpenNote()"
+			tabindex="0"
+			@keydown.esc="closeNote()"
+		>
 			<div class="note__title-container mb-1">
 				<div
 					class="note__title"
@@ -12,7 +19,15 @@
 					spellcheck="false"
 				></div>
 
-				<i :class="note.pinned ? 'mdi mdi-pin color-blue note__pin--pinned' : 'mdi mdi-pin-outline note__pin'" title="Pin note" @click.stop="onPinned(note.id)"></i>
+				<i
+					:class="
+						note.pinned
+							? 'mdi mdi-pin i-color-blue note__pin--pinned'
+							: 'mdi mdi-pin-outline note__pin'
+					"
+					title="Pin note"
+					@click.stop="onPinned(note.id)"
+				></i>
 			</div>
 
 			<div
@@ -25,56 +40,98 @@
 				spellcheck="false"
 			></div>
 
-			<div class="note__tags-list mt-2" v-if="GET_TAGS_IN_NOTES.length > 0">
-				<h4 class="mb-1 note__tag" v-for="(tag, key) in GET_TAGS_IN_NOTES" :key="key" :title="tag.name">{{ tag.name.length >= 10 ? tag.name.substring(0,10) + '...' : tag.name }}</h4>
+			<div
+				class="note__tags-list mt-2"
+				v-if="GET_TAGS_IN_NOTES.length > 0"
+			>
+				<h4
+					class="mb-1 note__tag"
+					v-for="(tag, key) in GET_TAGS_IN_NOTES"
+					:key="key"
+					:title="tag.name"
+				>
+					{{
+						tag.name.length >= 10
+							? tag.name.substring(0, 10) + "..."
+							: tag.name
+					}}
+				</h4>
 			</div>
 
 			<p class="note__date" :title="titleTime">
 				<i class="mdi mdi-calendar-clock note__date-edited"></i>
 				<!-- <span class="note__date-date">{{ note.editedTime ? note.editedTime.split('\n')[1] : '' }}</span>
 				<span class="note__date-time">{{ note.editedTime ? note.editedTime.split('\n')[0] : '' }}</span> -->
-				<span class="note__date-date">{{ note.editedTime ? note.editedTime.split('\n')[1] : '' }}</span>
-				<span class="note__date-time">{{ note.editedTime ? note.editedTime.split('\n')[0] : '' }}</span>
+				<span class="note__date-date">{{
+					note.editedTime ? note.editedTime.split("\n")[1] : ""
+				}}</span>
+				<span class="note__date-time">{{
+					note.editedTime ? note.editedTime.split("\n")[0] : ""
+				}}</span>
 			</p>
 
 			<footer class="note__footer">
 				<div class="note__options">
-					
-					<div class="note__add-tags" @click.stop @keydown.esc="isNoteAddTagsOpen = false">
-						<i class="mdi mdi-tag" @click.self="isNoteAddTagsOpen = !isNoteAddTagsOpen"></i>
+					<div
+						class="note__add-tags"
+						@click.stop
+						@keydown.esc="isNoteAddTagsOpen = false"
+					>
+						<i
+							class="mdi mdi-tag"
+							@click.self="isNoteAddTagsOpen = !isNoteAddTagsOpen"
+						></i>
 					</div>
 
 					<NoteColors :note="note" :unique="note.id" />
-					
-					<i class="mdi mdi-package-down" title="Archive" @click.stop="onArchived(note.id)" :class="{'color-blue': archived}"></i>
 
-					<i class="mdi mdi-delete" title="Delete" @click.stop="deleteNote(note.id)"></i>
+					<i
+						class="mdi mdi-package-down"
+						title="Archive"
+						@click.stop="onArchived(note.id)"
+						:class="{ 'i-color-blue': archived }"
+					></i>
+
+					<i
+						class="mdi mdi-delete"
+						title="Delete"
+						@click.stop="deleteNote(note.id)"
+					></i>
 				</div>
 
 				<div class="note__btn-container" v-if="OPEN_NOTE">
-					<button class="btn btn--blue" @click.stop.prevent ="editNote(note.id)">edit note</button>
-					<p class="btn" @click.stop="closeNote()">close</p>
+					<button
+						class="btn btn--blue"
+						@click.stop.prevent="editNote(note.id)"
+					>
+						edit note
+					</button>
+					<p class="btn btn--outline" @click.stop="closeNote()">
+						close
+					</p>
 				</div>
 			</footer>
 
-			<NoteTags :isNoteAddTagsOpen="isNoteAddTagsOpen" @update-noteTagsOpen="updateNoteTagsOpen" v-if="isNoteAddTagsOpen" :note="note"/>
-
+			<transition name="scaleopacity">
+				<NoteTags
+					:isNoteAddTagsOpen="isNoteAddTagsOpen"
+					@update-noteTagsOpen="updateNoteTagsOpen"
+					v-if="isNoteAddTagsOpen"
+					:note="note"
+				/>
+			</transition>
 		</article>
-
-		<!-- <div class="modal-background" v-if="OPEN_NOTE" @click="OPEN_NOTE = false"></div> -->
-
-		<!-- <router-view name="open-note" :key="$route.fullPath" :note="note"></router-view> -->
-	<!-- </div> -->
+	</transition>
 </template>
 
 <script>
-import NoteColors from '@/components/note/NoteColors' 
-import NoteTags from '@/components/note/NoteTags' 
+import NoteColors from "@/components/note/NoteColors"
+import NoteTags from "@/components/note/NoteTags"
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex"
 
 export default {
-	name: 'note',
+	name: "note",
 	components: {
 		NoteColors,
 		NoteTags,
@@ -87,7 +144,7 @@ export default {
 	data() {
 		return {
 			openNote: false,
-			titleTime: 'Created: \n' + this.note.createdTime,
+			titleTime: "Created: \n" + this.note.createdTime,
 			// tagsOpen: false,
 			// openNoteBG: true,
 			// currNote: false,
@@ -100,22 +157,21 @@ export default {
 
 			isNoteAddTagsOpen: false,
 			create: false,
-			inputSearchOrAdd: '',
+			inputSearchOrAdd: "",
 			inputChecks: [],
 
 			// isTitleEmpty: this.title.trim() == '' ? true : false,
 			// isBodyEmpty: this.content.trim() == '' ? true : false
-
 		}
 	},
 
 	computed: {
-		GET_TAGS_IN_NOTES () {
+		GET_TAGS_IN_NOTES() {
 			return this.$store.getters.GET_TAGS_IN_NOTES(this.note.id)
 		},
 
-		OPEN_TAGS () {
-			return this.$store.getters['ui/GET_OPEN_NOTE']
+		OPEN_TAGS() {
+			return this.$store.getters["ui/GET_OPEN_NOTE"]
 		},
 
 		OPEN_NOTE: {
@@ -124,16 +180,16 @@ export default {
 			},
 			set(value) {
 				this.openNote = value
-			}
+			},
 		},
 
 		OPEN_NOTE_BG: {
 			get() {
-				return this.$store.getters['ui/GET_OPEN_BG']
+				return this.$store.getters["ui/GET_OPEN_BG"]
 			},
 			set(newVal) {
-				this.$store.commit('ui/SET_OPEN_BG', newVal)
-			}
+				this.$store.commit("ui/SET_OPEN_BG", newVal)
+			},
 		},
 
 		// NOTE_TAGS_OPEN: {
@@ -195,9 +251,9 @@ export default {
 		},
 
 		resetNote() {
-			this.title = ''
-			this.content = ''
-			this.color = 'white'
+			this.title = ""
+			this.content = ""
+			this.color = "white"
 			this.pinned = false
 			this.archived = false
 			this.OPEN_NOTE = false
@@ -210,11 +266,11 @@ export default {
 			this.pinned = !this.pinned
 			// this.archived = false
 
-			console.log(this.pinned);
-			
-			this.$store.dispatch('UPDATE_PINNED', {
+			console.log(this.pinned)
+
+			this.$store.dispatch("UPDATE_PINNED", {
 				idNote: idNote,
-				isPinned: this.pinned
+				isPinned: this.pinned,
 			})
 
 			this.closeNote()
@@ -224,51 +280,52 @@ export default {
 		onArchived(idNote) {
 			this.archived = !this.archived
 
-			this.$store.dispatch('UPDATE_ARCHIVED', {
+			this.$store.dispatch("UPDATE_ARCHIVED", {
 				idNote: idNote,
-				isArchived: this.archived
+				isArchived: this.archived,
 			})
 
 			this.closeNote()
-
 		},
 
 		editNote(idNote) {
-			if(this.title != '' || this.content != '') {
-
+			if (this.title != "" || this.content != "") {
 				const noteData = {
 					title: this.title,
 					content: this.content,
 					color: this.color,
 					pinned: this.pinned,
-					archived: this.archived
+					archived: this.archived,
 				}
 
 				console.log(noteData)
-				this.$store.dispatch('UPDATE_NOTE', { idNote: this.note.id, noteData }) // TODO ovde treba UPDATE_NOTE a ne POST_NOTE, to POST je u NewNote.vue
+				this.$store.dispatch("UPDATE_NOTE", {
+					idNote: this.note.id,
+					noteData,
+				}) // TODO ovde treba UPDATE_NOTE a ne POST_NOTE, to POST je u NewNote.vue
 
 				// TODO ovde treba kao za note samo za tags!
 				// this.$store.dispatch('POST_TAGS', tags)
 
 				// this.OPEN_NOTE = false
 				// this.OPEN_NOTE_BG = false
-				
+
 				this.resetNote()
 			} else {
 				this.resetNote()
 
-				this.$store.dispatch('ui/ACT_NOTIFICATION', {
+				this.$store.dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'You need input some text content.',
-					alertClass: 'warning'
+					text: "You need input some text content.",
+					alertClass: "warning",
 				})
 			}
 		},
 
-
 		deleteNote(idNote) {
 			if (confirm("Are you sure you want to delete this note?")) {
-				this.$store.dispatch('DELETE_NOTE', idNote)
+				this.$store.dispatch("DELETE_NOTE", idNote)
+				this.OPEN_NOTE_BG = false
 			}
 		},
 
@@ -277,57 +334,62 @@ export default {
 		// }
 
 		searchOrAddTag() {
-			this.$store.dispatch('UPD_CURATED_SEARCH_TAGS', this.inputSearchOrAdd)
-			this.$store.commit('SET_SEARCH_TAGS', this.inputSearchOrAdd)
+			this.$store.dispatch(
+				"UPD_CURATED_SEARCH_TAGS",
+				this.inputSearchOrAdd
+			)
+			this.$store.commit("SET_SEARCH_TAGS", this.inputSearchOrAdd)
 
 			this.displayCreateNewTag()
 		},
 
 		displayCreateNewTag() {
-			if(this.ARR_ONLY_CURATED_SEARCH.length === 0) {
+			if (this.ARR_ONLY_CURATED_SEARCH.length === 0) {
 				this.create = true
-				console.log('CREATE TAG');
+				console.log("CREATE TAG")
 			} else {
 				this.create = false
 			}
 		},
 
 		createNewTag() {
-			this.$store.dispatch('POST_TAG', {
+			this.$store.dispatch("POST_TAG", {
 				inputValue: this.inputSearchOrAdd,
-				idNote: this.note.id
+				idNote: this.note.id,
 			}) // TODO
-			this.inputSearchOrAdd = ''
+			this.inputSearchOrAdd = ""
 		},
 
 		checkTag(tag) {
-			console.log('ID TAG: ',tag.id);
-			console.log('ID NOTE: ',this.note.id);
+			console.log("ID TAG: ", tag.id)
+			console.log("ID NOTE: ", this.note.id)
 			// console.log(this.inputChecks); // TODO treba da dodam idNote ove gde cekiram u sve te tagove sto cekiram, tj u svaki clan this.inputCheck niza, dakle update arrTags.find(tag => tag.id == tag.id).node_ids[...this.inputChecks] MA NE VALJA
-			
+
 			// console.log(this.inputChecks);
 			// console.log(this.inputChecks.find(input => input === tag.name)); //* sa MAP: ako je tu onda je [true], ako nije onda je []. sa FIND: ako nadje onda je jednako imenu taga, a ako ne pronadje, onda je undefined
-			
-			const tagIn = this.inputChecks.find(input => input === tag.name)
 
-			if(tagIn === tag.name) {
+			const tagIn = this.inputChecks.find((input) => input === tag.name)
+
+			if (tagIn === tag.name) {
 				// TODO add tag to note
-				this.$store.dispatch('ADD_TAG_TO_NOTE', { //TODO ADD not UPDATE
+				this.$store.dispatch("ADD_TAG_TO_NOTE", {
+					//TODO ADD not UPDATE
 					idNote: this.note.id,
-					idTag: tag.id
+					idTag: tag.id,
 				})
 			} else {
 				// TODO remove this tag from note tj izbrisi idNote iz niza note_ids tog taga
-				this.$store.dispatch('REMOVE_TAG_FROM_NOTE', { //TODO ADD not UPDATE
+				this.$store.dispatch("REMOVE_TAG_FROM_NOTE", {
+					//TODO ADD not UPDATE
 					idNote: this.note.id,
-					idTag: tag.id
+					idTag: tag.id,
 				})
 			}
 		},
 
 		updateNoteTagsOpen(isNoteAddTagsOpen) {
 			this.isNoteAddTagsOpen = isNoteAddTagsOpen
-		}
+		},
 	},
 }
 </script>

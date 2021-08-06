@@ -3,26 +3,20 @@
 	&:link,
 	&:visited {
 		--btn-height: 5rem;
-		// text-decoration: none;
-		// display: inline-block;
-		
-		// text-align: center;
 		border-radius: var(--radius);
 		padding: 0rem 3rem;
-		// margin: 1rem 1.5rem;
-		// width: auto;
-		// width: 20rem;
 		height: var(--btn-height);
 		line-height: var(--btn-height);
 		background: var(--grey);
 		color: var(--black);
-		text-align: center;
-		position: relative;
+		@extend %flex-center;
+		@extend %pos-rel;
 		font-family: inherit;
 		font-size: inherit;
+		@extend %text-center;
 		@extend %cursor;
-		@extend .transition-1;
-		// transition: all .2s ease-in-out, transform .2s ease-in-out;
+		text-transform: uppercase;
+		transition: 0.4s $outSmooth;
 	}
 
 	&:active,
@@ -32,101 +26,36 @@
 	}
 
 	&:active {
-		transform: scale(.94);
+		transform: scale(0.94);
 	}
 
-	// &::after {
-	// 	content: '';
-	// 	display: inline-block;
-	// 	height: 100%; /* 100% od btn-a */
-	// 	width: 100%; /* 100% od btn-a */
-	// 	border-radius: .8rem;
-	// 	position: absolute;
-	// 	top: 0;
-	// 	left: 0;
-	// 	z-index: -1;
-	// 	background: var(--white);
-	// 	@extend .transition-1;
-	// }
-
-	&:hover {
-		// background: var(--blue);
-		background: var(--grey);
-		// color: var(--white);
-		color: var(--black);
-
+	&:hover,
+	&:focus {
+		transform: scale(0.95);
+		filter: hue-rotate(-10deg);
 	}
 
 	&--blue {
 		font-size: inherit;
 		background: var(--blue);
 		color: var(--white);
-		// box-shadow: 0 3px 5px rgba(var(--blue), .7);
+	}
 
-		&:hover {
-			background: var(--blue);
-			color: var(--white);
-			box-shadow: var(--shadow);
+	&--outline {
+		background: transparent;
+		color: var(--blue) !important;
+		border: 2px solid var(--h4_bg);
+
+		&:hover,
+		&:focus {
+			background: var(--h4_bg);
+			border-color: transparent;
 		}
 	}
 
-	&--icon {
-		@extend .flex;
-		justify-content: center;
-		// padding: 1rem 2rem;
-
-		i {
-			padding: 0;
-			margin: 0;
-
-			&:hover {
-				box-shadow: var(--shadow);
-				color: var(--white);
-			}
-		}
-	}
-
-	&__underline {
-		display: block;
-		overflow: hidden;
-		font-size: inherit;
-		background: var(--blue);
-		color: var(--lgrey);
-		width: 80%;
-		padding: 1.5rem 3rem;
-		margin-left: auto;
-		margin-right: auto;
-
-		border-radius: .8rem;
-		font-family: inherit;
-		cursor: pointer;
-		position: relative;
-
-		&::after {
-			// content: '';
-			// position: absolute;
-			// bottom: 0;
-			// left: 0;
-			// display: block;
-			// width: 100%;
-			// z-index: -1;
-			// transition: all .2s ease-in-out;
-			@extend .underline::after;
-			height: 0;
-			background: var(--grey);
-			border: none;
-		}
-
-		&:hover {
-			background: transparent;
-			color: currentColor;
-			&::after {
-				@extend .underline::after:hover;
-			}
-		}
-	}
-
-	@include device(phone) {
-		--btn-height: 6rem;
+	@include device(phone-land) {
+		--btn-height: 7rem;
+		font-size: 1.6rem;
+		text-transform: uppercase;
 	}
 }

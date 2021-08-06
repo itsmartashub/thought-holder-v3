@@ -1,14 +1,14 @@
 .edit-tags {
-	box-shadow: var(--shadow_modal);
+	padding: 3rem 4rem;
 	background: var(--white);
+	box-shadow: var(--shadow_modal);
+	border-radius: var(--radius);
 	position: fixed !important;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%) rotate(0deg);
 	z-index: 100;
 	width: max-content;
-	padding: 3rem 4rem;
-	border-radius: var(--radius);
+	transform: translate(-50%, -50%) rotate(0deg);
 
 	&:focus {
 		border: none;
@@ -16,54 +16,63 @@
 	}
 
 	.label-add-tag {
-		@extend .flex;
+		@extend %flex-center;
 	}
 	.input-add-tag {
 		padding: 1rem;
-		// border-bottom: 1px solid var(--dgrey);
 	}
 
 	form {
 		flex-direction: column;
+		// width: 40rem;
 	}
-	
+
 	ul {
 		overflow-y: auto;
-		height: 40vh;
+		height: 50vh;
 	}
 
 	li {
 		border: none;
 		border-radius: 0;
-		padding: .5rem;
+		margin-bottom: 1.5rem;
+		// padding: .5rem;
 		font-size: 1.3rem;
 		@extend .transition-2;
+		overflow-x: hidden;
 
 		&:hover {
-			background:rgba(var(--grey), .5);
+			background: rgba(var(--grey), 0.5);
 			input {
 				color: var(--blue);
 			}
 		}
+		input {
+			padding: 0.5rem 1rem;
+		}
 	}
 	label {
 		@extend .flex;
+		margin: 0 2rem;
 	}
 
 	input {
-		padding: .7rem 0;
-		margin: 0 3rem;
+		padding: 1rem 0;
+		// margin: 0 3rem;
 		width: 100%;
 		border-radius: 0;
 	}
 
-	// button {
-	// 	width: 100%;
-	// }
+	button {
+		--btn-height: 6.2rem;
+		width: 100%;
+	}
 
 	.icon-check {
 		opacity: 0;
 		visibility: hidden;
-		@extend .transition-1;
+		@extend .transition-3;
 	}
+
+	// @include device(phone-land) { width: 90vw; }
 }

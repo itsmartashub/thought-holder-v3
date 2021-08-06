@@ -1,198 +1,63 @@
-// .fade-enter-active, .fade-leave-active {
-// //   transition: opacity .3s ease-in-out, transform .3s ease-in-out;
-// 	transition: all .25s ease;
-// //   transform: translateY(-1%);
-// }
-
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(-5%);
+//* fadey
+.fadey-enter,
+.fadey-leave-to,
+.fadey-leave-active {
+	opacity: 0;
+	transform: translateY(-5%);
+	backface-visibility: hidden;
+	transition: transform 0.7s ease, opacity 0.5s ease 0.1s;
 }
 
-.fade-leave-active {
-  transition: all .3s ease;
-}
-.fade-enter-active {
-  transition: all .3s ease;
+.fadey-leave-active,
+.fadey-enter-active {
+	transition: transform 0.7s ease, opacity 0.5s ease 0.1s;
 }
 
-
-.scale-enter-active, .scale-fade-leave-active {
-  transition: all .3s ease;
-}
-.scale-fade-enter, .scale-fade-leave-to {
-  opacity: 0;
-  transform: scale(0.5);
+//* notify
+.notify-enter-active,
+.notify-leave-active {
+	transition: all 0.3s $outBack;
 }
 
-
-.notify-enter-active, .notify-leave-active {
-	transition: all .2s ease;
-}
-.notify-enter, .notify-leave-to {
+.notify-enter,
+.notify-leave-to {
 	opacity: 0;
 	transform: translate(-10%);
 }
 
-
-
-
-.welcome-enter {
-	transform: translateY(100%);
-	opacity: 0;
-}
-.welcome-enter-active {
-	transition: all .1s ease;
-}
-.welcome-leave-active, .welcome-leave-to {
-	opacity: 0;
-}
-
-
+//* bounce
 .bounce-enter-active {
-  animation: bounce-in .5s;
+	animation: bounce-in 0.5s $outSmooth;
 }
+
 .bounce-leave-active {
-  animation: bounce-in .5s reverse;
+	animation: bounce-in 0.5s reverse $outSmooth;
 }
+
 @keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-
-
-
-
-
-.slide-leave-active {
-	transition: opacity .5s ease;
-	opacity: 0;
-	animation: slide-out .5s ease-out forwards;
-}
-
-.slide-leave {
-	opacity: 1;
-	transform: translateX(0);
-}
-
-.slide-enter-active {
-	animation: slide-in .5s ease-out forwards;
-}
-
-@keyframes slide-out {
 	0% {
-	transform: translateY(0);
+		transform: scale(0);
 	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
 	100% {
-	transform: translateY(-3rem);
+		transform: scale(1);
 	}
 }
 
-// v-enter: Starting state for enter. Added before element is inserted, removed one frame after element is inserted.
-.modal-enter {
-	transform: translate(-200%, -50%) rotate(-90deg);
-	opacity: 0;
+//* edittags
+.edittags-enter-active {
+	animation: edittagsIn 1s ease;
 }
 
-// v-enter-active: Active state for enter. Applied during the entire entering phase. Added before element is inserted, removed when transition/animation finishes. This class can be used to define the duration, delay and easing curve for the entering transition.
-.modal-enter-active {
-	transform: translate(-46%, -50%) rotate(4deg);
-	transition: all .3s ease-in-out;
+.edittags-leave-active {
+	animation: edittagsOut 1s ease;
 }
-
-// v-enter-to: Only available in versions 2.1.8+. Ending state for enter. Added one frame after element is inserted (at the same time v-enter is removed), removed when transition/animation finishes.
-.modal-enter-to, .modal-leave {
-	transform: translate(-50%, -50%) rotate(0deg);
-	opacity: 1;
-}
-// v-leave: Starting state for leave. Added immediately when a leaving transition is triggered, removed after one frame.
-
-// v-leave-active: Active state for leave. Applied during the entire leaving phase. Added immediately when leave transition is triggered, removed when the transition/animation finishes. This class can be used to define the duration, delay and easing curve for the leaving transition.
-.modal-leave-active {
-	transform: translate(-54%, -50%) rotate(-4deg);
-}
-
-// v-leave-to: Only available in versions 2.1.8+. Ending state for leave. Added one frame after a leaving transition is triggered (at the same time v-leave is removed), removed when the transition/animation finishes.
-.modal-leave-to {
-	transform: translate(150%, -50%) rotate(90deg);
-}
-
-
-// Each of these classes will be prefixed with the name of the transition. Here the v- prefix is the default when you use a <transition> element with no name. If you use <transition name="my-transition"> for example, then the v-enter class would instead be my-transition-enter.
-
-// v-enter-active and v-leave-active give you the ability to specify different easing curves for enter/leave transitions, which you’ll see an example of in the following section.
-
-
-//! HAHAHAHAHA
-@keyframes modalAnim {
-
-  0% {  
-    transform: translateX(-200%) rotate(-90deg);
-    opacity: 0;
-  }
-  
-  10% {
-    transform: translateX(4%) rotate(4deg);
-  }
-
-  
-  15%, 85% {
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  
-  90% {
-    transform: translateX(-4%) rotate(-4deg);
-  }
-
-  
-  100% {
-    transform: translateX(200%) rotate(90deg);
-  }
-}
-
-@keyframes modal {
-
-  0% {  
-    transform: translate(-200%, -50%) rotate(-90deg);
-    opacity: 0;
-  }
-  
-  10% {
-    transform: translate(-54%, -50%) rotate(4deg);
-  }
-
-  
-  15%, 85% {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-  
-  90% {
-    transform: translate(-46%, -50%) rotate(-4deg);
-  }
-
-  
-  100% {
-    transform: translate(200%, -50%) rotate(90deg);
-  }
-}
-
-.modal {
-	animation: modal 3s ease-in-out forwards
-}
-
-
-@keyframes modalIn {
-	0% {  
+@keyframes edittagsIn {
+	0% {
 		transform: translate(-200%, -50%) rotate(-90deg);
 		opacity: 0;
 	}
@@ -201,14 +66,15 @@
 		transform: translate(-40%, -50%) rotate(4deg);
 	}
 
-	15%, 100% {
+	15%,
+	100% {
 		transform: translate(-50%, -50%);
 		opacity: 1;
 	}
 }
 
-@keyframes modalOut {
-	0% {  
+@keyframes edittagsOut {
+	0% {
 		transform: translate(-50%, -50%);
 		opacity: 1;
 	}
@@ -223,28 +89,108 @@
 	}
 }
 
-
-.modal-in {
-	animation: modalIn 700ms ease-in-out forwards
-}
-
-.modal-out {
-	animation: modalOut 700ms ease-in-out forwards
-}
-
-
-//! ========================= BREAAK =========================
-.scaley-enter-to, .scaley-leave {
+//* scaley - in sidebar
+.scaley-enter-to,
+.scaley-leave {
 	transform: scaleY(1);
 	opacity: 1;
 	// height: 20vh;
 }
-.scaley-leave-to, .scaley-enter {
+
+.scaley-leave-to,
+.scaley-enter {
 	transform: scaleY(0);
 	opacity: 0;
 	// height: 0;
 }
 
-.scaley-leave-active, .scaley-enter-active {
-	transition: all .5s ease;
+.scaley-leave-active,
+.scaley-enter-active {
+	transition: all 0.5s ease;
+}
+
+//* translateY - preloader
+.preloader-enter-to {
+	// transform: translateY(0);
+	opacity: 1;
+}
+
+.preloader-leave-to {
+	// transform: translateY(-100%);
+	opacity: 0;
+	pointer-events: none;
+	z-index: -200;
+}
+
+.preloader-leave-active,
+.preloader-enter-active {
+	// transition: transform 3s $inOutQuad, opacity 4s $inOutQuad;
+	transition: 3s $inOutQuad;
+}
+
+//* scaleopacity
+.scaleopacity-enter-to,
+.scaleopacity-leave {
+	transform: none;
+}
+
+.scaleopacity-leave-to,
+.scaleopacity-enter {
+	transform: scale(0) rotateZ(-45deg);
+	opacity: 0;
+	// height: 0;
+}
+
+.scaleopacity-leave-active,
+.scaleopacity-enter-active {
+	transition: transform 0.5s ease, opacity 0.6s ease;
+}
+
+//? SA NETA
+.scale-slide-enter-active,
+.scale-slide-leave-active {
+	position: absolute;
+	transition: all 0.85s ease;
+}
+
+.scale-slide-enter-from {
+	left: -100%;
+}
+
+.scale-slide-enter-to {
+	left: 0%;
+}
+
+.scale-slide-leave-from {
+	transform: scale(1);
+}
+
+.scale-slide-leave-to {
+	transform: scale(0.8);
+}
+
+//! HAHAHAHAHA - MORAM DA PROBAM DA VIDIM STA JE OVO
+@keyframes modalAnim {
+	0% {
+		transform: translateX(-200%) rotate(-90deg);
+		opacity: 0;
+	}
+
+	10% {
+		transform: translateX(4%) rotate(4deg);
+	}
+
+	15%,
+	85% {
+		transform: translateX(0%);
+		opacity: 1;
+	}
+
+	90% {
+		transform: translateX(-4%) rotate(-4deg);
+	}
+
+	100% {
+		transform: translateX(200%) rotate(90deg);
+	}
 }

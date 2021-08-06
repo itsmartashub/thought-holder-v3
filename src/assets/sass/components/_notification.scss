@@ -10,10 +10,6 @@
 	box-shadow: var(--shadow);
 	border-radius: var(--radius);
 
-	// display: flex;
-	// align-items: center;
-	// word-wrap: wrap;
-
 	.position-wrapper {
 		position: relative;
 		display: flex;
@@ -33,30 +29,18 @@
 	}
 
 	p { padding: 0 2rem; }
+
+	@include device(tab-land) { width: 50%; }
+	@include device(phone-land) { width: 90%; }
 }
 
-
-// .success,
-// .warning {
-// 	-webkit-animation: hide 1s forwards;
-// 	-webkit-animation-iteration-count: 1;
-// 	-webkit-animation-delay: 3s;
-// 	animation: hide 1s forwards;
-// 	animation-iteration-count: 1;
-// 	animation-delay: 3s;
-// }
-
 .success {
-	// display: block;
 	background: var(--color-success) !important;
-	// background: var(--color-success);
 	color: rgba(0,0,0,.8);
 }
 
 .warning {
-	// display: block;
 	background: var(--color-warning) !important;
-	// background: var(--color-success);
 }
 
 .info {

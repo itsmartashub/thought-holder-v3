@@ -12,10 +12,44 @@
 	justify-content: center;
 	color: var(--black);
 
-	i { 
+	i {
 		font-size: 5rem;
 		color: var(--blue);
 	}
+	.icon-with-after {
+		@extend %pos-rel;
+		margin-bottom: 2rem;
+		transition: 0.4s $outBack;
+		transition-delay: 0.2s;
 
-	.logo { color: var(--blue); }
+		&::after {
+			@extend %after;
+			top: 0;
+			left: -15%;
+			width: 130%;
+			background: var(--blue);
+			opacity: 0.1;
+			border-radius: var(--radius);
+			transition: 0.5s $outBack;
+		}
+
+		&:hover {
+			transform: scale(0.85);
+			&::after {
+				transform: scale(1.1);
+				opacity: 0.2;
+			}
+		}
+	}
+
+	.logo {
+		color: var(--blue);
+	}
+
+	h2 {
+		text-transform: uppercase;
+		font-weight: 500;
+		font-size: 2.8rem;
+		text-align: center;
+	}
 }

@@ -1,13 +1,27 @@
-%pos-fix { position: fixed; }
-%pos-abs { position: absolute; }
-%pos-rel { position: relative; }
+%pos-fix {
+	position: fixed;
+}
+%pos-abs {
+	position: absolute;
+}
+%pos-rel {
+	position: relative;
+}
 
-%height-auto { height: auto; }
+%height-auto {
+	height: auto;
+}
 
-%object-fit { object-fit: cover; }
+%object-fit {
+	object-fit: cover;
+}
 
-%grid { display: grid; }
-%flex { display: flex; }
+%grid {
+	display: grid;
+}
+%flex {
+	display: flex;
+}
 
 %grid-center {
 	@extend %grid;
@@ -32,7 +46,7 @@
 }
 
 %after {
-	content: '';
+	content: "";
 	@extend %pos-abs;
 	width: 100%;
 	height: 100%;
@@ -45,19 +59,38 @@
 	transform: translate(-50%, -50%);
 }
 
-%overflow-hidden { overflow: hidden; }
-%radius-50 { border-radius: 50%; }
-%radius-default { border-radius: var(--radius); }
-%cursor { cursor: pointer; }
+%overflow-hidden {
+	overflow: hidden;
+}
+%radius-50 {
+	border-radius: 50%;
+}
+%radius-default {
+	border-radius: var(--radius);
+}
+%cursor {
+	cursor: pointer;
+}
 
-%text-center { text-align: center; }
-%font-600 { font-weight: 600; }
-%font-500 { font-weight: 500; }
-%font-300 { font-weight: 300; }
+%text-center {
+	text-align: center;
+}
+%font-600 {
+	font-weight: 600;
+}
+%font-500 {
+	font-weight: 500;
+}
+%font-300 {
+	font-weight: 300;
+}
 
 %grid-notes {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(var(--note-width-min), 1fr));
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(var(--note-width-min), 1fr)
+	);
 	grid-gap: 2.5rem;
 	align-items: flex-start;
 }

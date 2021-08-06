@@ -29,13 +29,15 @@
 				<!-- <span class="validate-alert" v-if="error">Password is incorrect.</span> -->
 			</div>
 
+			<span class="before-btn-txt">We don't hold your beer but we can hold your brilliant thoughts! <br/> Completely free.</span>
+
 			<button @click.prevent="login()" class="btn btn--blue mb-4 mt-1">LOGIN</button>
 
 			<!-- <span class="validate-alert mb-3" v-if="error">The e-mail or the password are incorrect.</span> -->
 			<span class="validate-alert mb-3" v-if="GET_LOGIN_SERVER_ERR !== ''">{{ GET_LOGIN_SERVER_ERR }}</span>
 			
 			<router-link :to="{ name: 'signup' }">
-				<p class="register-redirect">You don't have account yet? <span>Signup</span></p>
+				<p class="register-redirect">New to ThoughtsHolder? <span>Create an account</span></p>
 			</router-link>
 		</form>
 	</section>

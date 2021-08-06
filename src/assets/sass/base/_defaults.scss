@@ -1,13 +1,13 @@
 .transition-1 {
-   transition: all .1s ease-in-out;
-
+	transition: 0.1s ease-in-out;
 }
 .transition-2 {
-    transition: all .2s $cub-1;
+	transition: 0.2s $cub-1;
 }
 
 .transition-3 {
-    transition: all .3s $cub-1;
+	// transition: 0.3s $cub-1;
+	transition: 0.5s $inOutBack;
 }
 
 .translateX {
@@ -15,59 +15,28 @@
 	width: 0 !important;
 }
 
-.color-blue {
+.i-color-blue {
 	color: var(--blue);
 	position: relative;
 
 	&::after {
-		content: '';
-		position: absolute;
-		top: 0; left: 0;
+		@extend %after;
+		top: 0;
+		left: 0;
 		background: var(--h4_bg);
-		width: 100%;
-		height: 100%;
 		transform: scale(1.2);
 		border-radius: 8px;
+		@extend .transition-3;
 	}
 
 	&:hover::after {
 		transform: scale(0);
-		@extend .transition-3;
-	} 
+	}
 }
 
 .flex {
 	display: flex;
 	align-items: center;
-}
-
-.underline {
-	position: relative;
-	z-index: 80;
-	padding: .5rem;
-	
-	&::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		display: block;
-		width: 100%;
-		height: .2rem;
-		background: var(--blue);
-		border-radius: 2px;
-		z-index: -1;
-		border-left: 2px solid var(--blue);
-		border-right: 2px solid var(--blue);
-		transition: all .2s ease-in-out;
-	}
-
-	&:hover {
-		color: var(--white);
-		&::after {
-			height: 100%;
-		}
-	}
 }
 
 .modal-background {
@@ -82,8 +51,7 @@
 	bottom: 0;
 	background: var(--modal-bg);
 	backdrop-filter: blur(2px);
-	box-shadow:
-		inset 3rem 10rem 25rem var(--modal-bg),
+	box-shadow: inset 3rem 10rem 25rem var(--modal-bg),
 		inset -3rem -10rem 25rem var(--modal-bg);
 }
 
@@ -99,56 +67,110 @@
 	visibility: visible !important;
 }
 
-
-
 //? COLOR PALLETE CLASSES
 .white {
 	background: var(--white) !important; // ok
-	// .note__pinned.h4 i { background: var(--rgba-cred); }
+	color: var(--black) !important;
 }
 
 .red {
 	background: var(--rgba-cred) !important; // promeni
 	color: #222 !important;
 
-	.note__pinned, .h4, i { color: var(--cred) !important; }
-	.note__pinned.h4 i { background: var(--rgba-cred); }
-	.btn--blue { background: var(--cred);}
-	// .note__pin::after, .color-blue::after { background: var(--rgba-cred) !important;}
+	.note__pinned,
+	.h4,
+	i {
+		color: var(--cred) !important;
+	}
+	.note__pinned.h4 i {
+		background: var(--rgba-cred);
+	}
+	.btn--blue {
+		background: var(--cred);
+		color: var(--rgba-cred);
+	}
+	.btn--outline {
+		color: var(--cred) !important;
+		border-color: var(--cred) !important;
+	}
+	// .note__pin::after, .i-color-blue::after { background: var(--rgba-cred) !important;}
 }
 
 .blue {
 	background: var(--rgba-cblue) !important; // promeni
 	color: #222 !important;
 
-	.note__pinned, .h4, i { color: var(--cblue) !important; }
-	.btn--blue { background: var(--cblue);}
+	.note__pinned,
+	.h4,
+	i {
+		color: var(--cblue) !important;
+	}
+	.btn--blue {
+		background: var(--cblue);
+		color: var(--rgba-cblue);
+	}
+	.btn--outline {
+		color: var(--cblue) !important;
+		border-color: var(--cblue) !important;
+	}
 }
 
 .green {
 	background: var(--rgba-cgreen) !important; // ok
 	color: #222 !important;
 
-	.note__pinned, .h4, i { color: var(--cgreen) !important; }
-	.btn--blue { background: var(--cgreen);}
+	.note__pinned,
+	.h4,
+	i {
+		color: var(--cgreen) !important;
+	}
+	.btn--blue {
+		background: var(--cgreen);
+		color: var(--rgba-cgreen);
+	}
+	.btn--outline {
+		color: var(--cgreen) !important;
+		border-color: var(--cgreen) !important;
+	}
 }
 
 .purple {
 	background: var(--rgba-cpurple) !important; // promeni
 	color: #222 !important;
 
-	.note__pinned, .h4, i { color: var(--cpurple) !important; }
-	.btn--blue { background: var(--cpurple);}
+	.note__pinned,
+	.h4,
+	i {
+		color: var(--cpurple) !important;
+	}
+	.btn--blue {
+		background: var(--cpurple);
+		color: var(--rgba-cpurple);
+	}
+	.btn--outline {
+		color: var(--cpurple) !important;
+		border-color: var(--cpurple) !important;
+	}
 }
 
 .orange {
 	background: var(--rgba-corange) !important; // ok
 	color: #222 !important;
 
-	.note__pinned, .h4, i { color: var(--corange) !important; }
-	.btn--blue { background: var(--corange);}
+	.note__pinned,
+	.h4,
+	i {
+		color: var(--corange) !important;
+	}
+	.btn--blue {
+		background: var(--corange);
+		color: var(--rgba-corange);
+	}
+	.btn--outline {
+		color: var(--corange) !important;
+		border-color: var(--corange) !important;
+	}
 }
-
 
 .red,
 .green,
@@ -163,6 +185,6 @@
 
 	.note__pin--pinned::after,
 	.note__tag {
-		background: rgba(255,255,255,.15) !important;
+		background: rgba(255, 255, 255, 0.15) !important;
 	}
 }

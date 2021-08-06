@@ -1,4 +1,7 @@
 .search {
+	@extend %flex-center;
+	flex-direction: column;
+
 	&__by-tags,
 	&__by-colors {
 		margin: 0 auto;
@@ -8,7 +11,9 @@
 		border-radius: var(--radius);
 		box-shadow: var(--shadow);
 	}
-	&__by-tags { margin-bottom: 5vh; }
+	&__by-tags {
+		margin-bottom: 5vh;
+	}
 
 	&__title {
 		background: var(--blue);
@@ -16,10 +21,17 @@
 		font-weight: 300;
 		padding: 1.5rem 3rem;
 		font-size: 2.2rem;
-		
-		span { opacity: .8;}
 
-		i {color: var(--white); font-size: 2.5rem; vertical-align: middle; margin-right: .5rem;}
+		span {
+			opacity: 0.8;
+		}
+
+		i {
+			color: var(--white);
+			font-size: 2.5rem;
+			vertical-align: middle;
+			margin-right: 0.5rem;
+		}
 	}
 
 	&__body {
@@ -44,17 +56,23 @@
 		font-size: 1.3rem;
 		font-weight: 500;
 
-		i { 
+		i {
 			font-size: 2.8rem;
-			opacity: .85;
+			opacity: 0.85;
 			transition: 1s $outBack;
 		}
-		span { transition: .8s $outBack .1s; }
-		
+		span {
+			transition: 0.8s $outBack 0.1s;
+		}
+
 		&:hover {
-			background: rgba(0,0,0,.15);
-			i { transform: rotate(225deg); }
-			span { transform: translateY(20%); }
+			background: rgba(0, 0, 0, 0.15);
+			i {
+				transform: rotate(225deg);
+			}
+			span {
+				transform: translateY(20%);
+			}
 		}
 	}
 
@@ -62,11 +80,11 @@
 		@extend %flex-center;
 		@extend %cursor;
 		border-radius: 50%;
-		border: 1px solid rgba(grey, .3);
+		border: 1px solid rgba(grey, 0.3);
 		width: 6rem;
 		height: 6rem;
 		margin: 1rem;
-		transition: .4s $outBack;
+		transition: 0.4s $outBack;
 		overflow: hidden;
 
 		p {
@@ -74,26 +92,29 @@
 			opacity: 0;
 			font-size: 1.2rem;
 			font-weight: bold;
-			color: rgba(0,0,0,.5);
-			transition: .4s $outBack;
+			transition: 0.4s $outBack;
 		}
 
 		&:hover {
 			transform: scale(1.1);
 			p {
 				transform: none;
-				opacity: .8;
+				opacity: 0.5;
 			}
 		}
 	}
 
-
 	@include device(tab-land) {
-			&__by-tags, &__by-colors {
-				width: 82%;
-			}
+		&__by-tags,
+		&__by-colors {
+			width: 82%;
+		}
 	}
 	@include device(phone) {
-			padding: 8vh 0;
+		padding: 8vh 0;
+
+		&__tag {
+			margin: 1rem;
+		}
 	}
 }

@@ -1,34 +1,11 @@
 .grid-container {
 	display: grid;
-	// grid-template-rows: var(--header-height) minmax(calc(100vh - var(--header-height)), max-content);
-	// grid-template-columns: 32rem 1fr;
-	// grid-template-areas:
-	// 	"header header" // 8rem height
-	// 	"side main"; // 90vh or max-content height
-	// grid-template-rows: var(--header-height) 1fr;
 	grid-template-columns: var(--sidebar-width) 1fr;
-	// grid-template-rows: var(--header-height) minmax(calc(100vh - var(--header-height)), 1fr);
-	// grid-template-rows: var(--header-height) 1fr;
 	grid-template-rows: var(--header-height) minmax(calc(100vh - var(--header-height)), 1fr);
 	grid-template-areas:
 		"sidebar header" // 8rem height
 		"sidebar main"; // 90vh or max-content height
-
 	translate: all .3s ease-in-out;
-
-	// .grid-main-bg {
-	// 	position: absolute;
-	// 	top: 0;
-	// 	left: 0;
-	// 	width: 100%;
-	// 	height: 100%;
-	// 	background: rgba(0,0,0, .3);
-	// 	z-index: 100;
-	// 	pointer-events: visible;
-
-	// }
-
-	
 
 	@include device(tab) {
 		--sidebar-width: 0;
@@ -44,38 +21,19 @@
 
 			.sidebar {
 				opacity: 1 !important;
-				padding: 2rem !important;
+				// padding: 2rem !important;
 				box-shadow: 1px 0px 0px 0px var(--grey); 
 			}
 
 			.header { width: calc(100% - var(--sidebar-width)); }
-			
-			
-			
-
-
-			// .grid-main-bg {
-			// 	width: 0%;
-			// 	z-index: -1;
-			// 	pointer-events: none;
-			// }
 		}
-
-		
-
-		// grid-template-areas:
-		// 	"header header"
-		// 	"main main";
-
-		// 	.sidebar { transform: scaleX(0);}
 	}
 
 	@include device(phone-land) {
 		&--sidebar-show {
-			--sidebar-width: 70%;
+			--sidebar-width: 80vw;
 		}
 	}
-
 }
 
 

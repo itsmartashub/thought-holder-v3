@@ -94,7 +94,7 @@ export default {
 				state.defaultChecked.push(checkedTag.name) // on stalno pushuje ovo, na svaki klik na tagove
 			})
 
-			console.log('GET_DEFAULT_CHECKED', state.defaultChecked);
+			// console.log('GET_DEFAULT_CHECKED', state.defaultChecked);
 			return state.defaultChecked
 		}
 	},
@@ -170,13 +170,13 @@ export default {
 				querySnapshot.forEach(doc => {
 						notes.unshift(doc.data())
 				});
-				console.log('FETCH_NOTES', notes);
+				// console.log('FETCH_NOTES', notes);
 
 				commit('SET_NOTES', notes)
 				// commit('SET_ARCHIVED_NOTES')
 
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: 'Ooops, something went wrong!',
@@ -194,12 +194,12 @@ export default {
 				querySnapshot.forEach(doc => {
 						tags.push(doc.data())
 				});
-				console.log('FETCH_TAGS', tags);
+				// console.log('FETCH_TAGS', tags);
 
 				commit('SET_TAGS', tags)
 
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: 'Ooops, something went wrong!',
@@ -250,7 +250,7 @@ export default {
 				})
 
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: error.message,
@@ -268,16 +268,16 @@ export default {
 
 				snapshot.docChanges().forEach(change => {
 					if (change.type == 'added') {
-						console.log('Added notes: ', change.doc.data());
+						// console.log('Added notes: ', change.doc.data());
 						notes.unshift(change.doc.data())
 					}
 
 					if (change.type === "modified") {
-						console.log("Modified notes: ", change.doc.data());
+						// console.log("Modified notes: ", change.doc.data());
 					}
 
 					if (change.type === 'removed') {
-						console.log("Removed notes: ", change.doc.data());
+						// console.log("Removed notes: ", change.doc.data());
 						notes = notes.filter(note => note !== change.doc.data())
 					}
 
@@ -562,7 +562,7 @@ export default {
 
 		async POST_TAG({commit, dispatch}, {inputValue, idNote}) {
 			let docRef = db.collection('tags').doc()
-			console.log('ID NOTE', idNote);
+			// console.log('ID NOTE', idNote);
 			try {
 				await docRef.set({
 					id: docRef.id,
@@ -575,7 +575,7 @@ export default {
 				dispatch('UPD_CURATED_SEARCH_TAGS', inputValue)
 				commit('SET_SEARCH_TAGS', inputValue) // TODO ne znam treba li ovo
 
-				console.log('ID TAG-a', docRef.id);			
+				// console.log('ID TAG-a', docRef.id);			
 
 			} catch (error) {
 				console.log(error);
@@ -588,7 +588,7 @@ export default {
 			return docRef.update('note_ids', firebase.firestore.FieldValue.arrayUnion(idNote))
 			.then(() => {
 
-				console.log('UPDATE_TAGS_IN_NOTE');
+				// console.log('UPDATE_TAGS_IN_NOTE');
 				dispatch('FETCH_TAGS')
 
 				dispatch('ui/ACT_NOTIFICATION', {
@@ -613,7 +613,7 @@ export default {
 			return docRef.update('note_ids', firebase.firestore.FieldValue.arrayRemove(idNote))
 			.then(() => {
 
-				console.log('REMOVE_TAGS_FROM_NOTE');
+				// console.log('REMOVE_TAGS_FROM_NOTE');
 				dispatch('FETCH_TAGS')
 
 				dispatch('ui/ACT_NOTIFICATION', {
@@ -681,7 +681,7 @@ export default {
 			})
 			.then(() => {
 
-				console.log('UPDATE_TAGS');
+				// console.log('UPDATE_TAGS');
 				dispatch('FETCH_TAGS')
 
 				dispatch('ui/ACT_NOTIFICATION', {
@@ -719,7 +719,7 @@ export default {
 					alertClass: 'success'
 				})
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 				dispatch('ui/ACT_NOTIFICATION', {
 					display: true,
 					text: 'Tag can not be added!',

@@ -8,17 +8,28 @@
 
 html {
 	font-size: 62.5%;
-	box-sizing: border-box;
-	scroll-behavior: smooth;
+	-webkit-text-size-adjust: none;
+	touch-action: manipulation;
+	// touch-action: none;
+	overflow: -moz-scrollbars-none;
+	scrollbar-width: none;
+
+	@include device(phone-land) {
+		-ms-overflow-style: none;
+
+		// overflow: -moz-scrollbars-none;
+		// scrollbar-width: none;
+		&::-webkit-scrollbar {
+			display: none;
+			/* Safari and Chrome */
+		}
+	}
 }
 
-
-// html, html *::before, html *::after, body {
-// 	transition: all .5s;
-// }
-
-html, body {
+html,
+body {
 	scroll-behavior: smooth;
+	box-sizing: border-box;
 	width: 100%;
 	min-height: 100vh;
 	overflow-x: hidden;
@@ -26,14 +37,16 @@ html, body {
 }
 
 body {
-	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	background: var(--lgrey);
 	background: linear-gradient(var(--lgrey) 0%, var(--grey) 50%, var(--grey) 100%);
 	color: var(--black);
-	overflow-x: hidden;
+
+	@include device(phone-land) {
+		overflow-y: hidden;
+	}
 }
 
 ::selection {
@@ -41,11 +54,16 @@ body {
 	color: var(--grey);
 }
 
-ul { list-style-type: none; }
-a { text-decoration: none; color: inherit; }
+ul {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
 
 button {
-	border: none;
 	outline: none;
 }
 
@@ -56,7 +74,6 @@ form {
 }
 
 input {
-	border: none;
 	font-family: inherit;
 	border-bottom: 1px solid transparent;
 	border-radius: var(--radius);
@@ -87,72 +104,104 @@ i.icon-delete {
 	&:hover {
 		color: darken($red, 5%);
 	}
+
 	// color: $red;
 }
+
 i.icon-check {
 	&:hover {
 		color: darken($green, 5%);
 	}
 }
 
+i.icon-check,
+i.icon-delete {
+	transition: all $inOutQuad .2s;
+}
 
 
-::-webkit-scrollbar { 
+::-webkit-scrollbar {
 	width: .5rem;
 	height: .5rem;
 }
 
-::-webkit-scrollbar-track { 
-    background: var(--grey);
+::-webkit-scrollbar-track {
+	background: var(--grey);
 }
 
-::-webkit-scrollbar-thumb { 
-    background: var(--blue);
-    border-radius: 5rem;
+::-webkit-scrollbar-thumb {
+	background: var(--blue);
+	border-radius: 5rem;
 }
 
-::-webkit-scrollbar-corner { 
-    background: var(--grey);
+::-webkit-scrollbar-corner {
+	background: var(--grey);
 }
 
 .bp {
 	font-size: 2rem;
 	padding: .3rem 1rem;
-	display: block;
+	// display: none;
 	@extend %text-center;
 	@extend %pos-fix;
 	bottom: 5%;
 	left: 50%;
-	
-	&::before { content: 'desktop ' }
 
-	@include device(tab-land) { // width < 1200 ?
+	&::before {
+		content: 'desktop '
+	}
+
+	@include device(tab-land) {
+		// width < 1200 ?
 		background: purple;
-		&::before { content: 'tab-land'; }
+
+		&::before {
+			content: 'tab-land';
+		}
 	}
 
-	@include device(tab) { // width < 900 ?
+	@include device(tab) {
+		// width < 900 ?
 		background: teal;
-		&::before { content: 'tab'; }
+
+		&::before {
+			content: 'tab';
+		}
 	}
 
-	@include device(phone-land) { // width < 600 ?
+	@include device(phone-land) {
+		// width < 600 ?
 		background: lightgreen;
-		&::before { content: 'phone-land'; }
+
+		&::before {
+			content: 'phone-land';
+		}
 	}
 
-	@include device(phone) { // width < 500 ?
+	@include device(phone) {
+		// width < 500 ?
 		background: orangered;
-		&::before { content: 'phone'; }
+
+		&::before {
+			content: 'phone';
+		}
 	}
 
-	@include device(phone-ant) { // width < 320 ?
+	@include device(phone-ant) {
+		// width < 320 ?
 		background: coral;
-		&::before { content: 'phone-ant'; }
+
+		&::before {
+			content: 'phone-ant';
+		}
 	}
-	
-	@include device(big) { // width > 1920 ?
+
+	@include device(big) {
+		// width > 1920 ?
 		background: red;
-		&::before { content: 'big'; }
+
+		&::before {
+			content: 'big';
+		}
 	}
 }

@@ -28,6 +28,9 @@
 	@if $breakpoint == phone-land {
 		@media only screen and (max-width: 37.5em) { @content };  // 600/16
 	}
+	@if $breakpoint == phone-land-orientation {
+		@media only screen and (max-width: 37.5em) and (orientation: landscape) { @content };  // 600/16
+	}
 	@if $breakpoint == tab {
 		@media only screen and (max-width: 56.25em) { @content };  // 900/16
 	}
