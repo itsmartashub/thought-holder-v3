@@ -1,12 +1,8 @@
 .no-notes-wrapper {
-	// height: 90vh;
 	@extend %flex-center;
-	// flex-direction: column;
-	// justify-content: center;
 }
 
 .no-notes {
-	// @extend .flex;
 	@extend %flex-center;
 	flex-direction: column;
 	justify-content: center;
@@ -19,7 +15,7 @@
 	.icon-with-after {
 		@extend %pos-rel;
 		margin-bottom: 2rem;
-		transition: 0.4s $outBack;
+		@extend %transition-outBack;
 		transition-delay: 0.2s;
 
 		&::after {
@@ -29,8 +25,8 @@
 			width: 130%;
 			background: var(--blue);
 			opacity: 0.1;
-			border-radius: var(--radius);
-			transition: 0.5s $outBack;
+			@extend %radius-default;
+			@extend %transition-outBack;
 		}
 
 		&:hover {
@@ -48,8 +44,8 @@
 
 	h2 {
 		text-transform: uppercase;
-		font-weight: 500;
+		@extend %font-500;
 		font-size: 2.8rem;
-		text-align: center;
+		@extend %text-center;
 	}
 }

@@ -1,12 +1,12 @@
 <template>
 	<aside class="sidebar">
-		<router-link to="/" class="sidebar__top">
+		<a href="/" class="sidebar__top">
 			<div class="logo">
 				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong
 					>Holder</strong
 				>
 			</div>
-		</router-link>
+		</a>
 
 		<ul class="sidebar__ul">
 			<router-link tag="li" :to="{ name: 'home' }" class="sidebar__li">

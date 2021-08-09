@@ -106,7 +106,6 @@ export default {
 			let arrTags = this.GET_TAGS.filter(
 				(tag) => tag.name == this.inputAddTag
 			) // ako ne andje nista onda je [], ako nadje onda ima nesto
-			console.log(arrTags)
 			if (this.inputAddTag != "" && arrTags.length == 0) {
 				this.$store.dispatch("ADD_TAG", this.inputAddTag)
 				this.inputAddTag = ""
@@ -126,7 +125,6 @@ export default {
 		},
 
 		deleteTag(idTag) {
-			console.log("DELETE TAG", idTag)
 			if (
 				confirm(
 					"We’ll delete this label and remove it from all of your Keep notes. Your notes won’t be deleted."
@@ -138,7 +136,6 @@ export default {
 
 		updateTag(tag, key) {
 			if (this.currKey == key && tag.name != this.input) {
-				console.log(this.input)
 				this.$store.dispatch("UPDATE_TAG", {
 					idTag: tag.id,
 					newTagName: this.input,
@@ -148,12 +145,9 @@ export default {
 
 		focusEdit(currKey, e) {
 			this.currKey = currKey
-			// this.input = e.target.value
-			// console.log(this.input);
 		},
 
 		inputValue(e) {
-			// console.log(e.target.value);
 			this.input = e.target.value
 		},
 

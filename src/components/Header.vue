@@ -156,7 +156,6 @@ export default {
 
 		search() {
 			this.INPUT_SEARCH = this.inputSearch
-			console.log(this.INPUT_SEARCH)
 
 			// this.$store.commit('SEARCHED_NOTES', this.INPUT_SEARCH)
 		},

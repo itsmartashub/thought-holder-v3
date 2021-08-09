@@ -1,25 +1,19 @@
 .preloader {
-	position: fixed;
+	@extend %pos-fix;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100vh;
 	@extend %flex-center;
 	background: var(--blue);
-	// background: radial-gradient(#CECECE, #fff);
-	background: radial-gradient(lighten($blue, 10%), $blue);
-	overflow: hidden;
+	@extend %overflow-hidden;
 	z-index: 200000;
-	// clip-path: circle(100% at 50% 50%);
-	// transition-delay: opacity 2.5s !important;
-	// transform-origin: center bottom;
-
 
 	svg {
 		width: 5vw;
 		height: auto;
 		stroke-width: 1px;
-		stroke: white;
+		stroke: var(--white);
 	}
 
 	&__container {
@@ -27,35 +21,28 @@
 		width: 35rem;
 		height: 35rem;
 		border-radius: 100%;
-		// background: linear-gradient(165deg, rgba(255, 255, 255, 1) 0%, rgb(220, 220, 220) 40%, rgb(170, 170, 170) 98%, rgb(10, 10, 10) 100%);
-		background: linear-gradient(165deg, rgba($blue, 1) 0%, lighten($blue, 10%) 100%);
+		background: linear-gradient(
+			165deg,
+			rgba($blue, 1) 0%,
+			lighten($blue, 10%) 100%
+		);
 	}
 
-	&__item:before {
-		@extend %pos-abs;
-		content: '';
-		width: 100%;
-		height: 100%;
+	&__item::before {
+		@extend %after;
 		border-radius: 100%;
-		border-bottom: 0 solid #ffffff05;
-
-		box-shadow:
-			0 -10px 20px 15px #ffffff40 inset,
-			0 -5px 15px 10px #ffffff50 inset,
-			0 -2px 5px #ffffff80 inset,
-			0 -3px 2px #ffffffBB inset,
-			0 2px 0px $cgrey,
-			0 2px 3px $cgrey,
-			0 5px 5px #ffffff90,
-			0 10px 15px #ffffff60,
-			0 10px 20px 15px #ffffff40;
+		box-shadow: 0 -10px 20px 15px var(--h4_bg) inset,
+			0 -5px 15px 10px #ffffff50 inset, 0 -2px 5px #ffffff80 inset,
+			0 -3px 2px var(--lgrey) inset, 0 2px 0px $cgrey, 0 2px 3px $cgrey,
+			0 5px 5px #ffffff90, 0 10px 15px #ffffff60,
+			0 10px 20px 15px var(--h4_bg);
 		filter: blur(3px);
 		animation: 2s rotate linear infinite;
 	}
 
 	@keyframes rotate {
 		100% {
-			transform: rotate(360deg)
+			transform: rotate(360deg);
 		}
 	}
 }

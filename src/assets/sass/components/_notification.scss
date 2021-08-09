@@ -1,5 +1,5 @@
 .notification {
-	position: fixed;
+	@extend %pos-fix;
 	bottom: 5%;
 	left: 5%;
 	z-index: 10000;
@@ -8,35 +8,43 @@
 	width: 25%;
 	height: auto;
 	box-shadow: var(--shadow);
-	border-radius: var(--radius);
+	@extend %radius-default;
 
 	.position-wrapper {
-		position: relative;
-		display: flex;
+		@extend %pos-rel;
+		@extend %flex;
 		align-items: center;
 		word-wrap: wrap;
 	}
 
 	i:nth-of-type(2) {
 		@extend %cursor;
-		position: absolute;
+		@extend %pos-abs;
 		top: 0;
 		right: 0;
 		transform-origin: 50% 50%;
-		@extend .transition-3;
+		@extend %transition-inOutBack;
 
-		&:hover { transform: scale(1.3); }
+		&:hover {
+			transform: scale(1.3);
+		}
 	}
 
-	p { padding: 0 2rem; }
+	p {
+		padding: 0 2rem;
+	}
 
-	@include device(tab-land) { width: 50%; }
-	@include device(phone-land) { width: 90%; }
+	@include device(tab-land) {
+		width: 50%;
+	}
+	@include device(phone-land) {
+		width: 90%;
+	}
 }
 
 .success {
 	background: var(--color-success) !important;
-	color: rgba(0,0,0,.8);
+	color: rgba(0, 0, 0, 0.8);
 }
 
 .warning {

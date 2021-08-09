@@ -1,6 +1,6 @@
 .new-note {
 	@extend .note;
-	padding: 1.4rem 2.8rem;
+	padding: 2rem 2.8rem;
 	width: calc(100% / 2 + 20rem);
 	z-index: 5;
 	border: 2px solid var(--lgrey);
@@ -57,12 +57,12 @@
 
 	&__float-btn {
 		--float-btn-size: 6rem;
-		position: fixed;
+		@extend %pos-fix;
 		bottom: 5%;
 		right: 5%;
 		width: var(--float-btn-size);
 		height: var(--float-btn-size);
-		border-radius: 50%;
+		@extend %radius-50;
 		display: none;
 		justify-content: center;
 		align-items: center;

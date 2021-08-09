@@ -1,70 +1,6 @@
-.transition-1 {
-	transition: 0.1s ease-in-out;
-}
-.transition-2 {
-	transition: 0.2s $cub-1;
-}
-
 .transition-3 {
 	// transition: 0.3s $cub-1;
 	transition: 0.5s $inOutBack;
-}
-
-.translateX {
-	transform: translateX(-32rem) !important;
-	width: 0 !important;
-}
-
-.i-color-blue {
-	color: var(--blue);
-	position: relative;
-
-	&::after {
-		@extend %after;
-		top: 0;
-		left: 0;
-		background: var(--h4_bg);
-		transform: scale(1.2);
-		border-radius: 8px;
-		@extend .transition-3;
-	}
-
-	&:hover::after {
-		transform: scale(0);
-	}
-}
-
-.flex {
-	display: flex;
-	align-items: center;
-}
-
-.modal-background {
-	// TODO dodati onaj shadow kao sto je traversy stavljao za kopiju netflixa
-	position: fixed;
-	z-index: 70;
-	width: 100vw;
-	height: 100%;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: var(--modal-bg);
-	backdrop-filter: blur(2px);
-	box-shadow: inset 3rem 10rem 25rem var(--modal-bg),
-		inset -3rem -10rem 25rem var(--modal-bg);
-}
-
-// .open-note-footer {
-// 	grid-auto-flow: column;
-// 	display: grid;
-// 	grid-gap: 2.5vw;
-// 	align-items: center;
-// 	width: auto;
-// }
-.opacity-1 {
-	opacity: 1 !important;
-	visibility: visible !important;
 }
 
 //? COLOR PALLETE CLASSES
@@ -93,7 +29,6 @@
 		color: var(--cred) !important;
 		border-color: var(--cred) !important;
 	}
-	// .note__pin::after, .i-color-blue::after { background: var(--rgba-cred) !important;}
 }
 
 .blue {

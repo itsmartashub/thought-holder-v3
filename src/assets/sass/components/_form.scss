@@ -1,68 +1,49 @@
 .form {
 	padding: 6rem 8rem;
-	// padding: 6rem 10vw;
 	background: var(--white);
-	// width: 80vw;
-	display: grid;
-	justify-content: center;
+	@extend %grid-center;
 	justify-items: center;
-	// display: flex;
-	// align-items: center;
-	// flex-direction: column;
-	// justify-content: center;
-	border-radius: var(--radius);
-	box-shadow: 0 3px 5px rgba(var(--black), .1);
+	justify-content: center;
+	@extend %radius-default;
+	box-shadow: 0 3px 5px rgba(var(--black), 0.1);
 
 	.form-group {
-
-		// background: red;
-		// display: flex;
-		// flex-direction: column;
-		// justify-content: center;
 		width: 100%;
 
-		&:not(:last-child) { margin-bottom: 2.5rem; }
+		&:not(:last-child) {
+			margin-bottom: 2.5rem;
+		}
 
 		.input-field {
-			position: relative;
-			@extend .flex;
+			@extend %pos-rel;
+			@extend %flex;
+			align-items: center;
 		}
 
 		.input-icon {
 			color: var(--blue);
-			position: absolute;
+			@extend %pos-abs;
 			left: 3%;
 		}
 
 		input {
 			padding: 1.8rem 5rem;
-			border-radius: var(--radius);
+			@extend %radius-default;
 			border: 1px solid var(--grey);
 			background: var(--grey);
-			margin: .5rem 0;
-
-			// width: 20vw;
-			// width: 100%;
-
-			// &::before {
-			// 	content: 'f1ee'
-			// }
-
+			margin: 0.5rem 0;
 
 			&:focus {
 				outline: none;
-				background: rgba(var(--blue), .2);
+				background: rgba(var(--blue), 0.2);
 			}
 		}
 
 		label {
-			// opacity: .7;
 			font-size: 1.28rem;
 			font-weight: inherit;
 			color: var(--blue);
-			// display: block;
-			// transform: translateY(-440%);
-			transition: all .3s;
+			transition: all 0.3s;
 		}
 
 		// TODO sredi ovo! ne radi
@@ -77,44 +58,44 @@
 		color: $red;
 		font-size: 1.4rem;
 		font-weight: normal;
-		// margin-top: -1rem;
 	}
 
 	.btn--blue {
 		--btn-height: 6rem;
 		width: 100%;
 		margin-top: 5vh;
-		// box-shadow: 0 5px 12px rgba(0,0,0,.5);
-		// box-shadow: 0 3px 5px rgba(var(--blue), .7);
-		// box-shadow: 0px 4px 8px -4px rgba(var(--black), .8);
+	}
+
+	.underline-blue {
+		color: var(--blue);
+		@extend %cursor;
+		@extend %pos-rel;
+		&::after {
+			content: "";
+			@extend %pos-abs;
+			bottom: -10%;
+			left: 0;
+			width: 100%;
+			height: 1.5px;
+			background: var(--blue);
+			transform-origin: left center;
+			transition: 0.3s transform ease-in-out;
+		}
+
+		&:hover::after {
+			transform: scaleX(0);
+		}
 	}
 
 	.register-redirect {
-		font-weight: 500;
-		span {
-			color: var(--blue);
-			position: relative;
-			&::after {
-				content: '';
-				position: absolute;
-				bottom: -10%;
-				left: 0;
-				width: 100%;
-				height: 1.5px;
-				background: var(--blue);
-				transform-origin: left center;
-				transition: .3s transform ease-in-out;
-			}
-
-			&:hover::after { transform: scaleX(0); }
-		}
+		@extend %font-500;
 	}
 
 	.header__logo {
 		font-size: 2.5rem;
 		color: var(--blue);
-		font-weight: 500;
-		text-align: center;
+		@extend %font-500;
+		@extend %text-center;
 		padding: 1rem 0;
 
 		i {
@@ -122,7 +103,6 @@
 		}
 
 		strong {
-			// color: darken(var(--blue), 10%);
 			color: var(--black);
 		}
 	}
@@ -134,15 +114,14 @@
 	}
 
 	.invalid {
-		border: 1px solid rgba($red, .1) !important;
-		background: rgba($red, .1) !important;
-		// background: rgba(orangered, .1) !important;
+		border: 1px solid rgba($red, 0.1) !important;
+		background: rgba($red, 0.1) !important;
 	}
 
 	.before-btn-txt {
 		font-size: 1.4rem;
-		opacity: .8;
-		text-align: center;
+		opacity: 0.8;
+		@extend %text-center;
 	}
 
 	@include device(tab) {

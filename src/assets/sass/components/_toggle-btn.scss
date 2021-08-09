@@ -1,27 +1,30 @@
 .toggle-btn {
 	--toggle-circle-size: 1.8rem;
 
-	&__chb{ display: none; }
+	&__chb {
+		display: none;
+	}
 
 	&__label {
-		cursor: pointer;
+		@extend %cursor;
 		width: 5.3rem;
 		height: 2.5rem;
-		@extend .flex;
-		border-radius: var(--radius);
+		@extend %flex;
+		align-items: center;
+		@extend %radius-default;
 		background: var(--grey);
-		position: relative;
-		transition: .3s ease-in-out;
+		@extend %pos-rel;
+		transition: 0.3s ease-in-out;
 
 		&::after {
-			content: '';
-			position: absolute;
-			left: .5rem;
+			content: "";
+			@extend %pos-abs;
+			left: 0.5rem;
 			width: var(--toggle-circle-size);
 			height: var(--toggle-circle-size);
 			border-radius: 10rem;
 			background: var(--blue);
-			transition: .3s ease-in-out;
+			transition: 0.3s ease-in-out;
 		}
 	}
 }
@@ -32,14 +35,13 @@
 }
 
 .toggle-btn__chb:checked + .toggle-btn__label::after {
-	left: calc(100% - .5rem);
+	left: calc(100% - 0.5rem);
 	transform: translateX(-100%);
 	// background: var(--white);
 	background: var(--lgrey);
-
 }
 
 .toggle-btn__label:active::after {
-	transform: scaleX(2.5) scaleY(.5);
+	transform: scaleX(2.5) scaleY(0.5);
 	transform-origin: right center;
 }

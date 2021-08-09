@@ -1,34 +1,10 @@
 .notes {
 	--note-width-min: 22rem;
 
-	// &__pinned-title {
-	// 	letter-spacing: 1px;
-	// 	// font-weight: 800;
-	// 	text-transform: uppercase;
-	// 	font-size: 1.3rem;
-	// 	margin-bottom: 4rem;
-
-	// 	i {
-	// 		display: inline-block;
-	// 		line-height: 1;
-	// 		padding: 0 0.3rem;
-	// 		font-size: 1.4rem;
-	// 		transform: rotate(-20deg) scale(2) translateY(-35%);
-	// 		transition: all 0.3s ease, transform 0.3s 0.1s;
-	// 	}
-	// 	&:hover {
-	// 		i {
-	// 			padding: 0;
-	// 			font-size: 0;
-	// 			transform: none;
-	// 		}
-	// 	}
-	// }
-
 	.note {
 		font-size: 1.35rem;
 		&__body {
-			overflow: hidden;
+			@extend %overflow-hidden;
 		}
 	}
 
@@ -46,7 +22,6 @@
 	@extend %pos-rel;
 	padding: 8vh 5vw;
 	overflow-x: hidden;
-	@extend .transition-3;
 
 	.notes {
 		@extend %grid-notes;
@@ -58,7 +33,7 @@
 }
 
 .notes-home {
-	display: grid;
+	@extend %grid;
 	align-content: center;
 	grid-gap: calc(100vh / 10);
 

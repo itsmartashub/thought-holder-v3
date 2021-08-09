@@ -2,26 +2,36 @@
 	<div id="app">
 		<Loader v-if="isLoading" />
 		<Notification />
-		<transition name="fadey" mode="out-in">
-			<router-view v-if="homeDisplay"></router-view>
+
+		<transition name="bounce" mode="in-out">
+			<Obvio v-if="isObvio" />
 		</transition>
-		<span class="bp"></span>
+
+		<router-view v-if="homeDisplay"></router-view>
+		<!-- <span class="bp"></span> -->
 	</div>
 </template>
 
 <script>
 import Notification from "@/components/Notification"
 import Loader from "@/components/Loader"
+import Obvio from "@/components/Obvio"
 
 export default {
 	name: "app",
-	components: { Notification, Loader },
+	components: { Notification, Loader, Obvio },
 
 	data() {
 		return {
 			isLoading: true,
 			homeDisplay: false,
 		}
+	},
+
+	computed: {
+		isObvio() {
+			return this.$store.getters["ui/GET_IS_OBVIO"]
+		},
 	},
 
 	methods: {
@@ -35,8 +45,6 @@ export default {
 
 	mounted() {
 		this.showToggle()
-		// this.isLoading = false
-		// this.IS_LOADING = false;
 	},
 }
 </script>

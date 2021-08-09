@@ -1,0 +1,15 @@
+.modal-background {
+	// TODO dodati onaj shadow kao sto je traversy stavljao za kopiju netflixa
+	@extend %pos-fix;
+	z-index: 70;
+	width: 100vw;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: var(--modal-bg);
+	backdrop-filter: blur(2px);
+	box-shadow: inset 3rem 10rem 25rem var(--modal-bg),
+		inset -3rem -10rem 25rem var(--modal-bg);
+}

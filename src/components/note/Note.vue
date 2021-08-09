@@ -258,15 +258,10 @@ export default {
 			this.archived = false
 			this.OPEN_NOTE = false
 			this.OPEN_NOTE_BG = false
-			// this.arrTags = []
-			// this.tagsOpen = false
 		},
 
 		onPinned(idNote) {
 			this.pinned = !this.pinned
-			// this.archived = false
-
-			console.log(this.pinned)
 
 			this.$store.dispatch("UPDATE_PINNED", {
 				idNote: idNote,
@@ -274,7 +269,6 @@ export default {
 			})
 
 			this.closeNote()
-			// console.log(this.pinned);
 		},
 
 		onArchived(idNote) {
@@ -298,7 +292,6 @@ export default {
 					archived: this.archived,
 				}
 
-				console.log(noteData)
 				this.$store.dispatch("UPDATE_NOTE", {
 					idNote: this.note.id,
 					noteData,
@@ -346,7 +339,6 @@ export default {
 		displayCreateNewTag() {
 			if (this.ARR_ONLY_CURATED_SEARCH.length === 0) {
 				this.create = true
-				console.log("CREATE TAG")
 			} else {
 				this.create = false
 			}
@@ -361,8 +353,6 @@ export default {
 		},
 
 		checkTag(tag) {
-			console.log("ID TAG: ", tag.id)
-			console.log("ID NOTE: ", this.note.id)
 			// console.log(this.inputChecks); // TODO treba da dodam idNote ove gde cekiram u sve te tagove sto cekiram, tj u svaki clan this.inputCheck niza, dakle update arrTags.find(tag => tag.id == tag.id).node_ids[...this.inputChecks] MA NE VALJA
 
 			// console.log(this.inputChecks);

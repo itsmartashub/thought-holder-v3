@@ -2,7 +2,7 @@
 	padding: 3rem 4rem;
 	background: var(--white);
 	box-shadow: var(--shadow_modal);
-	border-radius: var(--radius);
+	@extend %radius-default;
 	position: fixed !important;
 	top: 50%;
 	left: 50%;
@@ -38,7 +38,7 @@
 		margin-bottom: 1.5rem;
 		// padding: .5rem;
 		font-size: 1.3rem;
-		@extend .transition-2;
+		@extend %transition-outSmooth;
 		overflow-x: hidden;
 
 		&:hover {
@@ -52,7 +52,8 @@
 		}
 	}
 	label {
-		@extend .flex;
+		@extend %flex;
+		align-items: center;
 		margin: 0 2rem;
 	}
 
@@ -71,7 +72,7 @@
 	.icon-check {
 		opacity: 0;
 		visibility: hidden;
-		@extend .transition-3;
+		@extend %transition-inOutCirc;
 	}
 
 	// @include device(phone-land) { width: 90vw; }

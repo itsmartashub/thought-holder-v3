@@ -1,144 +1,133 @@
-import firebase from '@/firebase';
+import firebase from "@/firebase"
 // import 'firebase/auth'
-import db from '@/db';
-import router from '@/router'
+import db from "@/db"
+import router from "@/router"
 // import * as ui from './ui'
 
 export default {
 	state: {
 		user: {},
 		isLoggedIn: false,
-		loginServerErr: '',
-		signupServerErr: '',
+		loginServerErr: "",
+		signupServerErr: "",
 	},
 
 	getters: {
-		GET_USER: state => state.user,
+		GET_USER: (state) => state.user,
 
-		IS_LOGGED_IN: state => state.isLoggedIn,
+		IS_LOGGED_IN: (state) => state.isLoggedIn,
 
-		GET_LOGIN_SERVER_ERR: state => state.loginServerErr,
+		GET_LOGIN_SERVER_ERR: (state) => state.loginServerErr,
 
-		GET_SIGNUP_SERVER_ERR: state => state.signupServerErr,
+		GET_SIGNUP_SERVER_ERR: (state) => state.signupServerErr,
 	},
 
-
 	mutations: {
-		SET_USER (state, user) {
-			if(user) {
-				state.user = user,
-				state.isLoggedIn = true
+		SET_USER(state, user) {
+			if (user) {
+				;(state.user = user), (state.isLoggedIn = true)
 			} else {
-				state.user = {},
-				state.isLoggedIn = false
+				;(state.user = {}), (state.isLoggedIn = false)
 			}
 		},
 
-		SET_LOGIN_SERVER_ERR (state, errServer) {
+		SET_LOGIN_SERVER_ERR(state, errServer) {
 			if (errServer) {
 				state.loginServerErr = errServer
 			}
 		},
 
-		SET_SIGNUP_SERVER_ERR (state, errServer) {
+		SET_SIGNUP_SERVER_ERR(state, errServer) {
 			if (errServer) {
 				state.signupServerErr = errServer
 			}
-		}
+		},
 	},
 
-
 	actions: {
-		async SIGNUP({commit, dispatch}, formData) {
+		async SIGNUP({ commit, dispatch }, formData) {
 			try {
-				const results = await firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
-				// console.log(results)
+				const results = await firebase
+					.auth()
+					.createUserWithEmailAndPassword(
+						formData.email,
+						formData.password
+					)
 
-				// let ref = db.collection('users')
-
-				// console.log(ref)
-				await db.collection('users').doc(results.user.uid).set({
-					auth_id: results.user.uid,
-					email: results.user.email
-				})
-
-				// const docRef = await ref.add({
-				// 	auth_id: results.user.uid,
-				// 	email: results.user.email
-				// })
-
-				// console.log(docRef);
+				await db
+					.collection("users")
+					.doc(results.user.uid)
+					.set({
+						auth_id: results.user.uid,
+						email: results.user.email,
+					})
 
 				// TODO dodati notification alert da smo successful signin i da se ulogujemo sa svojim podacima
 
-				// router.replace({ name: 'login' })
-				await router.replace({ name: 'home' })
+				await router.replace({ name: "home" })
 
-				await dispatch('ui/ACT_NOTIFICATION', {
+				await dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'You successfuly signed in!',
-					alertClass: 'success'
+					text: "You successfuly signed in!",
+					alertClass: "success",
 				})
-	
-
 			} catch (error) {
 				// console.error(error.message) // TODO dodati notification alert
-				commit('SET_SIGNUP_SERVER_ERR', error.message)
+				commit("SET_SIGNUP_SERVER_ERR", error.message)
 
-				dispatch('ui/ACT_NOTIFICATION', {
+				dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
 					text: error.message,
-					alertClass: 'warning'
+					alertClass: "warning",
 				})
 			}
 		},
 
-		async LOGIN ({commit, dispatch}, {email, password}) { // todo ovo treba iz Login.vue
+		async LOGIN({ commit, dispatch }, { email, password }) {
+			// todo ovo treba iz Login.vue
 			try {
-				const results = await firebase.auth().signInWithEmailAndPassword(email, password)
-				// console.log(results.user)
-				
-				if(results.user) {
-					commit('SET_USER', results.user)
-					router.replace({ name: 'home' })
+				const results = await firebase
+					.auth()
+					.signInWithEmailAndPassword(email, password)
 
-					dispatch('ui/ACT_NOTIFICATION', {
+				if (results.user) {
+					commit("SET_USER", results.user)
+					router.replace({ name: "home" })
+
+					dispatch("ui/ACT_NOTIFICATION", {
 						display: true,
-						text: 'Successfully logged in!',
-						alertClass: 'success'
+						text: "Successfully logged in!",
+						alertClass: "success",
 					})
 				}
-				
 			} catch (error) {
-				// console.log(error.message)
-				commit('SET_LOGIN_SERVER_ERR', error.message)
+				commit("SET_LOGIN_SERVER_ERR", error.message)
 
-				dispatch('ui/ACT_NOTIFICATION', {
+				dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
 					text: error.message,
-					alertClass: 'warning'
+					alertClass: "warning",
 				})
 			}
 		},
 
-		async LOGOUT ({dispatch}) {
+		async LOGOUT({ dispatch }) {
 			try {
 				await firebase.auth().signOut()
-				router.replace({ name: 'login' })
+				router.replace({ name: "login" })
 
-				dispatch('ui/ACT_NOTIFICATION', {
+				dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
-					text: 'Successfully logged out',
-					alertClass: 'success'
+					text: "Successfully logged out",
+					alertClass: "success",
 				})
 			} catch (error) {
-				dispatch('ui/ACT_NOTIFICATION', {
+				dispatch("ui/ACT_NOTIFICATION", {
 					display: true,
 					text: error.message,
-					alertClass: 'warning'
+					alertClass: "warning",
 				})
 			}
-		
-		}
-	}
+		},
+	},
 }

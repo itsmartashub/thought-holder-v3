@@ -41,7 +41,11 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	background: var(--lgrey);
-	background: linear-gradient(var(--lgrey) 0%, var(--grey) 50%, var(--grey) 100%);
+	background: linear-gradient(
+		var(--lgrey) 0%,
+		var(--grey) 50%,
+		var(--grey) 100%
+	);
 	color: var(--black);
 
 	@include device(phone-land) {
@@ -68,9 +72,8 @@ button {
 }
 
 form {
-	// display: flex;
-	// align-items: center;
-	@extend .flex;
+	display: flex;
+	align-items: center;
 }
 
 input {
@@ -94,7 +97,7 @@ input {
 }
 
 i {
-	padding: 0 .5rem;
+	padding: 0 0.5rem;
 	@extend %cursor;
 	font-size: 1.8rem;
 	// line-height: 1;
@@ -116,13 +119,12 @@ i.icon-check {
 
 i.icon-check,
 i.icon-delete {
-	transition: all $inOutQuad .2s;
+	transition: all $inOutQuad 0.2s;
 }
 
-
 ::-webkit-scrollbar {
-	width: .5rem;
-	height: .5rem;
+	width: 0.5rem;
+	height: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -140,7 +142,7 @@ i.icon-delete {
 
 .bp {
 	font-size: 2rem;
-	padding: .3rem 1rem;
+	padding: 0.3rem 1rem;
 	// display: none;
 	@extend %text-center;
 	@extend %pos-fix;
@@ -148,7 +150,7 @@ i.icon-delete {
 	left: 50%;
 
 	&::before {
-		content: 'desktop '
+		content: "desktop ";
 	}
 
 	@include device(tab-land) {
@@ -156,7 +158,7 @@ i.icon-delete {
 		background: purple;
 
 		&::before {
-			content: 'tab-land';
+			content: "tab-land";
 		}
 	}
 
@@ -165,7 +167,7 @@ i.icon-delete {
 		background: teal;
 
 		&::before {
-			content: 'tab';
+			content: "tab";
 		}
 	}
 
@@ -174,7 +176,7 @@ i.icon-delete {
 		background: lightgreen;
 
 		&::before {
-			content: 'phone-land';
+			content: "phone-land";
 		}
 	}
 
@@ -183,7 +185,7 @@ i.icon-delete {
 		background: orangered;
 
 		&::before {
-			content: 'phone';
+			content: "phone";
 		}
 	}
 
@@ -192,7 +194,7 @@ i.icon-delete {
 		background: coral;
 
 		&::before {
-			content: 'phone-ant';
+			content: "phone-ant";
 		}
 	}
 
@@ -201,7 +203,7 @@ i.icon-delete {
 		background: red;
 
 		&::before {
-			content: 'big';
+			content: "big";
 		}
 	}
 }

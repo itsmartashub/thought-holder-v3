@@ -1,9 +1,5 @@
 <template>
-	<!-- <section class="note newNote new-note m-auto" :class="setColor"> -->
 	<section class="new-note" :class="setColor">
-		<!-- <section class="new-note m-auto" :class="mobileNewNoteShow ? 'new-note m-auto new-note--open' : '' " :style="{backgroundColor: setColor}"> -->
-		<!-- <section :class="is_mobile_newnote_open.className" :style="{backgroundColor: setColor}"> -->
-
 		<header class="new-note__title-container" @click="onTitleClicked">
 			<div
 				class="note__title"
@@ -26,7 +22,6 @@
 			tag="article"
 			class="new-note__after-title-content"
 		>
-			<!-- <div v-if="titleClicked"> -->
 			<div
 				class="new-note__body mt-3"
 				ref="refContent"
@@ -42,7 +37,6 @@
 			<footer class="new-note__footer mt-1" v-if="titleClicked" :key="3">
 				<div class="new-note__options">
 					<div class="new-note__pallete">
-						<!-- <span class="mdi mdi-palette" title="Change color"></span> -->
 						<i class="mdi mdi-palette" title="Change color"></i>
 
 						<div class="new-note__colors-container">
@@ -55,7 +49,6 @@
 						</div>
 					</div>
 
-					<!-- <i class="fas fa-archive" title="Archive" @click="onArchived" :class="{'i-color-blue': archived}"></i> -->
 					<i
 						class="mdi mdi-package-down"
 						title="Archive"
@@ -71,7 +64,10 @@
 					>
 						add note
 					</button>
-					<button class="btn mt-1 mb-1" @click.prevent="closeNote">
+					<button
+						class="btn btn--outline mt-1 mb-1"
+						@click.prevent="closeNote"
+					>
 						close
 					</button>
 				</div>
@@ -87,12 +83,6 @@ import NoteTags from "@/components/note/NoteTags"
 export default {
 	name: "newNote",
 	components: { NoteColors, NoteTags },
-	//
-	// props: {
-	// show_new_note: Boolean,
-	// title_clicked: Boolean
-	// className: String
-	// },
 
 	data() {
 		return {
@@ -110,31 +100,10 @@ export default {
 				{ id: 5, name: "purple" },
 				{ id: 6, name: "orange" },
 			],
-
-			// isNoteAddTagsOpen: false,
-
-			// titleClicked: true
-			// titleClicked: this.title_clicked,
-			// showNewNote: this.show_new_note,
 		}
 	},
 
 	computed: {
-		// mobileNewNoteShow: {
-		// 	get() { return this.showNewNote },
-		// 	set(newValue) { this.showNewNote = newValue }
-		// }
-		// is_mobile_newnote_open: {
-		// 	get() {
-		// 		return this.$store.getters['ui/GET_MOBILE_NEWNOTE_OPEN']
-		// 	},
-		// 	set(newValue) {
-		// 		this.$store.commit('ui/SET_MOBILE_NEWNOTE_OPEN', {
-		// 			display: newValue
-		// 		})
-		// 	}
-		// }
-
 		titleClicked: {
 			get() {
 				return this.$store.getters["ui/GET_MOBILE_NEWNOTE_OPEN"]
@@ -216,14 +185,11 @@ export default {
 					color: this.setColor,
 					pinned: this.pinned,
 					archived: this.archived,
-					// arrTags: this.arrTags
 				}
 
-				console.log(note)
 				this.$store.dispatch("POST_NOTE", note)
 
 				// TODO if tagss, add tags
-
 				this.resetNote()
 				document
 					.querySelector(".new-note__wrapper")
@@ -243,7 +209,6 @@ export default {
 		},
 
 		closeNote() {
-			// console.log('CLOSE  NOTE')
 			this.resetNote()
 			this.titleClicked = false
 			document
@@ -254,14 +219,7 @@ export default {
 
 		onTitleClicked() {
 			this.titleClicked = true
-			// this.$nextTick(() => {
-			// 	this.$refs.refContent.focus()
-			// })
 		},
-
-		// updateNoteTagsOpen(isNoteAddTagsOpen) {
-		// 	this.isNoteAddTagsOpen = isNoteAddTagsOpen
-		// }
 	},
 }
 </script>

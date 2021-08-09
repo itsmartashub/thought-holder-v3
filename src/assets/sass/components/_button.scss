@@ -3,7 +3,7 @@
 	&:link,
 	&:visited {
 		--btn-height: 5rem;
-		border-radius: var(--radius);
+		@extend %radius-default;
 		padding: 0rem 3rem;
 		height: var(--btn-height);
 		line-height: var(--btn-height);
@@ -16,7 +16,7 @@
 		@extend %text-center;
 		@extend %cursor;
 		text-transform: uppercase;
-		transition: 0.4s $outSmooth;
+		@extend %transition-outSmooth;
 	}
 
 	&:active,

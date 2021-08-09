@@ -2,7 +2,7 @@
 	<section class="signup">
 		<form class="form">
 			<div class="logo">
-				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong
+				<i class="mdi mdi-format-strikethrough"></i> Thought<strong
 					>Holder</strong
 				>
 			</div>
@@ -22,7 +22,6 @@
 						:class="{ invalid: !validEmail }"
 					/>
 				</div>
-				<!-- <label for="email" class="label">Email</label> -->
 
 				<span class="validate-alert mb-2" v-if="!validEmail"
 					>Invalid e-mail.</span
@@ -46,9 +45,9 @@
 						v-model.trim="password"
 						@blur="checkPassword()"
 						:class="{ invalid: !validPassword }"
+						autocomplete
 					/>
 				</div>
-				<!-- <label for="password" class="label">Password</label> -->
 
 				<span class="validate-alert mb-2" v-if="!validPassword"
 					>Password must contains at least 6 characters.</span
@@ -62,14 +61,14 @@
 						type="password"
 						name="confirm_password"
 						required
-						placeholder="Confirm your password"
+						placeholder="Confirm your brilliant password"
 						class="input"
 						v-model.trim="confirm_password"
 						@blur="checkConfirmPassword()"
 						:class="{ invalid: !validConfirmPassword }"
+						autocomplete
 					/>
 				</div>
-				<!-- <label for="confirm_password" class="label">Confrim password</label> -->
 
 				<span class="validate-alert mb-2" v-if="!validConfirmPassword"
 					>Password doesn't match.</span
@@ -77,10 +76,21 @@
 			</div>
 
 			<span class="before-btn-txt"
-				>Make sure it's at least 6 characters when you can't make 6
-				pack. <br />
+				>Make sure there are at least 6 characters if you can't make 6
+				packs.
+				<br />
 				<!-- //TODO dodati OBVIO.gif iz filma the platform -->
-				Strong security is our priority, OBVIO. <br />
+				Strong security is our priority,
+				<!-- <a
+					class="underline-blue"
+					href="https://tenor.com/view/obvio-hoyo-obvious-duh-gif-16876730"
+					>OBVIO</a
+				>. -->
+				<span class="underline-blue" @click.prevent="isObvio = !isObvio"
+					>OBVIO</span
+				>.
+				<br />
+
 				Completely free.
 			</span>
 
@@ -96,7 +106,7 @@
 
 			<router-link :to="{ name: 'login' }">
 				<p class="register-redirect">
-					Already a member? <span>Login</span>
+					Already a member? <span class="underline-blue">Login</span>
 				</p>
 			</router-link>
 		</form>
@@ -123,7 +133,7 @@ export default {
 	},
 
 	computed: {
-		...mapGetters(["GET_SIGNUP_SERVER_ERR"]),
+		...mapGetters(["GET_SIGNUP_SERVER_ERR", "GET_IS_OBVIO"]),
 
 		validForm() {
 			return (
@@ -131,6 +141,15 @@ export default {
 				this.checkPassword() &&
 				this.checkConfirmPassword()
 			)
+		},
+
+		isObvio: {
+			get() {
+				return this.$store.getters["ui/GET_IS_OBVIO"]
+			},
+			set(newVal) {
+				return this.$store.commit("ui/SET_IS_OBVIO", newVal)
+			},
 		},
 	},
 
@@ -167,7 +186,6 @@ export default {
 				this.validConfirmPassword = false
 				return false
 			}
-			// return this.password === this.confirm_password || errorMsg == "Password doesn't match!"
 		},
 
 		signup() {
@@ -176,7 +194,6 @@ export default {
 				this.checkPassword() &&
 				this.checkConfirmPassword()
 			) {
-				console.log("signup")
 				const formData = {
 					email: this.email,
 					password: this.password,
@@ -184,16 +201,7 @@ export default {
 
 				this.$store.dispatch("SIGNUP", formData)
 			} else {
-				console.log("errors")
 				alert(err)
-				// this.username = '',
-				// this.email = '',
-				// this.password = '',
-				// this.confirm_password = '',
-				// this.validUsername = false,
-				// this.validEmail = false,
-				// this.validPassword = false,
-				// this.validConfirmPassword = false
 			}
 		},
 	},

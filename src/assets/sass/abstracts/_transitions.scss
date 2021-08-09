@@ -1,16 +1,27 @@
-//* fadey
+//* fadex - newnote
+.fadex-enter,
+.fadex-leave-to,
+.fadex-leave-active {
+	opacity: 0;
+	transform: translate(-10%, 0%);
+	backface-visibility: hidden;
+}
+.fadex-leave-active,
+.fadex-enter-active {
+	transition: transform 0.6s $outBack, opacity 0.3s ease;
+}
+
+//* fadey - router-view n notes
 .fadey-enter,
 .fadey-leave-to,
 .fadey-leave-active {
 	opacity: 0;
-	transform: translateY(-5%);
+	transform: translate(0%, -5%);
 	backface-visibility: hidden;
-	transition: transform 0.7s ease, opacity 0.5s ease 0.1s;
 }
-
 .fadey-leave-active,
 .fadey-enter-active {
-	transition: transform 0.7s ease, opacity 0.5s ease 0.1s;
+	transition: transform 0.6s $outBack, opacity 0.3s ease;
 }
 
 //* notify
@@ -18,22 +29,31 @@
 .notify-leave-active {
 	transition: all 0.3s $outBack;
 }
-
 .notify-enter,
 .notify-leave-to {
 	opacity: 0;
 	transform: translate(-10%);
 }
 
+//* notify
+.opacity-enter-active,
+.opacity-leave-active {
+	transition: all 1s ease;
+}
+.opacity-enter-active {
+	opacity: 1;
+}
+.opacity-leave-active {
+	opacity: 0;
+}
+
 //* bounce
 .bounce-enter-active {
 	animation: bounce-in 0.5s $outSmooth;
 }
-
 .bounce-leave-active {
 	animation: bounce-in 0.5s reverse $outSmooth;
 }
-
 @keyframes bounce-in {
 	0% {
 		transform: scale(0);
@@ -52,7 +72,6 @@
 .edittags-enter-active {
 	animation: edittagsIn 1s ease;
 }
-
 .edittags-leave-active {
 	animation: edittagsOut 1s ease;
 }
@@ -84,7 +103,7 @@
 	}
 
 	100% {
-		transform: translate(400%, -50%) rotate(90deg);
+		transform: translate(200%, -50%) rotate(90deg);
 		opacity: 0;
 	}
 }
@@ -96,14 +115,12 @@
 	opacity: 1;
 	// height: 20vh;
 }
-
 .scaley-leave-to,
 .scaley-enter {
 	transform: scaleY(0);
 	opacity: 0;
 	// height: 0;
 }
-
 .scaley-leave-active,
 .scaley-enter-active {
 	transition: all 0.5s ease;
@@ -114,14 +131,12 @@
 	// transform: translateY(0);
 	opacity: 1;
 }
-
 .preloader-leave-to {
 	// transform: translateY(-100%);
 	opacity: 0;
 	pointer-events: none;
 	z-index: -200;
 }
-
 .preloader-leave-active,
 .preloader-enter-active {
 	// transition: transform 3s $inOutQuad, opacity 4s $inOutQuad;
@@ -133,14 +148,12 @@
 .scaleopacity-leave {
 	transform: none;
 }
-
 .scaleopacity-leave-to,
 .scaleopacity-enter {
 	transform: scale(0) rotateZ(-45deg);
 	opacity: 0;
 	// height: 0;
 }
-
 .scaleopacity-leave-active,
 .scaleopacity-enter-active {
 	transition: transform 0.5s ease, opacity 0.6s ease;
@@ -149,7 +162,7 @@
 //? SA NETA
 .scale-slide-enter-active,
 .scale-slide-leave-active {
-	position: absolute;
+	@extend %pos-abs;
 	transition: all 0.85s ease;
 }
 

@@ -7,12 +7,10 @@
 	border-radius: calc(var(--radius) + 0.5rem);
 	word-wrap: break-word;
 	word-break: break-all;
-	cursor: pointer;
-
+	@extend %cursor;
 	@extend %pos-rel;
 
 	&:hover {
-		animation: 1s note-hover ease-in-out;
 		.note__pin,
 		.note__options {
 			opacity: 1;
@@ -33,8 +31,7 @@
 
 	&__title-container {
 		// grid-area: title;
-		@extend .flex;
-		justify-content: space-between;
+		@extend %flex-jsb;
 	}
 
 	&__title {
@@ -42,7 +39,7 @@
 		padding: 0.5rem 0;
 		width: 96%;
 		font-size: 1.6rem;
-		font-weight: 500;
+		@extend %font-500;
 		// background: lightseagreen;
 	}
 
@@ -51,7 +48,7 @@
 		// background: lightcoral;
 		padding: 2rem 0;
 		color: inherit;
-		overflow: hidden;
+		@extend %overflow-hidden;
 		overflow-y: auto;
 		max-height: 20rem;
 		min-height: 4rem;
@@ -71,7 +68,7 @@
 	}
 
 	&__pin {
-		position: relative;
+		@extend %pos-rel;
 		z-index: 5;
 		opacity: 0;
 		pointer-events: none;
@@ -95,9 +92,7 @@
 	&__tag {
 		@extend .h4;
 		transform: translateY(100%);
-		@extend .transition-3;
-		// padding: .4rem 1.3rem;
-		// font-size: 1rem;
+		@extend %transition-inOutBack;
 		&:not(:last-child) {
 			margin-right: 0.5rem;
 		}
@@ -105,7 +100,7 @@
 
 	&__date {
 		margin: 2rem 0;
-		display: grid;
+		@extend %grid;
 		justify-content: flex-start;
 		align-items: center;
 		grid-gap: 0 1rem;
@@ -113,7 +108,7 @@
 			"icon date"
 			"icon time";
 		transform: translateY(80%);
-		@extend .transition-3;
+		@extend %transition-inOutBack;
 		transition-delay: 0.05s;
 
 		&-edited {
@@ -132,24 +127,22 @@
 			letter-spacing: 0.5px;
 			font-size: 1.1rem;
 			opacity: 0.65;
-			font-weight: 500;
+			@extend %font-500;
 			text-transform: lowercase;
 		}
 	}
 
 	&__footer {
-		@extend .flex;
-		justify-content: space-between;
+		@extend %pos-rel;
+		@extend %flex-jsb;
 		flex-wrap: wrap;
-		position: relative;
 
 		i,
 		.note__add-tags,
 		.note__pallete {
-			@extend .transition-3;
+			@extend %transition-inOutBack;
 
 			&:hover {
-				opacity: 0.8;
 				transform: scale(1.2);
 			}
 		}
@@ -162,14 +155,14 @@
 	&__options {
 		width: 100%;
 
-		display: flex;
+		@extend %flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
 		opacity: 0;
 		pointer-events: none;
 		transform: translateY(10%) scaleY(0);
 		transform-origin: center bottom;
-		@extend .transition-3;
+		@extend %transition-inOutBack;
 		transition-delay: 0.1s;
 	}
 
@@ -184,14 +177,14 @@
 			top: 90%;
 			left: 10%;
 			padding: 2.2rem 1.5rem;
-			border-radius: var(--radius);
+			@extend %radius-default;
 			box-shadow: var(--shadow);
 			background: var(--white);
 			color: inherit;
 			font-size: 1.2rem;
 			z-index: 1000;
 			word-break: break-all;
-			display: flex;
+			@extend %flex;
 			flex-direction: column;
 			transform-origin: left top;
 
@@ -200,8 +193,16 @@
 			}
 		}
 
+		&-ul {
+			width: 100%;
+			li,
+			input {
+				width: 100%;
+			}
+		}
+
 		&-closebtn {
-			position: absolute;
+			@extend %pos-abs;
 			top: 5%;
 			right: 5%;
 			width: 2.5rem;
@@ -220,15 +221,15 @@
 		}
 
 		&-ul {
-			display: grid;
+			@extend %grid;
 			grid-gap: 0.6rem;
 			word-break: break-all;
 
 			li {
 				@extend %flex-center;
 				padding: 1rem;
-				border-radius: var(--radius);
-				transition: 0.4s $outSmooth;
+				@extend %radius-default;
+				@extend %transition-outSmooth;
 
 				span {
 					font-weight: 600;
@@ -245,15 +246,13 @@
 				@extend %cursor;
 
 				input {
-					text-align: center;
+					@extend %text-center;
 					margin-right: 1rem;
 					-webkit-appearance: none;
 					-moz-appearance: none;
 					appearance: none;
-					// display: inline-block;
 					width: var(--radio-size);
 					height: var(--radio-size);
-					// border-radius: 50%;
 					border: 2px solid var(--blue);
 					opacity: 0.4;
 					outline: none;
@@ -274,7 +273,7 @@
 	}
 
 	&__btn-container {
-		display: flex;
+		@extend %flex;
 		align-items: center;
 		flex-wrap: wrap;
 
@@ -297,7 +296,7 @@
 
 	&__colors-container {
 		--color-circle-size: 2.3rem;
-		display: grid;
+		@extend %grid;
 		grid-template-columns: repeat(3, 1fr);
 		grid-gap: 0.8rem;
 		padding: 1rem;
@@ -308,7 +307,7 @@
 		background: var(--white);
 		opacity: 0;
 		pointer-events: none;
-		border-radius: var(--radius);
+		@extend %radius-default;
 		transform-origin: left bottom;
 		transform: scale(0) rotateZ(-45deg);
 		transition: all 0.5s $inOutBack;
@@ -325,7 +324,7 @@
 			width: var(--color-circle-size);
 			height: var(--color-circle-size);
 			border: 1px solid rgba(grey, 0.3);
-			border-radius: 50%;
+			@extend %radius-50;
 			opacity: 0.8;
 
 			&:hover {

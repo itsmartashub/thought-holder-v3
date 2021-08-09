@@ -7,8 +7,8 @@
 		margin: 0 auto;
 		width: 60%;
 		background: var(--white);
-		overflow: hidden;
-		border-radius: var(--radius);
+		@extend %overflow-hidden;
+		@extend %radius-default;
 		box-shadow: var(--shadow);
 	}
 	&__by-tags {
@@ -18,7 +18,7 @@
 	&__title {
 		background: var(--blue);
 		color: var(--grey);
-		font-weight: 300;
+		@extend %font-300;
 		padding: 1.5rem 3rem;
 		font-size: 2.2rem;
 
@@ -38,7 +38,7 @@
 		padding: 5rem 3rem;
 		@extend %flex-center;
 		flex-wrap: wrap;
-		grid-gap: 3rem 1.5rem;
+		grid-gap: 3rem 3rem;
 		// grid-template-columns: repeat(auto-fill, minmax(var(--tag-size), 1fr));
 	}
 	&__tag {
@@ -47,26 +47,27 @@
 		align-content: center;
 		width: var(--tag-size);
 		height: var(--tag-size);
-		border-radius: var(--radius);
+		@extend %radius-default;
 		background: var(--grey);
-		overflow: hidden;
+		@extend %overflow-hidden;
 		color: var(--blue);
 		@extend %cursor;
-		@extend .transition-3;
 		font-size: 1.3rem;
-		font-weight: 500;
+		@extend %font-500;
+		@extend %transition-outSmooth;
 
 		i {
 			font-size: 2.8rem;
 			opacity: 0.85;
-			transition: 1s $outBack;
+			@extend %transition-outBack;
+			--duration: 1s;
 		}
 		span {
 			transition: 0.8s $outBack 0.1s;
 		}
 
 		&:hover {
-			background: rgba(0, 0, 0, 0.15);
+			background: var(--h4_bg);
 			i {
 				transform: rotate(225deg);
 			}
@@ -79,20 +80,20 @@
 	&__colors {
 		@extend %flex-center;
 		@extend %cursor;
-		border-radius: 50%;
+		@extend %radius-50;
 		border: 1px solid rgba(grey, 0.3);
 		width: 6rem;
 		height: 6rem;
 		margin: 1rem;
-		transition: 0.4s $outBack;
-		overflow: hidden;
+		@extend %transition-outBack;
+		@extend %overflow-hidden;
 
 		p {
 			transform: translateY(150%) rotateZ(-30deg);
 			opacity: 0;
 			font-size: 1.2rem;
 			font-weight: bold;
-			transition: 0.4s $outBack;
+			@extend %transition-outBack;
 		}
 
 		&:hover {

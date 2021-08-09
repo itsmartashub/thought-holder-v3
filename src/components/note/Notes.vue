@@ -364,9 +364,8 @@
 				</h4>
 				<transition-group
 					tag="div"
-					class="notes m-auto"
+					class="notes m-auto grid"
 					name="bounce"
-					mode="out-in"
 				>
 					<template v-for="(note, key) in GET_NOTES">
 						<Note

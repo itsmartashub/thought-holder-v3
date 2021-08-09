@@ -7,14 +7,13 @@
 }
 
 $blue: #5457f0;
-$cred: #DBAFB0;
+$cred: #dbafb0;
 $cblue: #cbf0f8;
-$cgreen: #D4F2D2;
+$cgreen: #d4f2d2;
 $cpurple: #d7aefb;
-$corange: #FFE8BA; // #fbbc04;
-$cgrey: #D1D0DC; // #e8eaed
-$cpeach: #F9C9AF;
-// $red: #ee6e73;
+$corange: #ffe8ba; // #fbbc04;
+$cgrey: #d1d0dc; // #e8eaed
+$cpeach: #f9c9af;
 $red: #ff8a80;
 $green: #69f0ae;
 
@@ -28,12 +27,12 @@ html {
 	--dgrey: rgb(119, 119, 119);
 	--black: rgb(71, 71, 71);
 	--blue: #5457f0;
-	--h4_bg: rgba(110, 110, 255, .1);
+	--h4_bg: rgba(110, 110, 255, 0.1);
 	// --modal-bg: rgba(84, 87, 240, .4);
-	--modal-bg: rgba(220, 220, 220, .6);
-	--rgba-lgrey: rgba(248, 248, 248, .8);
-	--rgba-dgrey: rgba(122, 122, 122, .1);
-	--header-blur-bg: rgba(248, 248, 248, .4);
+	--modal-bg: rgba(220, 220, 220, 0.6);
+	--rgba-lgrey: rgba(248, 248, 248, 0.8);
+	--rgba-dgrey: rgba(122, 122, 122, 0.1);
+	--header-blur-bg: rgba(248, 248, 248, 0.4);
 
 	--shadow-notes: 0px 10px 20px 0px var(--grey);
 	--shadow: 0px 4px 20px -1px var(--rgba-dgrey);
@@ -63,9 +62,9 @@ html [data-theme="dark"] {
 	--dgrey: rgb(32, 33, 63);
 	--black: rgb(117, 119, 155);
 	--blue: rgb(236, 101, 64);
-	--h4_bg: rgba(236, 101, 64, .1);
+	--h4_bg: rgba(236, 101, 64, 0.1);
 	--modal-bg: var(--rgba-lgrey);
-	--rgba-lgrey: rgba(39, 40, 70, .8);
+	--rgba-lgrey: rgba(39, 40, 70, 0.8);
 
 	--header-blur-bg: var(--grey);
 
@@ -89,8 +88,6 @@ html [data-theme="dark"] {
 	--color-info: var(--blue);
 }
 
-
-
 $inQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
 $inCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 $inQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
@@ -98,7 +95,7 @@ $inQuint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
 $inExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
 $inCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
 
-$outSmooth: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$outSmooth: cubic-bezier(0.215, 0.61, 0.355, 1);
 $outQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $outCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 $outQuart: cubic-bezier(0.165, 0.84, 0.44, 1);

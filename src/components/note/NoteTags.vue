@@ -75,7 +75,7 @@ export default {
 				return this.$store.getters.GET_DEFAULT_CHECKED(this.note.id)
 			},
 			set(newVal) {
-				console.log(newVal) //with computed we have true/false value instead of array
+				// console.log(newVal) //with computed we have true/false value instead of array
 				this.inputChecks = newVal
 			},
 		},
@@ -95,7 +95,6 @@ export default {
 		displayCreateNewTag() {
 			if (this.ARR_ONLY_CURATED_SEARCH.length === 0) {
 				this.create = true
-				console.log("CREATE TAG")
 			} else {
 				this.create = false
 			}
@@ -114,11 +113,8 @@ export default {
 		},
 
 		checkTag(tag) {
-			// console.log('ID TAG: ',tag.id);
-			// console.log('ID NOTE: ',this.note.id);
 			// console.log(this.inputChecks); // TODO treba da dodam idNote ove gde cekiram u sve te tagove sto cekiram, tj u svaki clan this.inputCheck niza, dakle update arrTags.find(tag => tag.id == tag.id).node_ids[...this.inputChecks] MA NE VALJA
 
-			// console.log(this.inputChecks);
 			// console.log(this.inputChecks.find(input => input === tag.name)); //* sa MAP: ako je tu onda je [true], ako nije onda je []. sa FIND: ako nadje onda je jednako imenu taga, a ako ne pronadje, onda je undefined
 
 			const tagIn = this.inputChecks.find((input) => input === tag.name)
@@ -139,15 +135,6 @@ export default {
 				})
 			}
 		},
-
-		// isChecked() {
-		// 	const arr = this.GET_TAGS.filter(tag => tag.note_ids.find(node_id => note_id === this.note.id))
-		// 	arr.forEach(checkedTag => {
-		// 		this.inputChecks.push(checkedTag.name)
-		// 	})
-
-		// 	console.log(this.inputChecks)
-		// },
 
 		emitNoteTagsOpen() {
 			let noteTagsOpen = this.noteTagsOpen

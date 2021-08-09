@@ -11,7 +11,7 @@
 			</section>
 
 			<template v-else>
-				<section class="search__by-tags">
+				<section class="search__by-tags" v-if="TAGS.length > 0">
 					<h2 class="search__title">
 						<i class="mdi mdi-tag-outline"></i><span>TAGS</span>
 					</h2>
@@ -63,12 +63,6 @@
 				</section>
 			</template>
 		</template>
-
-		<!-- <section class="search__finds notes" v-if="found">
-			<template v-for="note in COLOR_NOTES">
-				<Note :note="note" :key="note.id"/>
-			</template>
-		</section> -->
 
 		<template v-else>
 			<section class="no-notes">
@@ -128,13 +122,7 @@ export default {
 					name: "colors",
 					query: { color: this.colorName },
 				})
-				// this.$router.query = this.colorName
-				// console.log(this.colorName);
-				// this.route.query = this.SEARCH_TERM
-				// this.$route.path = `/search?color=${this.colorName}`
-				// this.$router.push('/colors')
 			}
-			// console.log(this.$route.query.color);
 		},
 	},
 }

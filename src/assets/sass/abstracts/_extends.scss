@@ -8,14 +8,6 @@
 	position: relative;
 }
 
-%height-auto {
-	height: auto;
-}
-
-%object-fit {
-	object-fit: cover;
-}
-
 %grid {
 	display: grid;
 }
@@ -86,11 +78,31 @@
 }
 
 %grid-notes {
-	display: grid;
+	@extend %grid;
 	grid-template-columns: repeat(
 		auto-fill,
 		minmax(var(--note-width-min), 1fr)
 	);
 	grid-gap: 2.5rem;
 	align-items: flex-start;
+}
+
+// transitions
+%transition-outBack {
+	--duration: 0.5s;
+	transition: var(--duration) $outBack;
+}
+%transition-inOutBack {
+	--duration: 0.5s;
+	transition: var(--duration) $inOutBack;
+}
+
+%transition-outSmooth {
+	--duration: 0.4s;
+
+	transition: var(--duration) $outSmooth;
+}
+%transition-inOutCirc {
+	--duration: 0.4s;
+	transition: var(--duration) $inOutCirc;
 }

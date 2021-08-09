@@ -1,7 +1,7 @@
 .header {
 	grid-area: header;
 
-	position: fixed;
+	@extend %pos-fix;
 	top: 0;
 	right: 0;
 	width: calc(100% - var(--sidebar-width));
@@ -9,8 +9,6 @@
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 	background-color: var(--header-blur-bg);
-	// background: rgba(var(--grey), .8);
-	// background: linear-gradient(var(--grey) 0%, var(--lgrey) 50%, var(--grey) 100%);
 	padding: 0rem 6vw;
 	@extend %flex-jsb;
 	z-index: var(--z-header);
@@ -55,22 +53,18 @@
 
 	&__view-theme {
 		@extend %grid-center;
-		// display: grid;
-		// place-items: center;
 		grid-auto-flow: column;
 		grid-gap: 2rem;
 	}
 
 	&__notes-view {
-		display: grid;
+		@extend %grid;
 		grid-template-columns: repeat(1fr, 2);
 		grid-template-rows: repeat(1fr, 2);
 		grid-gap: 0.3rem;
-
-		// margin: 0 1rem 0 4rem;
 		width: 2rem;
 		height: 2.5rem;
-		cursor: pointer;
+		@extend %cursor;
 		transform: rotate(90deg);
 
 		&:hover div {
@@ -79,7 +73,7 @@
 
 		div {
 			border: 0.2rem solid var(--black);
-			@extend .transition-2;
+			@extend %transition-outSmooth;
 		}
 
 		div:nth-of-type(1) {
@@ -91,34 +85,23 @@
 			grid-column: 2/2;
 			grid-row: 1/1;
 		}
-
-		// div:nth-of-type(3) {
-		// 	grid-column: 1/1;
-		// 	grid-row: 2/2;
-		// }
-
-		// div:nth-of-type(4) {
-		// 	grid-column: 2/2;
-		// 	grid-row: 2/2;
-		// }
 	}
 
 	&__login {
 		--avatar-size: 5rem;
-
-		position: relative;
+		@extend %pos-rel;
 
 		.login-email-wrapper {
 			@extend %flex-center;
 			flex-direction: column;
-			position: absolute;
+			@extend %pos-abs;
 			top: 100%;
 			right: 0;
 			background: var(--white);
 			width: max-content;
 			height: max-content;
 			padding: 1.5rem 2rem;
-			border-radius: var(--radius);
+			@extend %radius-default;
 			z-index: 100;
 			box-shadow: var(--shadow);
 			transform-origin: right top;
@@ -128,7 +111,7 @@
 				align-items: center;
 				margin-right: 1.5rem;
 				font-size: 1.4rem;
-				font-weight: 500;
+				@extend %font-500;
 
 				margin-bottom: 1.5rem;
 
@@ -147,14 +130,14 @@
 			width: var(--avatar-size);
 			height: var(--avatar-size);
 			@extend %flex-center;
-			border-radius: 50%;
+			@extend %radius-50;
 			color: var(--lgrey);
 			background: var(--blue);
-			font-weight: 500;
+			@extend %font-500;
 			text-transform: uppercase;
-			cursor: pointer;
-			@extend .transition-3;
-			border: 3px solid rgba(255, 255, 255, 0.5);
+			@extend %cursor;
+			@extend %transition-inOutBack;
+			border: 3px solid rgba(white, 0.4);
 
 			&:hover {
 				// transform: scale(1.05);

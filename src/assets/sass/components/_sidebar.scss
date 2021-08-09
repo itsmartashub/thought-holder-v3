@@ -35,13 +35,13 @@
 		@extend %cursor;
 		padding: 1.5rem 2.5rem;
 		// @extend %text-center;
-		font-weight: 500;
+		@extend %font-500;
 		font-size: 1.63rem;
 		margin-bottom: 2rem;
 		@extend %flex;
 		align-items: center;
-		border-radius: var(--radius);
-		overflow: hidden;
+		@extend %radius-default;
+		@extend %overflow-hidden;
 		z-index: 20;
 		// transition: .5s all $inCubic;
 
@@ -124,7 +124,7 @@
 	&__tag {
 		word-break: break-word;
 		opacity: 0.9;
-		display: grid;
+		@extend %grid;
 		justify-content: flex-start;
 		align-items: center;
 		grid-auto-flow: column;
@@ -137,7 +137,7 @@
 
 		i {
 			font-size: inherit;
-			@extend .transition-3;
+			@extend %transition-inOutCirc;
 		}
 
 		span:nth-of-type(2) {
@@ -154,7 +154,7 @@
 			border: 1px solid var(--blue);
 			padding: 0.2rem;
 			font-size: 1rem;
-			font-weight: 500;
+			@extend %font-500;
 			transform-origin: center;
 			transition: all 0.3s ease;
 		}
@@ -184,7 +184,7 @@
 	}
 
 	&__footer {
-		font-weight: 500;
+		@extend %font-500;
 		// align-self: flex-end;
 		padding: 2rem 0;
 		transform: translateY(1/0%);

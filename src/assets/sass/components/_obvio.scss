@@ -1,0 +1,22 @@
+.obvio {
+	@extend %pos-abs;
+	top: 10vh;
+	right: 10vh;
+	z-index: 10000;
+	// transform: translateX(100%);
+
+	figure {
+		width: 30vh;
+		height: auto;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		@extend %radius-default;
+	}
+
+	// opacity: 0;
+	// transform: translate(-100%);
+}

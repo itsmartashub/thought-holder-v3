@@ -1,11 +1,13 @@
 .grid-container {
-	display: grid;
+	@extend %grid;
 	grid-template-columns: var(--sidebar-width) 1fr;
-	grid-template-rows: var(--header-height) minmax(calc(100vh - var(--header-height)), 1fr);
-	grid-template-areas:
-		"sidebar header" // 8rem height
+	grid-template-rows: var(--header-height) minmax(
+			calc(100vh - var(--header-height)),
+			1fr
+		);
+	grid-template-areas: "sidebar header" // 8rem height
 		"sidebar main"; // 90vh or max-content height
-	translate: all .3s ease-in-out;
+	translate: all 0.3s ease-in-out;
 
 	@include device(tab) {
 		--sidebar-width: 0;
@@ -14,7 +16,9 @@
 			opacity: 0;
 			padding: 0 !important;
 		}
-		.header { width: 100%; }
+		.header {
+			width: 100%;
+		}
 
 		&--sidebar-show {
 			--sidebar-width: 40vw;
@@ -22,10 +26,12 @@
 			.sidebar {
 				opacity: 1 !important;
 				// padding: 2rem !important;
-				box-shadow: 1px 0px 0px 0px var(--grey); 
+				box-shadow: 1px 0px 0px 0px var(--grey);
 			}
 
-			.header { width: calc(100% - var(--sidebar-width)); }
+			.header {
+				width: calc(100% - var(--sidebar-width));
+			}
 		}
 	}
 
@@ -36,7 +42,6 @@
 	}
 }
 
-
 .sidebar-notes {
-	display: flex;
+	@extend %flex;
 }

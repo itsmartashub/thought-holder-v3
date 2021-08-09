@@ -4,11 +4,12 @@
 
 		<Header />
 
-		<transition name="fadey" mode="out-in">
-			<Notes v-if="$route.path == '/'" />
-		</transition>
+		<!-- //TODO sa ovim transitionom bude bag tipa kad iz jedne rute idemo u archieve u sl. zato bolje bez  -->
+		<!-- <transition name="fadex" mode="out-in"> -->
+		<Notes v-if="$route.path == '/'" />
+		<!-- </transition> -->
 
-		<transition name="fadey" mode="out-in">
+		<transition name="fadex" mode="out-in">
 			<router-view :key="$route.fullPath" />
 		</transition>
 
@@ -16,7 +17,9 @@
 			<EditTags v-if="OPEN_EDIT_TAGS" />
 		</transition>
 
-		<ModalBackground />
+		<transition name="opacity" mode="out-in">
+			<ModalBackground />
+		</transition>
 	</div>
 </template>
 
