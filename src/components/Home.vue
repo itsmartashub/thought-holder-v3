@@ -5,9 +5,9 @@
 		<Header />
 
 		<!-- //TODO sa ovim transitionom bude bag tipa kad iz jedne rute idemo u archieve u sl. zato bolje bez  -->
-		<!-- <transition name="fadex" mode="out-in"> -->
-		<Notes v-if="$route.path == '/'" />
-		<!-- </transition> -->
+		<transition name="fadex" mode="out-in">
+			<Notes v-if="$route.path == '/'" />
+		</transition>
 
 		<transition name="fadex" mode="out-in">
 			<router-view :key="$route.fullPath" />

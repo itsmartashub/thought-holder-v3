@@ -10,9 +10,6 @@
 .mb-4 {
 	margin-bottom: 4rem;
 }
-.mb-5 {
-	margin-bottom: 5rem;
-}
 
 .mt-1 {
 	margin-top: 1rem;
@@ -23,9 +20,6 @@
 .mt-3 {
 	margin-top: 3rem;
 }
-.mt-4 {
-	margin-top: 4rem;
-}
 .mt-5 {
 	margin-top: 5rem;
 }
@@ -35,7 +29,7 @@
 }
 
 .tac {
-	text-align: center;
+	@extend %text-center;
 }
 
 .i-color-blue {
