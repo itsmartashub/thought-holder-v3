@@ -81,6 +81,7 @@
 			<p>
 				All rights reserved. Site by
 				<a
+					class="underline-blue"
 					href="https://www.linkedin.com/in/marta-bireš"
 					target="_blank"
 				>

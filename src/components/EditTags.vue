@@ -71,7 +71,6 @@ export default {
 			input: "",
 			focusInput: false,
 			open: true,
-			// focusEdit: ''
 		}
 	},
 
