@@ -32,6 +32,27 @@
 	@extend %text-center;
 }
 
+.underline-blue {
+	color: var(--blue);
+	@extend %cursor;
+	@extend %pos-rel;
+	&::after {
+		content: "";
+		@extend %pos-abs;
+		bottom: -10%;
+		left: 0;
+		width: 100%;
+		height: 1.5px;
+		background: var(--blue);
+		transform-origin: left center;
+		transition: 0.3s transform ease-in-out;
+	}
+
+	&:hover::after {
+		transform: scaleX(0);
+	}
+}
+
 .i-color-blue {
 	color: var(--blue);
 	@extend %pos-rel;

@@ -86,7 +86,7 @@
 					href="https://tenor.com/view/obvio-hoyo-obvious-duh-gif-16876730"
 					>OBVIO</a
 				>. -->
-				<span class="underline-blue" @click.prevent="isObvio = !isObvio"
+				<span class="underline-blue" @click.prevent="obvioFun()"
 					>OBVIO</span
 				>.
 				<br />
@@ -110,14 +110,21 @@
 				</p>
 			</router-link>
 		</form>
+
+		<transition name="bounce" mode="in-out">
+			<Obvio v-if="isObvio" />
+		</transition>
 	</section>
 </template>
 
 <script>
 import { mapGetters } from "vuex"
+import Obvio from "@/components/Obvio"
 
 export default {
 	name: "login",
+
+	components: { Obvio },
 
 	data() {
 		return {
@@ -203,6 +210,13 @@ export default {
 			} else {
 				alert(err)
 			}
+		},
+
+		obvioFun() {
+			this.isObvio = true
+			setTimeout(() => {
+				this.isObvio = false
+			}, 4000)
 		},
 	},
 }

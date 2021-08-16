@@ -1,7 +1,7 @@
 .login,
 .signup {
 	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 	padding: 5vw;
 	background: linear-gradient(to right top, #4e54c8, #8f94fb);
 	@extend %flex-center;

@@ -18,9 +18,6 @@ export default {
 		searchTags: "", //* search
 
 		searchNote: "",
-
-		arrCheckedTags: [],
-		NEKINIZ: [],
 		defaultChecked: [],
 	},
 
@@ -38,15 +35,7 @@ export default {
 			)),
 		GET_COLORS: (state) => {
 			state.arrNotes.forEach((note) => state.arrColors.push(note.color))
-			return (state.arrColors = [...new Set(state.arrColors)]) // https://www.youtube.com/watch?v=dvPybpgk5Y4 //
-
-			// let a = [1,2,5,2,1,8]
-			// let b = Object.keys(a.reduce((acc, value) => {
-			// acc[value] = true
-			// return acc
-			// }, {}))
-
-			// return state.arrColors
+			return (state.arrColors = [...new Set(state.arrColors)]) // https://www.youtube.com/watch?v=dvPybpgk5Y4
 		},
 
 		GET_COLOR_NOTE: (state) => (colorName) => {

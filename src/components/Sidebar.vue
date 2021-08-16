@@ -9,10 +9,25 @@
 		</a>
 
 		<ul class="sidebar__ul">
-			<router-link tag="li" :to="{ name: 'home' }" class="sidebar__li">
+			<router-link
+				tag="li"
+				:to="{ name: 'home' }"
+				class="sidebar__li"
+				@click.native="closeMobileSidebar()"
+			>
 				<i class="mdi mdi-file-multiple-outline"></i>
 				<p>All Notes</p>
 			</router-link>
+
+			<!-- <li
+				class="sidebar__li"
+				@click.prevent="
+					$router.replace({ name: 'home' }) && closeMobileSidebar()
+				"
+			>
+				<i class="mdi mdi-file-multiple-outline"></i>
+				<p>All Notes</p>
+			</li> -->
 
 			<li @click="expandTags()" class="sidebar__li">
 				<i class="mdi mdi-tag-outline"></i>
@@ -41,11 +56,26 @@
 								}"
 								:key="key"
 								class="sidebar__tag"
+								@click.native="closeMobileSidebar()"
 							>
 								<i class="mdi mdi-tag-multiple"></i>
 								<span>{{ tag.name }}</span>
 								<span>{{ tag.note_ids.length }}</span>
 							</router-link>
+							<!-- <div
+								@click.prevent="
+									$router.replace({
+										name: 'tags',
+										params: { tagName: tag.name },
+									}) && closeMobileSidebar()
+								"
+								:key="key"
+								class="sidebar__tag"
+							>
+								<i class="mdi mdi-tag-multiple"></i>
+								<span>{{ tag.name }}</span>
+								<span>{{ tag.note_ids.length }}</span>
+							</div> -->
 						</template>
 					</transition-group>
 					<!-- </div> -->
@@ -64,29 +94,39 @@
 				tag="li"
 				:to="{ name: 'archived' }"
 				class="sidebar__li"
+				@click.native="closeMobileSidebar()"
 			>
 				<i class="mdi mdi-arrow-down-bold-box-outline"></i>
 				<p>Archive</p>
 			</router-link>
+			<!-- <li
+				@click.prevent="
+					$router.replace({ name: 'archived' }) &&
+						closeMobileSidebar()
+				"
+				class="sidebar__li"
+			>
+				<i class="mdi mdi-arrow-down-bold-box-outline"></i>
+				<p>Archive</p>
+			</li> -->
 		</ul>
 
 		<footer class="sidebar__footer">
 			<p class="logo">
-				&copy; 2019.&nbsp;
+				&copy; 2021.&nbsp;
 				<i class="mdi mdi-format-strikethrough"></i> Thoughts<strong
 					>Holder</strong
 				>
 			</p>
 
 			<p>
-				All rights reserved. Site by
+				All rights reserved. WebApp by
 				<a
-					class="underline-blue"
 					href="https://www.linkedin.com/in/marta-bireš"
 					target="_blank"
 				>
-					Marta Bireš</a
-				>
+					<span class="underline-blue">Marta Bireš</span>
+				</a>
 			</p>
 		</footer>
 
@@ -158,6 +198,14 @@ export default {
 		openEditTags() {
 			// this.OPEN = true
 			this.OPEN_EDIT_TAGS = true
+		},
+		closeMobileSidebar() {
+			if (document.querySelector(".grid-container--sidebar-show")) {
+				document
+					.querySelector(".grid-container--sidebar-show")
+					.classList.remove("grid-container--sidebar-show")
+			}
+			return
 		},
 	},
 

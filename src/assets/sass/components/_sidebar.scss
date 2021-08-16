@@ -190,8 +190,9 @@
 		transform: translateY(1/0%);
 		text-align: left;
 		font-size: 1.28rem;
-		a {
-			color: var(--blue);
+
+		.underline-blue {
+			@extend %font-600;
 		}
 
 		.logo {
@@ -277,6 +278,9 @@
 	// }
 
 	@include device(phone-land) {
+		&__top {
+			padding: 12rem 0 8rem 0;
+		}
 		&__tags-wrapper {
 			width: 85%;
 		}
